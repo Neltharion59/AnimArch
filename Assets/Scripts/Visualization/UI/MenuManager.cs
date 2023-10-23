@@ -51,12 +51,16 @@ namespace Visualization.UI
         [SerializeField] private Toggle hideRelToggle;
         [SerializeField] public GameObject PanelChooseAnimationStartMethod;
         [SerializeField] public GameObject PanelSourceCodeAnimation;
+        [SerializeField] public GameObject PanelError;
         public Anim createdAnim;
         public bool isPlaying = false;
         public Button[] playBtns;
         public GameObject playIntroTexts;
         public List<AnimMethod> animMethods;
         public bool isSelectingNode;
+        public void errorShowButtonClicked() {
+            Debug.Log("Error shown!\n");
+        }
 
 
         struct InteractiveData

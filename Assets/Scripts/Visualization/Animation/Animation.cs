@@ -136,6 +136,7 @@ namespace Visualization.Animation
 
                 if (!executionSuccess.IsSuccess)
                 {
+                    GameObject.Find("PanelError").SetActive(true); // TODO kacicky
                     break;
                 }
 
