@@ -7,6 +7,7 @@ using OALProgramControl;
 using UMSAGL.Scripts;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 using Visualisation.Animation;
 using Visualization.ClassDiagram;
@@ -42,6 +43,17 @@ namespace Visualization.Animation
         public string startClassName;
         public string startMethodName;
 
+
+        private void fillErrorPanel() {
+            // Debug.Log(String.Format("Code: {0}, message: {1}, type: {2}", executionSuccess.ErrorCode, executionSuccess.ErrorMessage, executionSuccess.GetType()));
+            GameObject errorPanel = UI.MenuManager.Instance.ErrorPanel;
+            errorPanel.SetActive(true);
+            // GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
+
+            // errorId.
+
+
+        }
 
         private void Awake()
         {
@@ -136,7 +148,7 @@ namespace Visualization.Animation
 
                 if (!executionSuccess.IsSuccess)
                 {
-                    GameObject.Find("PanelError").SetActive(true); // TODO kacicky
+                    fillErrorPanel();
                     break;
                 }
 
