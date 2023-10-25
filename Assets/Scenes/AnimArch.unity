@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38073993, b: 0.35872683, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4892,7 +4892,7 @@ MonoBehaviour:
   hideRelToggle: {fileID: 1656337406}
   PanelChooseAnimationStartMethod: {fileID: 2098846307}
   PanelSourceCodeAnimation: {fileID: 1792605010}
-  PanelError: {fileID: 0}
+  ErrorPanel: {fileID: 376187649}
   createdAnim:
     Code: 
     AnimationName: 
@@ -13305,7 +13305,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -416.728, y: 117.89}
+  m_AnchoredPosition: {x: -416.72803, y: 117.89}
   m_SizeDelta: {x: 456.514, y: 313.049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &376187651
@@ -29710,7 +29710,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 874806526}
   m_OnClick:
     m_PersistentCalls:
@@ -50574,7 +50574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22.7, y: -22.5}
+  m_AnchoredPosition: {x: -22.699997, y: -22.5}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654184199
