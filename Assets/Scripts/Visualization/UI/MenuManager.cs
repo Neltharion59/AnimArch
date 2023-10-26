@@ -71,7 +71,7 @@ namespace Visualization.UI
         }
         // executed after stopping or rerunning animation
         public void HideErrorPanelOnStopButton() {
-            Debug.Log("Error panel hidden!");
+            Debug.Log("Error panel Removed!");
             ErrorPanel.SetActive(false);
             ShowErrorBtn.GetComponent<Button>().interactable = false;
         }
