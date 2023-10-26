@@ -55,10 +55,10 @@ namespace Visualization.Animation
 
             GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
             errorId.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
-            GameObject errorDescription = errorPanel.transform.Find("ErrorDescription").gameObject;
-            errorDescription.GetComponent<TMP_Text>().text = String.Format("Description: {0}",executionSuccess.ErrorMessage);
-            GameObject errorType = errorPanel.transform.Find("ErrorType").gameObject;
-            errorType.GetComponent<TMP_Text>().text = String.Format("Type: {0}", executionSuccess.OwningCommand.GetType().Name);
+            GameObject errorDescription = errorPanel.transform.Find("ErrorDescriptionText").gameObject;
+            errorDescription.GetComponent<TMP_Text>().text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent iaculis erat sit amet enim cursus, nec laoreet nibh ornare. Sed fringilla libero vitae libero malesuada tincidunt. Aliquam ligula mi, efficitur in urna imperdiet" + executionSuccess.ErrorMessage;
+            GameObject errorType = errorPanel.transform.Find("ErrorTypeText").gameObject;
+            errorType.GetComponent<TMP_Text>().text = executionSuccess.OwningCommand.GetType().Name;
             GameObject errorSrcCode = errorPanel.transform.Find("SourceCodeError").gameObject;
             errorSrcCode.GetComponent<TMP_InputField>().text = executionSuccess.OwningCommand.ToCode();
         }
@@ -80,6 +80,9 @@ namespace Visualization.Animation
                 yield break;
             }
             AnimationIsRunning = true;
+
+            UI.MenuManager.Instance.ErrorPanel.SetActive(false);
+            UI.MenuManager.Instance.ShowErrorBtn.GetComponent<Button>().interactable = false;
 
             List<Anim> animations = AnimationData.Instance.getAnimList();
             Anim selectedAnimation = AnimationData.Instance.selectedAnim;
@@ -156,6 +159,8 @@ namespace Visualization.Animation
 
                 if (!executionSuccess.IsSuccess)
                 {
+                    GameObject errorPanelButton = UI.MenuManager.Instance.ShowErrorBtn;
+                    errorPanelButton.GetComponent<Button>().interactable = true;
                     ShowAndFillErrorPanel();
                     break;
                 }
