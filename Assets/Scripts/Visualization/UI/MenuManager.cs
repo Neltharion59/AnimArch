@@ -59,9 +59,21 @@ namespace Visualization.UI
         public GameObject playIntroTexts;
         public List<AnimMethod> animMethods;
         public bool isSelectingNode;
-        public void errorShowButtonClicked() {
-            Debug.Log("Show error button clicked!\n");
-            ErrorPanel.SetActive(!ErrorPanel.activeSelf);
+        // executed on pressing show error button
+        public void ShowErrorPanel() {
+            ShowErrorBtn.GetComponent<Button>().interactable = false;
+            ErrorPanel.SetActive(true);
+        }
+        // executed on pressing X button
+        public void HideErrorPanel() {
+            ShowErrorBtn.GetComponent<Button>().interactable = true;
+            ErrorPanel.SetActive(false);
+        }
+        // executed after stopping or rerunning animation
+        public void HideErrorPanelOnStopButton() {
+            Debug.Log("Error panel hidden!");
+            ErrorPanel.SetActive(false);
+            ShowErrorBtn.GetComponent<Button>().interactable = false;
         }
 
 
