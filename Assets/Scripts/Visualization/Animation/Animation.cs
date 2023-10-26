@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnimArch.Visualization.Diagrams;
@@ -16,6 +17,9 @@ using Visualization.ClassDiagram.ComponentsInDiagram;
 using Visualization.ClassDiagram.Diagrams;
 using Visualization.ClassDiagram.Relations;
 using Visualization.UI;
+
+
+using TMPro;
 
 namespace Visualization.Animation
 {
@@ -44,13 +48,27 @@ namespace Visualization.Animation
         public string startMethodName;
 
 
-        private void fillErrorPanel() {
+        private void fillErrorPanel(string CommandCode) {
             // Debug.Log(String.Format("Code: {0}, message: {1}, type: {2}", executionSuccess.ErrorCode, executionSuccess.ErrorMessage, executionSuccess.GetType()));
             GameObject errorPanel = UI.MenuManager.Instance.ErrorPanel;
             errorPanel.SetActive(true);
-            // GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
+            GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
+            //Debug.Log(String.Format("!!!!!!!!!!!!!!!CODE: {0}", errorId.GetComponent<TMP_Text>().text));
+            errorId.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
 
-            // errorId.
+
+            GameObject errorDescription = errorPanel.transform.Find("ErrorDescription").gameObject;
+            errorDescription.GetComponent<TMP_Text>().text = String.Format("Description: {0}",executionSuccess.ErrorMessage);
+
+            GameObject errorType = errorPanel.transform.Find("ErrorType").gameObject;
+            errorType.GetComponent<TMP_Text>().text = String.Format("Type: {0}", executionSuccess.GetType());
+
+            GameObject errorSrcCode = errorPanel.transform.Find("SourceCodeError").gameObject;
+            errorSrcCode.GetComponent<TMP_InputField>().text = CommandCode;
+           Debug.Log(String.Format("!!!!!!!!!!!!!!!CODE: {0}", errorSrcCode.GetComponent<TMP_InputField>() == null));
+         //   errorSrcCode.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
+
+         
 
 
         }
@@ -148,7 +166,7 @@ namespace Visualization.Animation
 
                 if (!executionSuccess.IsSuccess)
                 {
-                    fillErrorPanel();
+                    fillErrorPanel(CurrentCommand.ToString());
                     break;
                 }
 
