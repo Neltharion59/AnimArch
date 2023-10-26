@@ -47,8 +47,14 @@ namespace Visualization.Animation
         public string startClassName;
         public string startMethodName;
 
+        private void Awake()
+        {
+            classDiagram = GameObject.Find("ClassDiagram").GetComponent<ClassDiagram.Diagrams.ClassDiagram>();
+            objectDiagram = GameObject.Find("ObjectDiagram").GetComponent<ObjectDiagram>();
+            standardPlayMode = true;
+        }
 
-        private void ShowAndFillErrorPanel() {
+        private void ShowError() {
             Debug.Log("Error panel shown!");
             GameObject errorPanel = UI.MenuManager.Instance.ErrorPanel;
             errorPanel.SetActive(true);
@@ -63,11 +69,10 @@ namespace Visualization.Animation
             errorSrcCode.GetComponent<TMP_InputField>().text = executionSuccess.OwningCommand.ToCode();
         }
 
-        private void Awake()
-        {
-            classDiagram = GameObject.Find("ClassDiagram").GetComponent<ClassDiagram.Diagrams.ClassDiagram>();
-            objectDiagram = GameObject.Find("ObjectDiagram").GetComponent<ObjectDiagram>();
-            standardPlayMode = true;
+        private void HideError() {
+            Debug.Log("Error panel hidden!");
+            UI.MenuManager.Instance.ErrorPanel.SetActive(false);
+            UI.MenuManager.Instance.ShowErrorBtn.GetComponent<Button>().interactable = false;
         }
 
         // Main Couroutine for compiling the OAL of Animation script and then starting the visualisation of Animation
@@ -81,8 +86,7 @@ namespace Visualization.Animation
             }
             AnimationIsRunning = true;
 
-            UI.MenuManager.Instance.ErrorPanel.SetActive(false);
-            UI.MenuManager.Instance.ShowErrorBtn.GetComponent<Button>().interactable = false;
+            HideError();
 
             List<Anim> animations = AnimationData.Instance.getAnimList();
             Anim selectedAnimation = AnimationData.Instance.selectedAnim;
@@ -161,7 +165,7 @@ namespace Visualization.Animation
                 {
                     GameObject errorPanelButton = UI.MenuManager.Instance.ShowErrorBtn;
                     errorPanelButton.GetComponent<Button>().interactable = true;
-                    ShowAndFillErrorPanel();
+                    ShowError();
                     break;
                 }
 
@@ -904,6 +908,7 @@ namespace Visualization.Animation
         {
             isPaused = false;
             StopAllCoroutines();
+            HideError();
             if (DiagramPool.Instance.ClassDiagram.GetClassList() != null)
                 foreach (Class c in DiagramPool.Instance.ClassDiagram.GetClassList())
                 {
