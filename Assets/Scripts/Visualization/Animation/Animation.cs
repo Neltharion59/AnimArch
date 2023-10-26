@@ -62,7 +62,7 @@ namespace Visualization.Animation
             GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
             errorId.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
             GameObject errorDescription = errorPanel.transform.Find("ErrorDescriptionText").gameObject;
-            errorDescription.GetComponent<TMP_Text>().text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent iaculis erat sit amet enim cursus, nec laoreet nibh ornare. Sed fringilla libero vitae libero malesuada tincidunt. Aliquam ligula mi, efficitur in urna imperdiet" + executionSuccess.ErrorMessage;
+            errorDescription.GetComponent<TMP_InputField>().text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent iaculis erat sit amet enim cursus, nec laoreet nibh ornare. Sed fringilla libero vitae libero malesuada tincidunt. Aliquam ligula mi, efficitur in urna imperdiet" + executionSuccess.ErrorMessage;
             GameObject errorType = errorPanel.transform.Find("ErrorTypeText").gameObject;
             errorType.GetComponent<TMP_Text>().text = executionSuccess.OwningCommand.GetType().Name;
             GameObject errorSrcCode = errorPanel.transform.Find("SourceCodeError").gameObject;
