@@ -59,7 +59,7 @@ namespace Visualization.UI
         public List<AnimMethod> animMethods;
         public bool isSelectingNode;
         public void errorShowButtonClicked() {
-            Debug.Log("Error shown!\n");
+            Debug.Log("TEST!\n");
             ErrorPanel.SetActive(!ErrorPanel.activeSelf);
         }
 
