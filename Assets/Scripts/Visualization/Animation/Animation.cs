@@ -48,29 +48,19 @@ namespace Visualization.Animation
         public string startMethodName;
 
 
-        private void fillErrorPanel(string CommandCode) {
-            // Debug.Log(String.Format("Code: {0}, message: {1}, type: {2}", executionSuccess.ErrorCode, executionSuccess.ErrorMessage, executionSuccess.GetType()));
+        private void ShowAndFillErrorPanel() {
+            Debug.Log("Error panel shown!");
             GameObject errorPanel = UI.MenuManager.Instance.ErrorPanel;
             errorPanel.SetActive(true);
+
             GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
-            //Debug.Log(String.Format("!!!!!!!!!!!!!!!CODE: {0}", errorId.GetComponent<TMP_Text>().text));
             errorId.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
-
-
             GameObject errorDescription = errorPanel.transform.Find("ErrorDescription").gameObject;
             errorDescription.GetComponent<TMP_Text>().text = String.Format("Description: {0}",executionSuccess.ErrorMessage);
-
             GameObject errorType = errorPanel.transform.Find("ErrorType").gameObject;
-            errorType.GetComponent<TMP_Text>().text = String.Format("Type: {0}", executionSuccess.GetType());
-
+            errorType.GetComponent<TMP_Text>().text = String.Format("Type: {0}", executionSuccess.OwningCommand.GetType().Name);
             GameObject errorSrcCode = errorPanel.transform.Find("SourceCodeError").gameObject;
-            errorSrcCode.GetComponent<TMP_InputField>().text = CommandCode;
-           Debug.Log(String.Format("!!!!!!!!!!!!!!!CODE: {0}", errorSrcCode.GetComponent<TMP_InputField>() == null));
-         //   errorSrcCode.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
-
-         
-
-
+            errorSrcCode.GetComponent<TMP_InputField>().text = executionSuccess.OwningCommand.ToCode();
         }
 
         private void Awake()
@@ -166,7 +156,7 @@ namespace Visualization.Animation
 
                 if (!executionSuccess.IsSuccess)
                 {
-                    fillErrorPanel(CurrentCommand.ToString());
+                    ShowAndFillErrorPanel();
                     break;
                 }
 

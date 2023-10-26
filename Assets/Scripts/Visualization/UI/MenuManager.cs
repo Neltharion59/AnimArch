@@ -51,6 +51,7 @@ namespace Visualization.UI
         [SerializeField] private Toggle hideRelToggle;
         [SerializeField] public GameObject PanelChooseAnimationStartMethod;
         [SerializeField] public GameObject PanelSourceCodeAnimation;
+        [SerializeField] public GameObject ShowErrorBtn;
         [SerializeField] public GameObject ErrorPanel;
         public Anim createdAnim;
         public bool isPlaying = false;
@@ -59,7 +60,7 @@ namespace Visualization.UI
         public List<AnimMethod> animMethods;
         public bool isSelectingNode;
         public void errorShowButtonClicked() {
-            Debug.Log("TEST!\n");
+            Debug.Log("Show error button clicked!\n");
             ErrorPanel.SetActive(!ErrorPanel.activeSelf);
         }
 
