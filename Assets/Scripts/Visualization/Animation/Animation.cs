@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnimArch.Visualization.Diagrams;
 using Assets.Scripts.AnimationControl.OAL;
 using OALProgramControl;
+using TMPro;
 using UMSAGL.Scripts;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
 using Visualisation.Animation;
 using Visualization.ClassDiagram;
@@ -17,9 +16,6 @@ using Visualization.ClassDiagram.ComponentsInDiagram;
 using Visualization.ClassDiagram.Diagrams;
 using Visualization.ClassDiagram.Relations;
 using Visualization.UI;
-
-
-using TMPro;
 
 namespace Visualization.Animation
 {
