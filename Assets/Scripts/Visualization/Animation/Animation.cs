@@ -56,18 +56,7 @@ namespace Visualization.Animation
 
         private void ShowError() {
             Debug.Log("Error panel shown!");
-            GameObject errorPanel = UI.MenuManager.Instance.ErrorPanel;
-
-            GameObject errorId = errorPanel.transform.Find("ErrorID").gameObject;
-            errorId.GetComponent<TMP_Text>().text = executionSuccess.ErrorCode;
-            GameObject errorDescription = errorPanel.transform.Find("ErrorDescriptionText").gameObject;
-            errorDescription.GetComponent<TMP_InputField>().text = executionSuccess.ErrorMessage;
-            GameObject errorType = errorPanel.transform.Find("ErrorTypeText").gameObject;
-            errorType.GetComponent<TMP_Text>().text = executionSuccess.OwningCommand.GetType().Name;
-            GameObject errorSrcCode = errorPanel.transform.Find("SourceCodeError").gameObject;
-            errorSrcCode.GetComponent<TMP_InputField>().text = executionSuccess.OwningCommand.ToCode();
-
-            UI.MenuManager.Instance.ShowErrorPanel();
+            UI.MenuManager.Instance.ShowErrorPanel(executionSuccess);
         }
 
         // Main Couroutine for compiling the OAL of Animation script and then starting the visualisation of Animation

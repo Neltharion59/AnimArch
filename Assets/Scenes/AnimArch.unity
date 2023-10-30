@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13444,7 +13444,7 @@ GameObject:
   - component: {fileID: 376187650}
   - component: {fileID: 376187653}
   - component: {fileID: 376187652}
-  - component: {fileID: 376187651}
+  - component: {fileID: 376187654}
   m_Layer: 5
   m_Name: ErrorPanel
   m_TagString: Untagged
@@ -13484,20 +13484,6 @@ RectTransform:
   m_AnchoredPosition: {x: -416.72803, y: 117.89}
   m_SizeDelta: {x: 456.514, y: 313.049}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &376187651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 376187649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc3706d0e1e243b4a854c1ed2389ee3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LabelClassMethodName: {fileID: 490488569}
-  TextAreaSourceCode: {fileID: 0}
 --- !u!114 &376187652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13536,6 +13522,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 376187649}
   m_CullTransparentMesh: 0
+--- !u!114 &376187654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376187649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8285c021270f0744ea7e83445777e88f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ErrorIDText: {fileID: 1763792202}
+  ErrorDescriptionText: {fileID: 1211973635}
+  ErrorCommandTypeText: {fileID: 931026515}
+  ErrorSourceCodeText: {fileID: 873838068}
 --- !u!1 &379604346
 GameObject:
   m_ObjectHideFlags: 0

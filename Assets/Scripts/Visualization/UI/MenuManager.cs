@@ -60,9 +60,14 @@ namespace Visualization.UI
         public List<AnimMethod> animMethods;
         public bool isSelectingNode;
         // executed on pressing show error button
-        public void ShowErrorPanel() {
+        public void ShowErrorPanel()
+        {
+            ShowErrorPanel(null);
+        }
+        public void ShowErrorPanel(EXEExecutionResult executionResult = null) {
             ShowErrorBtn.GetComponent<Button>().interactable = false;
             ErrorPanel.SetActive(true);
+            ErrorPanel.GetComponent<ExecutionErrorPanel>().FillPanel(executionResult);
         }
         // executed on pressing X button
         public void HideErrorPanel() {
