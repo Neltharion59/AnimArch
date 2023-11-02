@@ -66,7 +66,7 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override String ToCodeSimple()
+        public override String ToCodeSimple()//--------------------------------
         {
             return
                 this.AssignmentTarget.ToCode()
@@ -74,6 +74,10 @@ namespace OALProgramControl
                     + this.AssignmentType
                     + (this.Prompt?.ToCode() ?? string.Empty)
                     + (EXETypes.StringTypeName.Equals(this.AssignmentType) ? ")" : "))");
+        }
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeCommandRead(this);
         }
 
         public override EXECommand CreateClone()

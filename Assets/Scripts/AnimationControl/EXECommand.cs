@@ -93,9 +93,12 @@ namespace OALProgramControl
         {
             return Indent + ToCodeSimple() + ";\n";
         }
-        public virtual String ToCodeSimple()
+        public virtual String ToCodeSimple()//-----------------------------
         {
             return "Command";
+        }
+        public virtual void Accept(Visitor v) {
+            v.VisitExeCommand(this);
         }
         public virtual string ToFormattedCode(String Indent = "")
         {

@@ -75,10 +75,14 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()
+        public override string ToCodeSimple()//--------------------------------------------
         {
             return "create list " + this.AssignmentTarget.ToCode()
                 + " of " + this.ArrayType + " { " + string.Join(", ", this.Items.Select(item => item.ToCode())) + " }";
+        }
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeCommandCreateList(this);
         }
 
         public override EXECommand CreateClone()

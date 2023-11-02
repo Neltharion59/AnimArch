@@ -32,9 +32,12 @@
 
             return Success();
         }
-        public override string ToCodeSimple()
+        public override string ToCodeSimple()//-----------------------------------------
         {
             return "continue";
+        }
+        public override void Accept(Visitor v) {
+            v.VisitExeCommandContinue(this);
         }
 
         public override EXECommand CreateClone()

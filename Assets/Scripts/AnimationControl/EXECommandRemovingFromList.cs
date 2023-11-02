@@ -42,9 +42,13 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()
+        public override string ToCodeSimple() //-----------------------------------
         {
             return "remove " + this.Item.ToCode() + " from " + this.Array.ToCode();
+        }
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeCommandRemovingFromList(this);
         }
 
         public override EXECommand CreateClone()

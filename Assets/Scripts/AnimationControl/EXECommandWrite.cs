@@ -36,11 +36,15 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()
+        public override string ToCodeSimple()//---------------------------------------------
         {
             String Result = "write(" + string.Join(", ", this.Arguments.Select(argument => argument.ToCode())) + ")";
 
             return Result;
+        }
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeCommandWrite(this);
         }
 
         public override EXECommand CreateClone()

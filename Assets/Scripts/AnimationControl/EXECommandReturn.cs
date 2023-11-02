@@ -33,9 +33,13 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()
+        public override string ToCodeSimple()//------------------------------------------------
         {
             return this.Expression == null ? "return" : ("return " + this.Expression.ToCode());
+        }
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeCommandReturn(this);
         }
 
         public override EXECommand CreateClone()

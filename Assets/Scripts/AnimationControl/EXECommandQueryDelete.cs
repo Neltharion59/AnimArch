@@ -38,9 +38,13 @@ namespace OALProgramControl
 
             return Success();
         }
-        public override string ToCodeSimple()
+        public override string ToCodeSimple()//-----------------------------
         {
             return "delete object instance " + this.DeletedVariable.ToCode();
+        }
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeCommandQueryDelete(this);
         }
 
         public override EXECommand CreateClone()
