@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 16b6cc14bc8b80b40a8d33c8d619201c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3086442565632
+    m_Localized: Create Diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4026562252800
+    m_Localized: Load Diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4393018593280
+    m_Localized: Edit Diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5327710851072
+    m_Localized: Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5743567704064
+    m_Localized: Edit Anim
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6275166375936
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6926202048512
+    m_Localized: Open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7783454871552
+    m_Localized: 'Manage Animation:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8236884299776
+    m_Localized: Show graph relations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8901480157184
+    m_Localized: Animation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9621885423616
+    m_Localized: 'Play Animation:'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
