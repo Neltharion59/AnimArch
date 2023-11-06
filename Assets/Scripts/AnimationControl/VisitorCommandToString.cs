@@ -6,6 +6,18 @@ using UnityEngine;
 public class VisitorCommandToString : Visitor
 {
     private string commandString;
+    public string CommandString
+    {
+        get
+        {
+            return commandString;
+        }
+    }
+
+    public VisitorCommandToString()
+    {
+        commandString = string.Empty;
+    }
 
     public override void VisitExeCommand(EXECommand c)
     {
@@ -24,11 +36,7 @@ public class VisitorCommandToString : Visitor
 
     public override void VisitExeCommandContinue(EXECommandContinue c)
     {
-        commandString += "continue";
-    }
-
-    public string GetCommandString() {
-        return commandString;
+        commandString += "continue"; // c.GetType
     }
 
     public override void VisitExeCommandAddingToList(EXECommandAddingToList c)

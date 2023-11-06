@@ -10,7 +10,7 @@ namespace OALProgramControl
         public MethodInvocationInfo CallInfo { get; private set; }
         private EXEValueBase CalledObject { get; set; }
         private string MethodAccessChainS { get; }
-        public EXEScopeMethod InvokedMethod { get; private set; }
+        public EXEScopeMethod InvokedMethod { get; private set; } 
 
         public string GetMethodAccessChainS() { ///-----for visitor
             return MethodAccessChainS;

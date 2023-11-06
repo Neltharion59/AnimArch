@@ -69,10 +69,10 @@ namespace Visualization.Animation
                 yield break;
             }
 
-            VisitorCommandToString v = new();
-            EXECommandContinue cont = new();
+            VisitorCommandToString v = new VisitorCommandToString();
+            EXECommandContinue cont = new EXECommandContinue();
             cont.Accept(v);
-            Debug.Log(v.GetCommandString());
+            Debug.Log(v.CommandString);
             
 
 

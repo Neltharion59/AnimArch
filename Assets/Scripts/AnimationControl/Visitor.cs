@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using OALProgramControl;
 using UnityEngine;
 
-public abstract class Visitor : MonoBehaviour
+public abstract class Visitor
 {
 
     public abstract void VisitExeCommandCall(EXECommandCall c);
