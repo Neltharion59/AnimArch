@@ -34,6 +34,8 @@ public class ExecutionErrorPanel : MonoBehaviour
         ErrorIDTextComponent.text = executionSuccess.ErrorCode;
         ErrorDescriptionTextComponent.text = executionSuccess.ErrorMessage;
         ErrorCommandTypeTextComponent.text = executionSuccess.OwningCommand.GetType().Name;
-        ErrorSourceCodeTextComponent.text = executionSuccess.OwningCommand.ToCode();
+        executionSuccess.OwningCommand.Accept(EXECommand.visitor);
+
+        ErrorSourceCodeTextComponent.text = EXECommand.visitor.GetCommandStringAndResetStateNow();
     }
 }

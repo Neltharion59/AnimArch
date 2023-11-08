@@ -31,10 +31,6 @@
 
             return Success();
         }
-        public override string ToCodeSimple()//----------------------------
-        {
-            return "break";
-        }
         public override void Accept(Visitor v) {
             v.VisitExeCommandBreak(this);
         }

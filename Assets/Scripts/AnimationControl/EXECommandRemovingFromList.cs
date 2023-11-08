@@ -6,8 +6,8 @@ namespace OALProgramControl
 {
     public class EXECommandRemovingFromList : EXECommand
     {
-        private EXEASTNodeBase Array { get; }
-        private EXEASTNodeBase Item { get; }
+        public EXEASTNodeBase Array { get; }
+        public EXEASTNodeBase Item { get; }
 
         public EXECommandRemovingFromList(EXEASTNodeBase array, EXEASTNodeBase item)
         {
@@ -42,10 +42,6 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple() //-----------------------------------
-        {
-            return "remove " + this.Item.ToCode() + " from " + this.Array.ToCode();
-        }
         public override void Accept(Visitor v)
         {
             v.VisitExeCommandRemovingFromList(this);

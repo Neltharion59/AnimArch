@@ -53,10 +53,6 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()//--------------------------------------------------------------------------------------------
-        {
-            return "create object instance " + (this.AssignmentTarget?.ToCode() ?? string.Empty) + " of " + this.ClassName;
-        }
         public override void Accept(Visitor v)
         {
             v.VisitExeCommandQueryCreate(this);

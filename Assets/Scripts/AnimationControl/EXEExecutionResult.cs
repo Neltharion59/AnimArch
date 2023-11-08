@@ -54,12 +54,15 @@ namespace OALProgramControl
 
         public override string ToString()
         {
+            if (this.OwningCommand != null) {
+                this.OwningCommand.Accept(EXECommand.visitor);
+            }
             return string
                     .Format
                     (
                         "{{\n\tsuccess: '{0}',\n\tcommand: '{1}',\n\tcommandType: '{2}',\n\terrorMessage: '{3}',\n\terrorCode: '{4}'\n}}",
                         this.IsSuccess,
-                        OwningCommand == null ? string.Empty : this.OwningCommand.ToCode(),
+                        OwningCommand == null ? string.Empty : EXECommand.visitor.GetCommandStringAndResetStateNow(),
                         OwningCommand == null ? string.Empty : this.OwningCommand.GetType().Name,
                         ErrorMessage ?? string.Empty,
                         ErrorCode ?? string.Empty

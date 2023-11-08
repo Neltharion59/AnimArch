@@ -69,13 +69,6 @@ namespace Visualization.Animation
                 yield break;
             }
 
-            VisitorCommandToString v = new VisitorCommandToString();
-            EXECommandContinue cont = new EXECommandContinue();
-            cont.Accept(v);
-            Debug.Log(v.CommandString);
-            
-
-
             AnimationIsRunning = true;
 
             UI.MenuManager.Instance.HideErrorPanelOnStopButton();
@@ -287,7 +280,7 @@ namespace Visualization.Animation
 
             CDClassInstance callerObject = currentCommand.GetCurrentMethodScope().OwningObject;
             CDClassInstance createdObject = createCommand.GetCreatedInstance();
-            string targetVariableName = createCommand.AssignmentTarget.ToCode(); //---------tu bude vysledok od visitora
+            string targetVariableName = createCommand.AssignmentTarget.ToCode();
 
 
             var objectInDiagram = AddObjectToDiagram(targetVariableName, createdObject);

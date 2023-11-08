@@ -130,16 +130,25 @@ namespace OALProgramControl
             }
         }
 
-        public override String ToCode(String Indent = "")
+        public override void Accept(Visitor v)
         {
-            String Result = "";
+            v.VisitExeScope(this);
             foreach (EXECommand Command in this.Commands)
             {
-                Result += Command.ToCode(Indent);
+                Command.Accept(v);
             }
-
-            return Result;
         }
+
+        // public override String ToCode(String Indent = "")
+        // {
+        //     String Result = "";
+        //     foreach (EXECommand Command in this.Commands)
+        //     {
+        //         Result += Command.ToCode(Indent);
+        //     }
+
+        //     return Result;
+        // }
 
         public override string ToFormattedCode(string Indent = "")
         {

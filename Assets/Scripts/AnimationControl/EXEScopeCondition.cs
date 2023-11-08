@@ -91,10 +91,10 @@ namespace OALProgramControl
 
             return Success();
         }
-        public override String ToCode(String Indent = "")
-        {
-            return FormatCode(Indent, false);
-        }
+        // public override String ToCode(String Indent = "")
+        // {
+        //     return FormatCode(Indent, false);
+        // }
 
         public override string ToFormattedCode(string Indent = "")
         {

@@ -44,10 +44,6 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()//----------------------------------------
-        {
-            return "add " + this.AddedElement.ToCode() + " to " + this.Array.ToCode();
-        }
         public override void Accept(Visitor v)
         {
             v.VisitExeCommandAddingToList(this);

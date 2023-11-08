@@ -9,12 +9,9 @@ namespace OALProgramControl
         public EXEValueBase ReturnedValue;
         public MethodInvocationInfo CallInfo { get; private set; }
         private EXEValueBase CalledObject { get; set; }
-        private string MethodAccessChainS { get; }
+        public string MethodAccessChainS { get; }
         public EXEScopeMethod InvokedMethod { get; private set; } 
 
-        public string GetMethodAccessChainS() { ///-----for visitor
-            return MethodAccessChainS;
-        }
         public EXECommandCall(EXEASTNodeAccessChain methodAccessChain, EXEASTNodeMethodCall methodCall)
         {
             this.MethodAccessChain = methodAccessChain;
@@ -116,10 +113,6 @@ namespace OALProgramControl
                 );
 
             return Success();
-        }
-        public override string ToCodeSimple()//------------------------------
-        {
-            return this.MethodAccessChainS + "." + this.MethodCall.ToCode();
         }
         public override void Accept(Visitor v) {
             v.VisitExeCommandCall(this);

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 
 namespace OALProgramControl
 {
-    public abstract class EXECommand
+    public abstract class EXECommand : IVisitable
     {
         public bool IsActive { get; set; } = false;
         protected EXEScope SuperScope { get; private set; } = null;
         public EXEExecutionStack CommandStack { get; set; } = null;
+        public static VisitorCommandToString visitor = new VisitorCommandToString(); //DO_NOT_COMMIT
         public virtual IEnumerable<EXEScope> ScopesToTop()
         {
             EXEScope currentScope = this.SuperScope;
@@ -89,20 +90,14 @@ namespace OALProgramControl
             return false;
         }
         public abstract EXECommand CreateClone();
-        public virtual String ToCode(String Indent = "")
-        {
-            return Indent + ToCodeSimple() + ";\n";
-        }
-        public virtual String ToCodeSimple()//-----------------------------
-        {
-            return "Command";
-        }
         public virtual void Accept(Visitor v) {
             v.VisitExeCommand(this);
         }
         public virtual string ToFormattedCode(String Indent = "")
         {
-            return HighlightCodeIf(IsActive, ToCode(Indent));
+            Accept(EXECommand.visitor);
+            string temporary_variable_command_to_code = visitor.GetCommandStringAndResetStateNow();
+            return HighlightCodeIf(IsActive, temporary_variable_command_to_code);
         }
         protected string HighlightCodeIf(bool condition, string code)
         {

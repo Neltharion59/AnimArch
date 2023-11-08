@@ -8,9 +8,9 @@ namespace OALProgramControl
 {
     public class EXECommandRead : EXECommand
     {
-        private String AssignmentType { get; }
-        private EXEASTNodeAccessChain AssignmentTarget { get; }
-        private EXEASTNodeBase Prompt { get; }  // Must be String type
+        public String AssignmentType { get; }
+        public EXEASTNodeAccessChain AssignmentTarget { get; }
+        public EXEASTNodeBase Prompt { get; }  // Must be String type
 
         public EXECommandRead(String assignmentType, EXEASTNodeAccessChain assignmentTarget, EXEASTNodeBase prompt)
         {
@@ -66,15 +66,6 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override String ToCodeSimple()//--------------------------------
-        {
-            return
-                this.AssignmentTarget.ToCode()
-                    + " = "
-                    + this.AssignmentType
-                    + (this.Prompt?.ToCode() ?? string.Empty)
-                    + (EXETypes.StringTypeName.Equals(this.AssignmentType) ? ")" : "))");
-        }
         public override void Accept(Visitor v)
         {
             v.VisitExeCommandRead(this);

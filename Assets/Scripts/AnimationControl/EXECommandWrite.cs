@@ -9,7 +9,7 @@ namespace OALProgramControl
 {
     public class EXECommandWrite : EXECommand
     {
-        private List<EXEASTNodeBase> Arguments { get; }
+        public List<EXEASTNodeBase> Arguments { get; }
         public EXECommandWrite() : this(new List<EXEASTNodeBase>()) {}
         public EXECommandWrite(List<EXEASTNodeBase> Arguments)
         {
@@ -36,12 +36,6 @@ namespace OALProgramControl
             return Success();
         }
 
-        public override string ToCodeSimple()//---------------------------------------------
-        {
-            String Result = "write(" + string.Join(", ", this.Arguments.Select(argument => argument.ToCode())) + ")";
-
-            return Result;
-        }
         public override void Accept(Visitor v)
         {
             v.VisitExeCommandWrite(this);

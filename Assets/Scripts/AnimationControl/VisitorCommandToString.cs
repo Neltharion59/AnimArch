@@ -1,107 +1,192 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using OALProgramControl;
 using UnityEngine;
 
 public class VisitorCommandToString : Visitor
 {
-    private string commandString;
-    public string CommandString
-    {
-        get
-        {
-            return commandString;
-        }
+    private readonly StringBuilder commandString;
+    private bool simpleFormatting;
+
+    private int indentationLevel;
+
+    public string GetCommandStringAndResetStateNow() {
+        string result = commandString.ToString();
+        ResetState();
+        return result;
     }
 
     public VisitorCommandToString()
     {
-        commandString = string.Empty;
+        commandString = new StringBuilder();
+        ResetState();
     }
 
-    public override void VisitExeCommand(EXECommand c)
+    private void ResetState() {
+        simpleFormatting = true;
+        indentationLevel = 0;
+        commandString.Clear();
+    }
+
+    public void ActivateSimpleFormatting() {
+        simpleFormatting = true;
+        indentationLevel = 0;
+    }
+
+    public void DeactivateSimpleFormatting() {
+        simpleFormatting = false;
+    }
+
+    private void IncreaseIndentation() {
+        indentationLevel++;
+    }
+
+    private void DecreaseIndentation() {
+        indentationLevel--;
+    }
+
+    private void AddIndentation() {
+        if (simpleFormatting) {
+            commandString.Append(indentationLevel*4*' ');
+        }
+    }
+
+    private void AddEOL() {
+        if (simpleFormatting) {
+            commandString.Append(";\n");
+        }
+    }
+
+    public override void VisitExeCommand(EXECommand command)
     {
-        commandString += "Command";
+        AddIndentation();
+        commandString.Append("Command");
+        AddEOL();
     }
 
-    public override void VisitExeCommandBreak(EXECommandBreak c)
+    public override void VisitExeCommandBreak(EXECommandBreak command)
     {
-        commandString += "break";
+        AddIndentation();
+        commandString.Append("break");
+        AddEOL();
     }
 
-    public override void VisitExeCommandCall(EXECommandCall c)
+    public override void VisitExeCommandCall(EXECommandCall command)
     {
-        commandString += c.GetMethodAccessChainS() + "." + c.MethodCall.ToCode();
+        AddIndentation();
+        commandString.Append(command.MethodAccessChainS + "." + command.MethodCall.ToCode());
+        AddEOL();
     }
 
-    public override void VisitExeCommandContinue(EXECommandContinue c)
+    public override void VisitExeCommandContinue(EXECommandContinue command)
     {
-        commandString += "continue"; // c.GetType
+        AddIndentation();
+        commandString.Append("continue");
+        AddEOL();
     }
 
-    public override void VisitExeCommandAddingToList(EXECommandAddingToList c)
+    public override void VisitExeCommandAddingToList(EXECommandAddingToList command)
     {
-        //return "add " + this.AddedElement.ToCode() + " to " + this.Array.ToCode();
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append("add " + command.AddedElement.ToCode() + " to " + command.Array.ToCode());
+        AddEOL();
     }
 
-    public override void VisitExeCommandAssignment(EXECommandAssignment c)
+    public override void VisitExeCommandAssignment(EXECommandAssignment command)
     {
-        //return this.AssignmentTarget.ToCode() + " = " + this.AssignedExpression.ToCode();
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append(command.AssignmentTarget.ToCode() + " = " + command.AssignedExpression.ToCode());
+        AddEOL();
     }
 
-    public override void VisitExeCommandCreateList(EXECommandCreateList c)
+    public override void VisitExeCommandCreateList(EXECommandCreateList command)
     {
-        //return "create list " + this.AssignmentTarget.ToCode()
-          //      + " of " + this.ArrayType + " { " + string.Join(", ", this.Items.Select(item => item.ToCode())) + " }";
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append("create list " + command.AssignmentTarget.ToCode()
+               + " of " + command.ArrayType + " { " + string.Join(", ", command.Items.Select(item => item.ToCode())) + " }");
+        AddEOL();
     }
 
-    public override void VisitExeCommandMulti(EXECommandMulti c)
+    public override void VisitExeCommandMulti(EXECommandMulti command)
     {
         //nie je implemetacia v command multi
-        throw new System.NotImplementedException();
     }
 
-    public override void VisitExeCommandQueryCreate(EXECommandQueryCreate c)
+    public override void VisitExeCommandQueryCreate(EXECommandQueryCreate command)
     {
-        //return "create object instance " + (this.AssignmentTarget?.ToCode() ?? string.Empty) + " of " + this.ClassName;
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append("create object instance " + (command.AssignmentTarget?.ToCode() ?? string.Empty) + " of " + command.ClassName);
+        AddEOL();
     }
 
-    public override void VisitExeCommandQueryDelete(EXECommandQueryDelete c)
+    public override void VisitExeCommandQueryDelete(EXECommandQueryDelete command)
     {
-        //return "delete object instance " + this.DeletedVariable.ToCode();
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append("delete object instance " + command.DeletedVariable.ToCode());
+        AddEOL();
     }
 
-    public override void VisitExeCommandRead(EXECommandRead c)
+    public override void VisitExeCommandRead(EXECommandRead command)
     {
-        //return
-        //        this.AssignmentTarget.ToCode()
-        //            + " = "
-        //            + this.AssignmentType
-        //           + (this.Prompt?.ToCode() ?? string.Empty)
-         //           + (EXETypes.StringTypeName.Equals(this.AssignmentType) ? ")" : "))");
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append(
+               command.AssignmentTarget.ToCode()
+                   + " = "
+                   + command.AssignmentType
+                  + (command.Prompt?.ToCode() ?? string.Empty)
+                   + (EXETypes.StringTypeName.Equals(command.AssignmentType) ? ")" : "))"));
+        AddEOL();
     }
 
-    public override void VisitExeCommandRemovingFromList(EXECommandRemovingFromList c)
+    public override void VisitExeCommandRemovingFromList(EXECommandRemovingFromList command)
     {
-        //return "remove " + this.Item.ToCode() + " from " + this.Array.ToCode();
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append("remove " + command.Item.ToCode() + " from " + command.Array.ToCode());
+        AddEOL();
     }
 
-    public override void VisitExeCommandReturn(EXECommandReturn c)
+    public override void VisitExeCommandReturn(EXECommandReturn command)
     {
-        //return this.Expression == null ? "return" : ("return " + this.Expression.ToCode());
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append(command.Expression == null ? "return" : ("return " + command.Expression.ToCode()));
+        AddEOL();
     }
 
-    public override void VisitExeCommandWrite(EXECommandWrite c)
+    public override void VisitExeCommandWrite(EXECommandWrite command)
     {
-        //String Result = "write(" + string.Join(", ", this.Arguments.Select(argument => argument.ToCode())) + ")";
-        throw new System.NotImplementedException();
+        AddIndentation();
+        commandString.Append("write(" + string.Join(", ", command.Arguments.Select(argument => argument.ToCode())) + ")");
+        AddEOL();
+    }
+
+    public override void VisitExeScope(EXEScope scope)
+    {
+        
+    }
+
+    public override void VisitExeScopeLoop(EXEScopeLoop scope)
+    {
+    }
+
+    public override void VisitExeScopeMethod(EXEScopeMethod scope)
+    {
+    }
+
+    public override void VisitExeScopeForEach(EXEScopeForEach scope)
+    {
+    }
+
+    public override void VisitExeScopeParallel(EXEScopeParallel scope)
+    {
+    }
+
+    public override void VisitExeScopeCondition(EXEScopeCondition scope)
+    {
+    }
+
+    public override void VisitExeScopeLoopWhile(EXEScopeLoopWhile scope)
+    {
     }
 }

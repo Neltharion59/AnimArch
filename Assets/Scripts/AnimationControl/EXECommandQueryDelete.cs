@@ -4,7 +4,7 @@ namespace OALProgramControl
 {
     public class EXECommandQueryDelete : EXECommand
     {
-        private EXEASTNodeBase DeletedVariable { get; }
+        public EXEASTNodeBase DeletedVariable { get; }
 
         public EXECommandQueryDelete(EXEASTNodeBase deletedVariable)
         {
@@ -37,10 +37,6 @@ namespace OALProgramControl
             }
 
             return Success();
-        }
-        public override string ToCodeSimple()//-----------------------------
-        {
-            return "delete object instance " + this.DeletedVariable.ToCode();
         }
         public override void Accept(Visitor v)
         {
