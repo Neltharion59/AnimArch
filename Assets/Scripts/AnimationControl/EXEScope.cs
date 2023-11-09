@@ -7,6 +7,13 @@ namespace OALProgramControl
     public class EXEScope : EXECommand
     {
         protected readonly List<EXEVariable> LocalVariables;
+        public List<EXEVariable> Variables
+        {
+            get
+            {
+                return this.LocalVariables.Select(x => x).ToList();
+            }
+        }
         public List<EXECommand> Commands { get; protected set; }
 
         public String OALCode;

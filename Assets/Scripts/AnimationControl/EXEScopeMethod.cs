@@ -22,7 +22,7 @@ namespace OALProgramControl
         public override bool CollectReturn(EXEValueBase returnedValue, OALProgram programInstance)
         {
             // Check compatibility of types
-            if (!EXETypes.CanBeAssignedTo(this.MethodCallOrigin.EvaluationResult.ReturnedOutput, this.MethodDefinition.ReturnType, programInstance.ExecutionSpace))
+            if (!EXETypes.CanBeAssignedTo(returnedValue, this.MethodDefinition.ReturnType, programInstance.ExecutionSpace))
             {
                 return false;
             }

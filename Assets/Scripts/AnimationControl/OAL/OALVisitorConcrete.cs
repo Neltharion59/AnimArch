@@ -631,7 +631,7 @@ namespace AnimationControl.OAL
                     HandleError(string.Format("Malformed expression - operand of binary operator is not EXEASTNodeBase, instead it is '{0}'.", operand1?.GetType().Name ?? "NULL"), context);
                 }
 
-                object operand2 = Visit(context.GetChild(0));
+                object operand2 = Visit(context.GetChild(2));
 
                 if (operand2 is not EXEASTNodeBase || operand2 == null)
                 {
