@@ -22,7 +22,8 @@ namespace Assets.UnitTests.AnimationControl
             while (_executionResult.IsSuccess && programInstance.CommandStack.HasNext())
             {
                 EXECommand currentCommand = programInstance.CommandStack.Next();
-                Debug.Log(i.ToString() + currentCommand.ToCode());
+                currentCommand.Accept(EXECommand.visitor);
+                Debug.Log(i.ToString() + EXECommand.visitor.GetCommandStringAndResetStateNow());
                 _executionResult = currentCommand.PerformExecution(programInstance);
 
                 if (!_executionResult.IsSuccess)
