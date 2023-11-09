@@ -9,7 +9,7 @@ public class VisitorCommandToString : Visitor
 {
     private readonly StringBuilder commandString;
     private bool simpleFormatting;
-    private bool advancedFormatting;
+    private bool highlighting;
 
     private int indentationLevel;
 
@@ -27,7 +27,7 @@ public class VisitorCommandToString : Visitor
 
     private void ResetState() {
         simpleFormatting = true;
-        advancedFormatting = false;
+        highlighting = false;
         indentationLevel = 0;
         commandString.Clear();
     }
@@ -41,12 +41,12 @@ public class VisitorCommandToString : Visitor
         simpleFormatting = false;
     }
 
-    public void ActivateFormatting() {
-        advancedFormatting = true;
+    public void ActivateHighlighting() {
+        highlighting = true;
     }
 
-    public void DeactivateFormatting() {
-        advancedFormatting = false;
+    public void DeactivateHighlighting() {
+        highlighting = false;
     }
 
     private void IncreaseIndentation() {
@@ -58,23 +58,21 @@ public class VisitorCommandToString : Visitor
     }
 
     private void HighlightBegin(EXECommand command) {
-        if (advancedFormatting && command.IsActive) {
+        if (highlighting && command.IsActive) {
             commandString.Append("<b><color=green>");
         }
 
     }
 
     private void HighlightEnd(EXECommand command) {
-        if (advancedFormatting && command.IsActive) {
+        if (highlighting && command.IsActive) {
             commandString.Append("</color></b>");
         }
     }
 
-
-
-    private void AddIndentation() {
+    private void WriteIndentation() {
         if (simpleFormatting) {
-            commandString.Append(indentationLevel*'\t');
+            commandString.Append(string.Concat(Enumerable.Repeat("\t", indentationLevel)));
         }
     }
 
@@ -87,7 +85,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommand(EXECommand command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("Command");
         AddEOL();
         HighlightEnd(command);
@@ -96,7 +94,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandBreak(EXECommandBreak command)
     {   
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("break");
         AddEOL();
         HighlightEnd(command);
@@ -105,7 +103,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandCall(EXECommandCall command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append(command.MethodAccessChainS + "." + command.MethodCall.ToCode());
         AddEOL();
         HighlightEnd(command);
@@ -114,7 +112,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandContinue(EXECommandContinue command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("continue");
         AddEOL();
         HighlightEnd(command);
@@ -123,7 +121,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandAddingToList(EXECommandAddingToList command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("add " + command.AddedElement.ToCode() + " to " + command.Array.ToCode());
         AddEOL();
         HighlightEnd(command);
@@ -132,7 +130,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandAssignment(EXECommandAssignment command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append(command.AssignmentTarget.ToCode() + " = " + command.AssignedExpression.ToCode());
         AddEOL();
         HighlightEnd(command);
@@ -141,7 +139,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandCreateList(EXECommandCreateList command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("create list " + command.AssignmentTarget.ToCode()
                + " of " + command.ArrayType + " { " + string.Join(", ", command.Items.Select(item => item.ToCode())) + " }");
         AddEOL();
@@ -150,13 +148,13 @@ public class VisitorCommandToString : Visitor
 
     public override void VisitExeCommandMulti(EXECommandMulti command)
     {
-        //nie je implemetacia v command multi
+        VisitExeCommand(command);
     }
 
     public override void VisitExeCommandQueryCreate(EXECommandQueryCreate command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("create object instance " + (command.AssignmentTarget?.ToCode() ?? string.Empty) + " of " + command.ClassName);
         AddEOL();
         HighlightEnd(command);
@@ -165,7 +163,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandQueryDelete(EXECommandQueryDelete command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("delete object instance " + command.DeletedVariable.ToCode());
         AddEOL();
         HighlightEnd(command);
@@ -174,7 +172,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandRead(EXECommandRead command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append(
                command.AssignmentTarget.ToCode()
                    + " = "
@@ -188,7 +186,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandRemovingFromList(EXECommandRemovingFromList command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("remove " + command.Item.ToCode() + " from " + command.Array.ToCode());
         AddEOL();
         HighlightEnd(command);
@@ -197,7 +195,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandReturn(EXECommandReturn command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append(command.Expression == null ? "return" : ("return " + command.Expression.ToCode()));
         AddEOL();
         HighlightEnd(command);
@@ -206,7 +204,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeCommandWrite(EXECommandWrite command)
     {
         HighlightBegin(command);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("write(" + string.Join(", ", command.Arguments.Select(argument => argument.ToCode())) + ")");
         AddEOL();
         HighlightEnd(command);
@@ -218,7 +216,6 @@ public class VisitorCommandToString : Visitor
         {
             Command.Accept(this);
         }
-        
     }
 
     public override void VisitExeScopeLoop(EXEScopeLoop scope)
@@ -234,7 +231,6 @@ public class VisitorCommandToString : Visitor
     {
         foreach (EXECommand Command in scope.Commands)
         {
-
             Command.Accept(this);
         }
     }
@@ -242,22 +238,22 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeScopeForEach(EXEScopeForEach scope)
     { 
         HighlightBegin(scope);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("for each " + scope.IteratorName + " in "
                     + scope.Iterable.ToCode()
                     + "\n");
 
-            ActivateFormatting();
+            ActivateHighlighting();
             IncreaseIndentation();
             foreach (EXECommand Command in scope.Commands)
             {
                 Command.Accept(this);
             }
-            DeactivateFormatting();
+            DeactivateHighlighting();
             DecreaseIndentation();
 
             HighlightBegin(scope);
-            AddIndentation();
+            WriteIndentation();
             commandString.Append("end for");
             AddEOL();
     }
@@ -265,7 +261,7 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeScopeParallel(EXEScopeParallel scope)
     {
         HighlightBegin(scope);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("par\n");
         HighlightEnd(scope);
 
@@ -276,12 +272,12 @@ public class VisitorCommandToString : Visitor
             {
                 
                 HighlightBegin(scope);
-                AddIndentation();
+                WriteIndentation();
                 commandString.Append("\tthread\n");
                 HighlightEnd(scope);
 
 
-                ActivateFormatting();
+                ActivateHighlighting();
                 IncreaseIndentation();
                 IncreaseIndentation();
                 foreach (EXECommand Command in Thread.Commands)
@@ -290,10 +286,10 @@ public class VisitorCommandToString : Visitor
                 }
                 DecreaseIndentation();
                 DecreaseIndentation();
-                DeactivateFormatting();
+                DeactivateHighlighting();
 
                 HighlightBegin(scope);
-                AddIndentation();
+                WriteIndentation();
                 commandString.Append("\tend thread");
                 AddEOL();
                 HighlightEnd(scope);
@@ -301,7 +297,7 @@ public class VisitorCommandToString : Visitor
         }
 
         HighlightBegin(scope);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("end par");
         AddEOL();
         HighlightEnd(scope);
@@ -310,57 +306,57 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeScopeCondition(EXEScopeCondition scope)
     {
         HighlightBegin(scope);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("if (" + scope.Condition.ToCode() + ")\n");
         HighlightEnd(scope);
 
-        ActivateFormatting();
+        ActivateHighlighting();
         IncreaseIndentation();
         foreach (EXECommand Command in scope.Commands)
         {
             Command.Accept(this);
         }
         DecreaseIndentation();
-        DeactivateFormatting();
+        DeactivateHighlighting();
 
         if (scope.ElifScopes != null)
         {
             foreach (EXEScopeCondition Elif in scope.ElifScopes)
             {
                 HighlightBegin(scope);
-                AddIndentation();
+                WriteIndentation();
                 commandString.Append("elif ("+ Elif.Condition.ToCode() + ")\n");
                 HighlightEnd(scope);
 
-                ActivateFormatting();
+                ActivateHighlighting();
                 IncreaseIndentation();
                 foreach (EXECommand Command in Elif.Commands)
                 {
                     Command.Accept(this);
                 }
                 DecreaseIndentation();
-                DeactivateFormatting(); 
+                DeactivateHighlighting(); 
             }
         }
             if (scope.ElseScope != null)
             {
                 HighlightBegin(scope);
-                AddIndentation();
+                WriteIndentation();
                 commandString.Append("else\n");
                 HighlightEnd(scope);
 
-                ActivateFormatting();
+                ActivateHighlighting();
                 IncreaseIndentation();
                 foreach (EXECommand Command in scope.ElseScope.Commands)
                 {
                     Command.Accept(this);
                 }
                 DecreaseIndentation();
-                DeactivateFormatting(); 
+                DeactivateHighlighting(); 
             }
 
             HighlightBegin(scope);
-            AddIndentation();
+            WriteIndentation();
             commandString.Append("end if");
             AddEOL();
             HighlightEnd(scope);
@@ -370,21 +366,21 @@ public class VisitorCommandToString : Visitor
     public override void VisitExeScopeLoopWhile(EXEScopeLoopWhile scope)
     {
         HighlightBegin(scope);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("while (" + scope.Condition.ToCode() + ")\n");
         HighlightEnd(scope);
 
-        ActivateFormatting();
+        ActivateHighlighting();
         IncreaseIndentation();
         foreach (EXECommand Command in scope.Commands)
         {
             Command.Accept(this);
         }
         DecreaseIndentation();
-        DeactivateFormatting();
+        DeactivateHighlighting();
 
         HighlightBegin(scope);
-        AddIndentation();
+        WriteIndentation();
         commandString.Append("end while");
         AddEOL();
         HighlightEnd(scope);

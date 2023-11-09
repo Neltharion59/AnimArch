@@ -42,15 +42,7 @@ namespace OALProgramControl
         {
             v.VisitExeScopeMethod(this);
         }
-        // public override string ToFormattedCode(string Indent = "")
-        // {
-        //     String Result = "";
-        //     foreach (EXECommand Command in this.Commands)
-        //     {
-        //         Result += Command.ToFormattedCode(Indent);
-        //     }
-        //     return Result;
-        // }
+
         protected override EXEScope CreateDuplicateScope()
         {
             return new EXEScopeMethod(this.MethodDefinition);

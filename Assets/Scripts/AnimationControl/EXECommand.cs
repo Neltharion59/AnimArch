@@ -94,20 +94,6 @@ namespace OALProgramControl
             v.VisitExeCommand(this);
         }
 
-        // public virtual string ToFormattedCode(String Indent = "")
-        // {
-        //     Accept(EXECommand.visitor);
-        //     string temporary_variable_command_to_code = visitor.GetCommandStringAndResetStateNow();
-        //     return HighlightCodeIf(IsActive, temporary_variable_command_to_code);
-        // }
-        // protected string HighlightCodeIf(bool condition, string code)
-        // {
-        //     return condition ? HighlightCode(code) : code;
-        // }
-        // private string HighlightCode(string code)
-        // {
-        //     return "<b><color=green>" + code + "</color></b>";
-        // }
         public void ToggleActiveRecursiveBottomUp(bool active)
         {
             this.IsActive = active;

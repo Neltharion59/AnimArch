@@ -35,33 +35,6 @@ namespace OALProgramControl
             v.VisitExeScopeParallel(this);
         }
 
-        // public override String ToCode(String Indent = "")
-        // {
-        //     return FormatCode(Indent, false);
-        // }
-        // public override string ToFormattedCode(string Indent = "")
-        // {
-        //     return FormatCode(Indent, IsActive);
-        // }
-        // private string FormatCode(String Indent, bool Highlight)
-        // {
-        //     String Result = HighlightCodeIf(Highlight, Indent + "par\n");
-        //     if (this.Threads != null)
-        //     {
-        //         foreach (EXEScope Thread in this.Threads)
-        //         {
-        //             Result += HighlightCodeIf(Highlight, Indent + "\tthread\n");
-        //             foreach (EXECommand Command in Thread.Commands)
-        //             {
-        //                 Result += Command.ToFormattedCode(Indent + "\t\t");
-        //             }
-        //             Result += HighlightCodeIf(Highlight, Indent + "\tend thread;\n");
-        //         }
-        //     }
-        //     Result += HighlightCodeIf(Highlight, Indent + "end par;\n");
-        //     return Result;
-        // }
-
         protected override EXEScope CreateDuplicateScope()
         {
             return new EXEScopeParallel(Threads.Select(x => (EXEScope)x.CreateClone()));
