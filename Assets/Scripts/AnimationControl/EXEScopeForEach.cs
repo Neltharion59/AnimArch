@@ -19,32 +19,37 @@ namespace OALProgramControl
             this.CurrentIterableIndex = 0;
         }
 
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeScopeForEach(this);
+        }
+
         // public override String ToCode(String Indent = "")
         // {
         //     return FormatCode(Indent, false);
         // }
-        public override string ToFormattedCode(string Indent = "")
-        {
-            return FormatCode(Indent, IsActive);
-        }
-        private string FormatCode(String Indent, bool Highlight)
-        {
-            String Result
-                =
-                HighlightCodeIf
-                (
-                    Highlight,
-                    Indent + "for each " + this.IteratorName + " in "
-                    + this.Iterable.ToCode()
-                    + "\n"
-                );
-            foreach (EXECommand Command in this.Commands)
-            {
-                Result += Command.ToFormattedCode(Indent + "\t");
-            }
-            Result += HighlightCodeIf(Highlight, Indent + "end for;\n");
-            return Result;
-        }
+        // public override string ToFormattedCode(string Indent = "")
+        // {
+        //     return FormatCode(Indent, IsActive);
+        // }
+        // private string FormatCode(String Indent, bool Highlight)
+        // {
+        //     String Result
+        //         =
+        //         HighlightCodeIf
+        //         (
+        //             Highlight,
+        //             Indent + "for each " + this.IteratorName + " in "
+        //             + this.Iterable.ToCode()
+        //             + "\n"
+        //         );
+        //     foreach (EXECommand Command in this.Commands)
+        //     {
+        //         Result += Command.ToFormattedCode(Indent + "\t");
+        //     }
+        //     Result += HighlightCodeIf(Highlight, Indent + "end for;\n");
+        //     return Result;
+        // }
 
         protected override EXEScope CreateDuplicateScope()
         {

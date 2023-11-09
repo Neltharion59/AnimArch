@@ -133,10 +133,6 @@ namespace OALProgramControl
         public override void Accept(Visitor v)
         {
             v.VisitExeScope(this);
-            foreach (EXECommand Command in this.Commands)
-            {
-                Command.Accept(v);
-            }
         }
 
         // public override String ToCode(String Indent = "")
@@ -150,15 +146,15 @@ namespace OALProgramControl
         //     return Result;
         // }
 
-        public override string ToFormattedCode(string Indent = "")
-        {
-            String Result = "";
-            foreach (EXECommand Command in this.Commands)
-            {
-                Result += Command.ToFormattedCode(Indent);
-            }
-            return Result;
-        }
+        // public override string ToFormattedCode(string Indent = "")
+        // {
+        //     String Result = "";
+        //     foreach (EXECommand Command in this.Commands)
+        //     {
+        //         Result += Command.ToFormattedCode(Indent);
+        //     }
+        //     return Result;
+        // }
 
         public override EXECommand CreateClone()
         {

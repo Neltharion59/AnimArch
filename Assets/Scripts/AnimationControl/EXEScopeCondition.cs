@@ -91,45 +91,51 @@ namespace OALProgramControl
 
             return Success();
         }
+
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeScopeCondition(this);
+        }
+
         // public override String ToCode(String Indent = "")
         // {
         //     return FormatCode(Indent, false);
         // }
 
-        public override string ToFormattedCode(string Indent = "")
-        {
-            return FormatCode(Indent, IsActive);
-        }
+        // public override string ToFormattedCode(string Indent = "")
+        // {
+        //     return FormatCode(Indent, IsActive);
+        // }
 
-        private string FormatCode(String Indent, bool Highlight)
-        {
-            String Result = HighlightCodeIf(Highlight, Indent + "if (" + this.Condition.ToCode() + ")\n");
-            foreach (EXECommand Command in this.Commands)
-            {
-                Result += Command.ToFormattedCode(Indent + "\t");
-            }
-            if (this.ElifScopes != null)
-            {
-                foreach (EXEScopeCondition Elif in this.ElifScopes)
-                {
-                    Result += HighlightCodeIf(Highlight, Indent + "elif (" + Elif.Condition.ToCode() + ")\n");
-                    foreach (EXECommand Command in Elif.Commands)
-                    {
-                        Result += Command.ToFormattedCode(Indent + "\t");
-                    }
-                }
-            }
-            if (this.ElseScope != null)
-            {
-                Result += HighlightCodeIf(Highlight, Indent + "else\n");
-                foreach (EXECommand Command in this.ElseScope.Commands)
-                {
-                    Result += Command.ToFormattedCode(Indent + "\t");
-                }
-            }
-            Result += HighlightCodeIf(Highlight, Indent + "end if;\n");
-            return Result;
-        }
+        // private string FormatCode(String Indent, bool Highlight)
+        // {
+        //     String Result = HighlightCodeIf(Highlight, Indent + "if (" + this.Condition.ToCode() + ")\n");
+        //     foreach (EXECommand Command in this.Commands)
+        //     {
+        //         Result += Command.ToFormattedCode(Indent + "\t");
+        //     }
+        //     if (this.ElifScopes != null)
+        //     {
+        //         foreach (EXEScopeCondition Elif in this.ElifScopes)
+        //         {
+        //             Result += HighlightCodeIf(Highlight, Indent + "elif (" + Elif.Condition.ToCode() + ")\n");
+        //             foreach (EXECommand Command in Elif.Commands)
+        //             {
+        //                 Result += Command.ToFormattedCode(Indent + "\t");
+        //             }
+        //         }
+        //     }
+        //     if (this.ElseScope != null)
+        //     {
+        //         Result += HighlightCodeIf(Highlight, Indent + "else\n");
+        //         foreach (EXECommand Command in this.ElseScope.Commands)
+        //         {
+        //             Result += Command.ToFormattedCode(Indent + "\t");
+        //         }
+        //     }
+        //     Result += HighlightCodeIf(Highlight, Indent + "end if;\n");
+        //     return Result;
+        // }
 
         protected override EXEScope CreateDuplicateScope()
         {

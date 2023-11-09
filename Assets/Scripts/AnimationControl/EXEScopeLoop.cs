@@ -27,5 +27,10 @@ namespace OALProgramControl
 
             return Success();
         }
+
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeScopeLoop(this);
+        }
     }
 }

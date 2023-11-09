@@ -534,7 +534,9 @@ namespace Visualization.UI
                 .GetComponent<PanelSourceCodeAnimation>()
                 .SetMethodLabelText(currentMethodScope.MethodDefinition.OwningClass.Name, currentMethodScope.MethodDefinition.Name);
 
-            string sourceCode = currentMethodScope.ToFormattedCode();
+            EXECommand.visitor.ActivateFormatting();
+            currentMethodScope.Accept(EXECommand.visitor);
+            string sourceCode = EXECommand.visitor.GetCommandStringAndResetStateNow();
             PanelSourceCodeAnimation.GetComponent<PanelSourceCodeAnimation>().SetSourceCodeText(sourceCode);
         }
     }
