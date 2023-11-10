@@ -10,6 +10,7 @@ public class VisitorCommandToString : Visitor
     private readonly StringBuilder commandString;
     private bool simpleFormatting;
     private bool highlighting;
+    private bool originalHighlighting;
 
     private int indentationLevel;
 
@@ -28,6 +29,7 @@ public class VisitorCommandToString : Visitor
     private void ResetState() {
         simpleFormatting = true;
         highlighting = false;
+        originalHighlighting = true;
         indentationLevel = 0;
         commandString.Clear();
     }
@@ -42,11 +44,18 @@ public class VisitorCommandToString : Visitor
     }
 
     public void ActivateHighlighting() {
+        originalHighlighting = highlighting;
         highlighting = true;
+
     }
 
     public void DeactivateHighlighting() {
         highlighting = false;
+        originalHighlighting = false;
+    }
+
+    private void HighlightingToOriginalState() {
+        highlighting = originalHighlighting;
     }
 
     private void IncreaseIndentation() {
@@ -242,20 +251,22 @@ public class VisitorCommandToString : Visitor
         commandString.Append("for each " + scope.IteratorName + " in "
                     + scope.Iterable.ToCode()
                     + "\n");
+        HighlightEnd(scope);
 
-            ActivateHighlighting();
-            IncreaseIndentation();
-            foreach (EXECommand Command in scope.Commands)
-            {
-                Command.Accept(this);
-            }
-            DeactivateHighlighting();
-            DecreaseIndentation();
+        ActivateHighlighting();
+        IncreaseIndentation();
+        foreach (EXECommand Command in scope.Commands)
+        {
+            Command.Accept(this);
+        }
+        HighlightingToOriginalState();
+        DecreaseIndentation();
 
-            HighlightBegin(scope);
-            WriteIndentation();
-            commandString.Append("end for");
-            AddEOL();
+        HighlightBegin(scope);
+        WriteIndentation();
+        commandString.Append("end for");
+        AddEOL();
+        HighlightEnd(scope);
     }
 
     public override void VisitExeScopeParallel(EXEScopeParallel scope)
@@ -286,7 +297,7 @@ public class VisitorCommandToString : Visitor
                 }
                 DecreaseIndentation();
                 DecreaseIndentation();
-                DeactivateHighlighting();
+                HighlightingToOriginalState();
 
                 HighlightBegin(scope);
                 WriteIndentation();
@@ -317,7 +328,7 @@ public class VisitorCommandToString : Visitor
             Command.Accept(this);
         }
         DecreaseIndentation();
-        DeactivateHighlighting();
+        HighlightingToOriginalState();
 
         if (scope.ElifScopes != null)
         {
@@ -335,7 +346,7 @@ public class VisitorCommandToString : Visitor
                     Command.Accept(this);
                 }
                 DecreaseIndentation();
-                DeactivateHighlighting(); 
+                HighlightingToOriginalState();
             }
         }
             if (scope.ElseScope != null)
@@ -352,7 +363,7 @@ public class VisitorCommandToString : Visitor
                     Command.Accept(this);
                 }
                 DecreaseIndentation();
-                DeactivateHighlighting(); 
+                HighlightingToOriginalState();
             }
 
             HighlightBegin(scope);
@@ -377,7 +388,7 @@ public class VisitorCommandToString : Visitor
             Command.Accept(this);
         }
         DecreaseIndentation();
-        DeactivateHighlighting();
+        HighlightingToOriginalState();
 
         HighlightBegin(scope);
         WriteIndentation();
