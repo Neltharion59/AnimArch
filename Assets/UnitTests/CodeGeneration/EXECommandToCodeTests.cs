@@ -6,9 +6,13 @@ using OALProgramControl;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class OALToStringConversionTests
+public class EXECommandToCodeTests : MonoBehaviour
 {
-    private static readonly VisitorCommandToString visitor = EXECommand.visitor;
+    private static readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
+
+    ~EXECommandToCodeTests() {
+        visitor.Return();
+    }
 
     [Test]
     public void EXECommandAddingToList_ToCodeConversionTest() {
@@ -22,19 +26,19 @@ public class OALToStringConversionTests
         // Act
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         _command.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
     
         // Assert
         string _expectedUnformattedOutput             = "add element to list";
@@ -60,19 +64,19 @@ public class OALToStringConversionTests
         // Act
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         _command.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
     
         // Assert
         string _expectedUnformattedOutput             = "x = 5";
@@ -94,19 +98,19 @@ public class OALToStringConversionTests
         // Act
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         _command.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
     
         // Assert
         string _expectedUnformattedOutput             = "break";

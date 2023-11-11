@@ -14,19 +14,54 @@ public class VisitorCommandToString : Visitor
 
     private int indentationLevel;
 
-    public string GetCommandStringAndResetStateNow() {
+    private enum VisitorState {Available, InUse_String, InUse_Return};
+    private VisitorState state;
+    private static readonly LinkedList<VisitorCommandToString> visitors = new LinkedList<VisitorCommandToString>();
+
+    public static VisitorCommandToString BorrowAVisitor(bool returnVisitorAfterGetString = true) {
+        foreach (VisitorCommandToString v in visitors) {
+            if (v.isVisitorAvailable()) {
+                return v.BorrowVisitor(returnVisitorAfterGetString);
+            }
+        }
+        VisitorCommandToString newVisitor = new VisitorCommandToString();
+        visitors.AddLast(newVisitor);
+        return newVisitor.BorrowVisitor(returnVisitorAfterGetString);
+    }
+
+    private VisitorCommandToString()
+    {
+        commandString = new StringBuilder();
+        state = VisitorState.Available;
+        ResetConfig();
+    }
+
+    private bool isVisitorAvailable() {
+        return state == VisitorState.Available;
+    }
+
+    private VisitorCommandToString BorrowVisitor(bool returnVisitorAfterGetString) {
+        if (state != VisitorState.Available) {Debug.Log("Borrowing a visitor that is not available!");}
+        state = returnVisitorAfterGetString ? VisitorState.InUse_String : VisitorState.InUse_Return;
+        return this;
+    }
+
+    public void Return() {
+        if (state != VisitorState.InUse_Return) {Debug.Log("Visitor returned when no return expected!");}
+        state = VisitorState.Available;
+        ResetConfig();
+    }
+
+    public string GetCommandStringAndResetConfigNow() {
         string result = commandString.ToString();
-        ResetState();
+        if (state == VisitorState.InUse_String) {
+            state = VisitorState.Available;
+        }
+        ResetConfig();
         return result;
     }
 
-    public VisitorCommandToString()
-    {
-        commandString = new StringBuilder();
-        ResetState();
-    }
-
-    private void ResetState() {
+    private void ResetConfig() {
         simpleFormatting = true;
         highlighting = false;
         originalHighlighting = true;

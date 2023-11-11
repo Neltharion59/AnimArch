@@ -6,9 +6,13 @@ using OALProgramControl;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class EXEScopeToCodeTests
+public class EXEScopeToCodeTests : MonoBehaviour
 {
-    private static readonly VisitorCommandToString visitor = EXECommand.visitor;
+    private static readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
+
+    ~EXEScopeToCodeTests() {
+        visitor.Return();
+    }
 
     [Test]
     public void EXEScopeForEach_ToCodeConversionTest()
@@ -24,19 +28,19 @@ public class EXEScopeToCodeTests
         // Act
         visitor.DeactivateSimpleFormatting();
         _scope.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         _scope.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
 
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
     
         // Assert
         string _expectedUnformattedOutput             = "for each element in list\nelement.Perform()end for";
