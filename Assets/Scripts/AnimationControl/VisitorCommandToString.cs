@@ -14,8 +14,8 @@ public class VisitorCommandToString : Visitor
 
     private int indentationLevel;
 
-    private enum VisitorState {Available, InUse_String, InUse_Return};
-    private VisitorState state;
+    private enum VisitorAvailability {Available, InUse_String, InUse_Return};
+    private VisitorAvailability availability;
     private static readonly LinkedList<VisitorCommandToString> visitors = new LinkedList<VisitorCommandToString>();
 
     public static VisitorCommandToString BorrowAVisitor(bool returnVisitorAfterGetString = true) {
@@ -32,36 +32,36 @@ public class VisitorCommandToString : Visitor
     private VisitorCommandToString()
     {
         commandString = new StringBuilder();
-        state = VisitorState.Available;
-        ResetConfig();
+        availability = VisitorAvailability.Available;
+        ResetState();
     }
 
     private bool isVisitorAvailable() {
-        return state == VisitorState.Available;
+        return availability == VisitorAvailability.Available;
     }
 
     private VisitorCommandToString BorrowVisitor(bool returnVisitorAfterGetString) {
-        if (state != VisitorState.Available) {Debug.Log("Borrowing a visitor that is not available!");}
-        state = returnVisitorAfterGetString ? VisitorState.InUse_String : VisitorState.InUse_Return;
+        if (availability != VisitorAvailability.Available) {Debug.Log("Borrowing a visitor that is not available!");}
+        availability = returnVisitorAfterGetString ? VisitorAvailability.InUse_String : VisitorAvailability.InUse_Return;
         return this;
     }
 
     public void Return() {
-        if (state != VisitorState.InUse_Return) {Debug.Log("Visitor returned when no return expected!");}
-        state = VisitorState.Available;
-        ResetConfig();
+        if (availability != VisitorAvailability.InUse_Return) {Debug.Log("Visitor returned when no return expected!");}
+        availability = VisitorAvailability.Available;
+        ResetState();
     }
 
-    public string GetCommandStringAndResetConfigNow() {
+    public string GetCommandStringAndResetStateNow() {
         string result = commandString.ToString();
-        if (state == VisitorState.InUse_String) {
-            state = VisitorState.Available;
+        if (availability == VisitorAvailability.InUse_String) {
+            availability = VisitorAvailability.Available;
         }
-        ResetConfig();
+        ResetState();
         return result;
     }
 
-    private void ResetConfig() {
+    private void ResetState() {
         simpleFormatting = true;
         highlighting = false;
         originalHighlighting = true;

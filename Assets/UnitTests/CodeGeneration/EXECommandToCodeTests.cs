@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 public class EXECommandToCodeTests : MonoBehaviour
 {
-    private static readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
+    private readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
 
     ~EXECommandToCodeTests() {
         visitor.Return();
@@ -26,19 +26,19 @@ public class EXECommandToCodeTests : MonoBehaviour
         // Act
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         _command.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
     
         // Assert
         string _expectedUnformattedOutput             = "add element to list";
@@ -64,19 +64,19 @@ public class EXECommandToCodeTests : MonoBehaviour
         // Act
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         _command.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
     
         // Assert
         string _expectedUnformattedOutput             = "x = 5";
@@ -98,19 +98,19 @@ public class EXECommandToCodeTests : MonoBehaviour
         // Act
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         _command.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
     
         // Assert
         string _expectedUnformattedOutput             = "break";

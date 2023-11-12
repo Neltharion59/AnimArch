@@ -37,6 +37,6 @@ public class ExecutionErrorPanel : MonoBehaviour
         ErrorCommandTypeTextComponent.text = executionSuccess.OwningCommand.GetType().Name;
         executionSuccess.OwningCommand.Accept(visitor);
 
-        ErrorSourceCodeTextComponent.text = visitor.GetCommandStringAndResetConfigNow();
+        ErrorSourceCodeTextComponent.text = visitor.GetCommandStringAndResetStateNow();
     }
 }

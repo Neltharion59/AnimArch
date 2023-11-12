@@ -24,7 +24,7 @@ namespace Assets.UnitTests.AnimationControl
                 EXECommand currentCommand = programInstance.CommandStack.Next();
                 VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
                 currentCommand.Accept(visitor);
-                Debug.Log(i.ToString() + visitor.GetCommandStringAndResetConfigNow());
+                Debug.Log(i.ToString() + visitor.GetCommandStringAndResetStateNow());
                 _executionResult = currentCommand.PerformExecution(programInstance);
 
                 if (!_executionResult.IsSuccess)

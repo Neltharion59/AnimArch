@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 public class EXEScopeToCodeTests : MonoBehaviour
 {
-    private static readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
+    private readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
 
     ~EXEScopeToCodeTests() {
         visitor.Return();
@@ -28,19 +28,19 @@ public class EXEScopeToCodeTests : MonoBehaviour
         // Act
         visitor.DeactivateSimpleFormatting();
         _scope.Accept(visitor);
-        string _actualUnformattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         _scope.Accept(visitor);
-        string _actualFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
-        string _actualHighlightedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
-        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetConfigNow();
+        string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
     
         // Assert
         string _expectedUnformattedOutput             = "for each element in list\nelement.Perform()end for";

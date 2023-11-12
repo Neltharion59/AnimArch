@@ -537,7 +537,7 @@ namespace Visualization.UI
             VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
             visitor.ActivateHighlighting();
             currentMethodScope.Accept(visitor);
-            string sourceCode = visitor.GetCommandStringAndResetConfigNow();
+            string sourceCode = visitor.GetCommandStringAndResetStateNow();
             PanelSourceCodeAnimation.GetComponent<PanelSourceCodeAnimation>().SetSourceCodeText(sourceCode);
         }
     }

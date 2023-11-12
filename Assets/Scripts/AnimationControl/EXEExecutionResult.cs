@@ -63,7 +63,7 @@ namespace OALProgramControl
                     (
                         "{{\n\tsuccess: '{0}',\n\tcommand: '{1}',\n\tcommandType: '{2}',\n\terrorMessage: '{3}',\n\terrorCode: '{4}'\n}}",
                         this.IsSuccess,
-                        OwningCommand == null ? string.Empty : visitor.GetCommandStringAndResetConfigNow(),
+                        OwningCommand == null ? string.Empty : visitor.GetCommandStringAndResetStateNow(),
                         OwningCommand == null ? string.Empty : this.OwningCommand.GetType().Name,
                         ErrorMessage ?? string.Empty,
                         ErrorCode ?? string.Empty
