@@ -183,6 +183,91 @@ MonoBehaviour:
     m_Localized: "Vybra\u0165 triedu\npriamo v diagrame\npre anim\xE1ciu\n."
     m_Metadata:
       m_Items: []
+  - m_Id: 2452717717950464
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452924434223104
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452928951488512
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452937205878784
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2453396050153472
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2453514610544640
+    m_Localized: "Vybra\u0165 farbu pre Triedu:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454312216170496
+    m_Localized: "Zada\u0165 text..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454737417932800
+    m_Localized: "Potvrdi\u0165"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455044705226752
+    m_Localized: "Sp\xE4\u0165"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455356279099392
+    m_Localized: "Prida\u0165 prvky:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455731216322560
+    m_Localized: "Prida\u0165 vz\u0165ah"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455996095008768
+    m_Localized: "Zru\u0161i\u0165"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2456277792854016
+    m_Localized: "Vybra\u0165 Vrcholy\nna spojenie..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469463778660352
+    m_Localized: 'Volanie zdroj:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469854536798208
+    m_Localized: "Volanie cie\u013E:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470212164128768
+    m_Localized: 'Trieda:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470323799724032
+    m_Localized: "Met\xF3da:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470429529739264
+    m_Localized: 'Trieda:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470646769520640
+    m_Localized: "Met\xF3da:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470857344552960
+    m_Localized: "V\xFDber\nHotov\xFD"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2472202713698304
+    m_Localized: "Nov\xE9 volanie bolo pridan\xE9\ndo skriptu anima\u010Dn\xE9ho
+      k\xF3du! "
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
