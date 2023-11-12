@@ -9,6 +9,7 @@ using Visualization.Animation;
 using Visualization.ClassDiagram;
 using Visualization.ClassDiagram.ClassComponents;
 using Visualization.ClassDiagram.ComponentsInDiagram;
+using UnityEngine.Localization.Settings;
 
 namespace Visualization.UI
 {
@@ -53,29 +54,44 @@ namespace Visualization.UI
         [SerializeField] public GameObject PanelSourceCodeAnimation;
         [SerializeField] public GameObject ShowErrorBtn;
         [SerializeField] public GameObject ErrorPanel;
+        [SerializeField] public GameObject EnglishBtn;
+        [SerializeField] public GameObject SlovakBtn;
         public Anim createdAnim;
         public bool isPlaying = false;
         public Button[] playBtns;
         public GameObject playIntroTexts;
         public List<AnimMethod> animMethods;
         public bool isSelectingNode;
+
+
+        public void SetLanguage(int language)
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+        }
+
         // executed on pressing show error button
         public void ShowErrorPanel()
         {
             ShowErrorPanel(null);
         }
-        public void ShowErrorPanel(EXEExecutionResult executionResult = null) {
+
+        public void ShowErrorPanel(EXEExecutionResult executionResult = null) 
+        {
             ShowErrorBtn.GetComponent<Button>().interactable = false;
             ErrorPanel.SetActive(true);
             ErrorPanel.GetComponent<ExecutionErrorPanel>().FillPanel(executionResult);
         }
+
         // executed on pressing X button
-        public void HideErrorPanel() {
+        public void HideErrorPanel() 
+        {
             ShowErrorBtn.GetComponent<Button>().interactable = true;
             ErrorPanel.SetActive(false);
         }
+
         // executed after stopping or rerunning animation
-        public void HideErrorPanelOnStopButton() {
+        public void HideErrorPanelOnStopButton() 
+        {
             Debug.Log("Error panel Removed!");
             ErrorPanel.SetActive(false);
             ShowErrorBtn.GetComponent<Button>().interactable = false;
