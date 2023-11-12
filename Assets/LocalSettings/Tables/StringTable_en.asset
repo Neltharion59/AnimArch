@@ -62,6 +62,126 @@ MonoBehaviour:
     m_Localized: 'Play Animation:'
     m_Metadata:
       m_Items: []
+  - m_Id: 2248790300954624
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249262525059072
+    m_Localized: To Python
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249557837615104
+    m_Localized: Enter text...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250148370452480
+    m_Localized: Enter script...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250389819756544
+    m_Localized: Enter script...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250616647716864
+    m_Localized: class unselected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250788270247936
+    m_Localized: method unselected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250944591958016
+    m_Localized: Check
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251300663201792
+    m_Localized: full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251796094390272
+    m_Localized: Step mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252023090122752
+    m_Localized: Play mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252558769852416
+    m_Localized: Show error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252716727341056
+    m_Localized: 'Time per animation:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253394736582656
+    m_Localized: Color selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253534985719808
+    m_Localized: Class
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253651092443136
+    m_Localized: Relation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253857032769536
+    m_Localized: Random pallete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254294465122304
+    m_Localized: Method
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254749161230336
+    m_Localized: Select class
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254970905694208
+    m_Localized: Directly click on the diagram and select the initial class.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255401761378304
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255678266675200
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255681676644352
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256150335590400
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256354849853440
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256580595683328
+    m_Localized: Error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256888809918464
+    m_Localized: 'Description:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257134457720832
+    m_Localized: 'Type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257241072734208
+    m_Localized: 'Source code:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2258619253919744
+    m_Localized: "Select Class \ndirectly in diagram\nto animate\n."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -44,11 +44,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7783454871552
-    m_Key: animationLabel2Key
+    m_Key: manageAnimationLabelKey
     m_Metadata:
       m_Items: []
   - m_Id: 8236884299776
-    m_Key: New Entry
+    m_Key: showGraphKey
     m_Metadata:
       m_Items: []
   - m_Id: 8901480157184
@@ -56,7 +56,127 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9621885423616
-    m_Key: animationLabel1Key
+    m_Key: playAnimationLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2248790300954624
+    m_Key: saveKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249262525059072
+    m_Key: toPythonKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249557837615104
+    m_Key: consolePlaceholderKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250148370452480
+    m_Key: fullInputPlaceholderKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250389819756544
+    m_Key: sepInputKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250616647716864
+    m_Key: classTxtKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250788270247936
+    m_Key: methodTxtKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250944591958016
+    m_Key: checkBtnKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251300663201792
+    m_Key: buttonFullKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251796094390272
+    m_Key: stepBtnKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252023090122752
+    m_Key: PlayModeBtnKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252558769852416
+    m_Key: showErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252716727341056
+    m_Key: animationTimeLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253394736582656
+    m_Key: colorSelectionKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253534985719808
+    m_Key: animationClassKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253651092443136
+    m_Key: animationRelationKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253857032769536
+    m_Key: palleteBtnKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254294465122304
+    m_Key: animationMethodKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254749161230336
+    m_Key: playIntro1Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254970905694208
+    m_Key: playIntro2Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255401761378304
+    m_Key: playBtns1Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255678266675200
+    m_Key: playBtns2Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255681676644352
+    m_Key: playBtns3Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256150335590400
+    m_Key: playBtns4Key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256354849853440
+    m_Key: currentMethodKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256580595683328
+    m_Key: errorLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256888809918464
+    m_Key: errorDescriptionKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257134457720832
+    m_Key: errorTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257241072734208
+    m_Key: sourceCodeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2258619253919744
+    m_Key: animationIntroKey
     m_Metadata:
       m_Items: []
   m_Metadata:

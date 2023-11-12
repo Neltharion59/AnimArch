@@ -19,39 +19,39 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 3086442565632
-    m_Localized: Vytvor Diagram
+    m_Localized: "Vytvori\u0165 Diagram"
     m_Metadata:
       m_Items: []
   - m_Id: 4026562252800
-    m_Localized: "Na\u010D\xEDtaj  \u013E\u0161\u010D\u0165\u017E\xFD\xE1\xED\xE9\xF4\xE4"
+    m_Localized: "Na\u010D\xEDta\u0165 Diagram"
     m_Metadata:
       m_Items: []
   - m_Id: 4393018593280
-    m_Localized: Edituj Diagram
+    m_Localized: "Editova\u0165 Diagram"
     m_Metadata:
       m_Items: []
   - m_Id: 5327710851072
-    m_Localized: Vytvor
+    m_Localized: "Vytvori\u0165"
     m_Metadata:
       m_Items: []
   - m_Id: 5743567704064
-    m_Localized: 'Uprav Anim '
+    m_Localized: "Upravi\u0165"
     m_Metadata:
       m_Items: []
   - m_Id: 6275166375936
-    m_Localized: Prehraj
+    m_Localized: "Spusti\u0165"
     m_Metadata:
       m_Items: []
   - m_Id: 6926202048512
-    m_Localized: Otvor
+    m_Localized: "Otvori\u0165"
     m_Metadata:
       m_Items: []
   - m_Id: 7783454871552
-    m_Localized: "Spravuj Anim\xE1ciu:"
+    m_Localized: "Spravova\u0165 Anim\xE1ciu:"
     m_Metadata:
       m_Items: []
   - m_Id: 8236884299776
-    m_Localized: "Uk\xE1\u017E vz\u0165ahy grafov"
+    m_Localized: "Zobrazi\u0165 vz\u0165ahy grafov"
     m_Metadata:
       m_Items: []
   - m_Id: 8901480157184
@@ -59,7 +59,128 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9621885423616
-    m_Localized: "Prehraj Anim\xE1ciu:"
+    m_Localized: "Spusti\u0165 Anim\xE1ciu:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2248790300954624
+    m_Localized: "Ulo\u017Ei\u0165"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249262525059072
+    m_Localized: Do Python
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249557837615104
+    m_Localized: "Zada\u0165 text..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250148370452480
+    m_Localized: "Zada\u0165 skript..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250389819756544
+    m_Localized: "Zada\u0165 skript..."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250616647716864
+    m_Localized: "trieda nezvolen\xE1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250788270247936
+    m_Localized: "met\xF3da nezvolen\xE1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250944591958016
+    m_Localized: "Za\u0161krtn\xFA\u0165"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251300663201792
+    m_Localized: "pln\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251796094390272
+    m_Localized: "Krokov\xFD re\u017Eim"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252023090122752
+    m_Localized: "Sp\xFA\u0161\u0165ac\xED re\u017Eim"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252558769852416
+    m_Localized: "Zobrazi\u0165 chybu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252716727341056
+    m_Localized: "\u010Cas na anim\xE1ciu:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253394736582656
+    m_Localized: "V\xFDber farby"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253534985719808
+    m_Localized: Trieda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253651092443136
+    m_Localized: "Vz\u0165ah"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253857032769536
+    m_Localized: "N\xE1hodn\xE1 paleta"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254294465122304
+    m_Localized: "Met\xF3da"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254749161230336
+    m_Localized: "Vybra\u0165 triedu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254970905694208
+    m_Localized: "Klin\xFA\u0165 priamo na diagram a zvoli\u0165 po\u010Diato\u010Dn\xFA
+      triedu."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255401761378304
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255678266675200
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255681676644352
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256150335590400
+    m_Localized: "Met\xF3da 1"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256354849853440
+    m_Localized: "Spusti\u0165"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256580595683328
+    m_Localized: Chyba
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256888809918464
+    m_Localized: 'Popis:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257134457720832
+    m_Localized: 'Typ:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257241072734208
+    m_Localized: "Zdrojov\xFD k\xF3d:"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2258619253919744
+    m_Localized: "Vybra\u0165 triedu\npriamo v diagrame\npre anim\xE1ciu\n."
     m_Metadata:
       m_Items: []
   references:
