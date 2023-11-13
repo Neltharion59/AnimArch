@@ -6,14 +6,8 @@ using OALProgramControl;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class EXEScopeToCodeTests : MonoBehaviour
+public class EXEScopeToCodeTests
 {
-    private readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
-
-    ~EXEScopeToCodeTests() {
-        visitor.Return();
-    }
-
     [Test]
     public void EXEScopeForEach_ToCodeConversionTest()
     {
@@ -26,18 +20,22 @@ public class EXEScopeToCodeTests : MonoBehaviour
         }
 
         // Act
+        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         _scope.Accept(visitor);
         string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         _scope.Accept(visitor);
         string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
         string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
         string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();

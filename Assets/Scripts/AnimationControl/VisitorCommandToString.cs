@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,49 +15,40 @@ public class VisitorCommandToString : Visitor
 
     private int indentationLevel;
 
-    private enum VisitorAvailability {Available, InUse_String, InUse_Return};
-    private VisitorAvailability availability;
+    private bool available;
     private static readonly LinkedList<VisitorCommandToString> visitors = new LinkedList<VisitorCommandToString>();
 
-    public static VisitorCommandToString BorrowAVisitor(bool returnVisitorAfterGetString = true) {
+    public static VisitorCommandToString BorrowAVisitor() {
         foreach (VisitorCommandToString v in visitors) {
             if (v.isVisitorAvailable()) {
-                return v.BorrowVisitor(returnVisitorAfterGetString);
+                return v.BorrowVisitor();
             }
         }
         VisitorCommandToString newVisitor = new VisitorCommandToString();
         visitors.AddLast(newVisitor);
-        return newVisitor.BorrowVisitor(returnVisitorAfterGetString);
+        return newVisitor.BorrowVisitor();
     }
 
     private VisitorCommandToString()
     {
         commandString = new StringBuilder();
-        availability = VisitorAvailability.Available;
+        available = true;
         ResetState();
     }
 
     private bool isVisitorAvailable() {
-        return availability == VisitorAvailability.Available;
+        return available;
     }
 
-    private VisitorCommandToString BorrowVisitor(bool returnVisitorAfterGetString) {
-        if (availability != VisitorAvailability.Available) {Debug.Log("Borrowing a visitor that is not available!");}
-        availability = returnVisitorAfterGetString ? VisitorAvailability.InUse_String : VisitorAvailability.InUse_Return;
+    private VisitorCommandToString BorrowVisitor() {
+        if (!available) {throw new Exception("Borrowing a visitor that is not available!");}
+        available = false;
         return this;
-    }
-
-    public void Return() {
-        if (availability != VisitorAvailability.InUse_Return) {Debug.Log("Visitor returned when no return expected!");}
-        availability = VisitorAvailability.Available;
-        ResetState();
     }
 
     public string GetCommandStringAndResetStateNow() {
         string result = commandString.ToString();
-        if (availability == VisitorAvailability.InUse_String) {
-            availability = VisitorAvailability.Available;
-        }
+        available = true;
         ResetState();
         return result;
     }

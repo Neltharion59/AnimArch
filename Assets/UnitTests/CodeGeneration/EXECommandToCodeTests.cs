@@ -6,14 +6,8 @@ using OALProgramControl;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-public class EXECommandToCodeTests : MonoBehaviour
+public class EXECommandToCodeTests
 {
-    private readonly VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor(false);
-
-    ~EXECommandToCodeTests() {
-        visitor.Return();
-    }
-
     [Test]
     public void EXECommandAddingToList_ToCodeConversionTest() {
         // Arrange
@@ -24,18 +18,22 @@ public class EXECommandToCodeTests : MonoBehaviour
         EXECommand _command = new EXECommandAddingToList(_assignmentTarget, _assignedValue) { IsActive = true };
 
         // Act
+        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
         string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         _command.Accept(visitor);
         string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
         string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
         string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
@@ -62,18 +60,22 @@ public class EXECommandToCodeTests : MonoBehaviour
         EXECommand _command = new EXECommandAssignment(_assignmentTarget, _assignedValue) { IsActive = true };
 
         // Act
+        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
         string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         _command.Accept(visitor);
         string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
         string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
         string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
@@ -96,18 +98,22 @@ public class EXECommandToCodeTests : MonoBehaviour
         EXECommand _command = new EXECommandBreak() { IsActive = true };
 
         // Act
+        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         _command.Accept(visitor);
         string _actualUnformattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         _command.Accept(visitor);
         string _actualFormattedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.DeactivateSimpleFormatting();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
         string _actualHighlightedOutput = visitor.GetCommandStringAndResetStateNow();
 
+        visitor = VisitorCommandToString.BorrowAVisitor();
         visitor.ActivateHighlighting();
         _command.Accept(visitor);
         string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
