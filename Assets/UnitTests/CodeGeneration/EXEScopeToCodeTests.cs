@@ -10,7 +10,7 @@ public class EXEScopeToCodeTests
 {
     [Test]
     public void EXEScopeForEach_ToCodeConversionTest()
-    {
+    {//.Perform()element
         // Arrange
         string _methodSourceCode = "for each element in list\r\n\telement.Perform();\r\nend for;";
         EXEScopeMethod _scope = OALParserBridge.Parse(_methodSourceCode);

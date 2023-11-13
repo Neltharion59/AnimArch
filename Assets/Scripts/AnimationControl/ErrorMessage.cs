@@ -205,17 +205,21 @@ namespace OALProgramControl
         }
         public static string FailedExpressionEvaluation(EXEASTNodeBase expression, EXEScope currentScope)
         {
+            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            expression.Accept(visitor);
             return string
                     .Format
                     (
                         "Failed to evaluate expression {0}. Variables available in current scope are:\n{1}.",
-                        Stringify(expression.ToCode()),
+                        Stringify(visitor.GetCommandStringAndResetStateNow()),
                         VariableNameList(currentScope)
                     );
         }
         public static string FailedExpressionTypeDetermination(EXEASTNodeBase expression)
         {
-            return FailedExpressionTypeDetermination(expression.ToCode());
+            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            expression.Accept(visitor);
+            return FailedExpressionTypeDetermination(visitor.GetCommandStringAndResetStateNow());
         }
         public static string FailedExpressionTypeDetermination(string expression)
         {

@@ -18,10 +18,13 @@
 
         public EXEExecutionResult Evaluate(EXEScope currentScope, OALProgram currentProgramInstance, EXEASTNodeAccessChainContext valueContext)
         {
+            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            this.NodeValue.Accept(visitor);
+
             valueContext.CreateVariableIfItDoesNotExist = valueContext.CreateVariableIfItDoesNotExist && this.PreviousNode == null;
             valueContext.VariableCreationType = valueContext.CreateVariableIfItDoesNotExist ? valueContext.VariableCreationType : null;
             valueContext.CurrentValue = this.PreviousNode == null ? null : PreviousNode.EvaluationResult;
-            valueContext.CurrentAccessChain = (valueContext.CurrentAccessChain ?? string.Empty) + this.NodeValue.ToCode();
+            valueContext.CurrentAccessChain = (valueContext.CurrentAccessChain ?? string.Empty) + visitor.GetCommandStringAndResetStateNow();
 
             EXEExecutionResult executionResult = this.NodeValue.Evaluate(currentScope, currentProgramInstance, valueContext);
 

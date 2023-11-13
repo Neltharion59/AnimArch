@@ -14,12 +14,15 @@ namespace OALProgramControl
 
         public EXECommandCall(EXEASTNodeAccessChain methodAccessChain, EXEASTNodeMethodCall methodCall)
         {
+            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            methodAccessChain.Accept(visitor);
+
             this.MethodAccessChain = methodAccessChain;
             this.MethodCall = methodCall;
             this.ReturnedValue = null;
             this.CallInfo = null;
             this.CalledObject = null;
-            this.MethodAccessChainS = methodAccessChain.ToCode();
+            this.MethodAccessChainS = visitor.GetCommandStringAndResetStateNow();
         }
         public EXECommandCall(EXEValueBase methodOwningObject, string accessChain, EXEASTNodeMethodCall methodCall)
         {

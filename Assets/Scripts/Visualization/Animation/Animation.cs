@@ -280,7 +280,9 @@ namespace Visualization.Animation
 
             CDClassInstance callerObject = currentCommand.GetCurrentMethodScope().OwningObject;
             CDClassInstance createdObject = createCommand.GetCreatedInstance();
-            string targetVariableName = createCommand.AssignmentTarget.ToCode();
+            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            createCommand.Accept(visitor);
+            string targetVariableName = visitor.GetCommandStringAndResetStateNow();
 
 
             var objectInDiagram = AddObjectToDiagram(targetVariableName, createdObject);

@@ -58,6 +58,8 @@ namespace OALProgramControl
             {
                 if (!EXETypes.CanBeAssignedTo(iterableValue.ElementTypeName, iteratorVariable.Value.TypeName, OALProgram.ExecutionSpace))
                 {
+                    VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                    this.Iterable.Accept(visitor);
                     return Error
                     (
                         string.Format
@@ -67,7 +69,7 @@ namespace OALProgramControl
                             string.Join(", ", iterableValue.Elements.Select(element => element.TypeName)),
                             ErrorMessage.IterableAndIteratorTypeMismatch
                             (
-                                this.Iterable.ToCode(),
+                                visitor.GetCommandStringAndResetStateNow(),
                                 iterableValue.ElementTypeName,
                                 this.IteratorName,
                                 iteratorVariable.Value.TypeName
