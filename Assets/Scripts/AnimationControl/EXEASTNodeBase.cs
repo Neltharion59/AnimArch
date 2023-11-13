@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OALProgramControl
 {
-    public abstract class EXEASTNodeBase
+    public abstract class EXEASTNodeBase : IVisitable
     {
         public EEvaluationState EvaluationState { get; protected set; }
         public virtual EXEExecutionResult EvaluationResult { get; set; }
@@ -20,10 +20,11 @@ namespace OALProgramControl
 
         public abstract EXEExecutionResult Evaluate(EXEScope currentScope, OALProgram currentProgramInstance, EXEASTNodeAccessChainContext valueContext = null);
         public abstract EXEASTNodeBase Clone();
-        public abstract string ToCode();
         public void IncementBracketLevel()
         {
             this.BracketLevel++;
         }
+
+        public abstract void Accept(Visitor v);
     }
 }

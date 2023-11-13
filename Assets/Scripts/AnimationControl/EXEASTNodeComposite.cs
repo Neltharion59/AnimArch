@@ -95,19 +95,14 @@ namespace OALProgramControl
             return this.EvaluationResult;
         }
 
-        public override string ToCode()
-        {
-            return
-                this.Operands.Count == 1
-                ?
-                (this.Operation + " " + this.Operands.First().ToCode())
-                :
-                (string.Join(" " + this.Operation + " ", this.Operands.Select(operand => operand.ToCode())));
-        }
-
         public override EXEASTNodeBase Clone()
         {
             return new EXEASTNodeComposite(this.Operation, this.Operands.Select(operand => operand.Clone()).ToArray());
+        }
+
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeASTNodeComposite(this);
         }
     }
 }

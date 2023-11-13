@@ -6,7 +6,7 @@ namespace OALProgramControl
 {
     public class EXEASTNodeLeaf : EXEASTNodeBase
     {
-        private String Value { get; }
+        public String Value { get; }
 
         public EXEASTNodeLeaf(String Value) : base()
         {
@@ -97,14 +97,14 @@ namespace OALProgramControl
             }
         }
 
-        public override string ToCode()
-        {
-            return this.Value;
-        }
-
         public override EXEASTNodeBase Clone()
         {
             return new EXEASTNodeLeaf(this.Value);
+        }
+
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeASTNodeLeaf(this);
         }
     }
 }

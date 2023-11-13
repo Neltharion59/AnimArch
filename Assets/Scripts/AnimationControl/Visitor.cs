@@ -31,4 +31,10 @@ public abstract class Visitor
     public abstract void VisitExeScopeParallel(EXEScopeParallel scope);
     public abstract void VisitExeScopeCondition(EXEScopeCondition scope);
     public abstract void VisitExeScopeLoopWhile(EXEScopeLoopWhile scope);
+
+    public abstract void VisitExeASTNodeAccesChain(EXEASTNodeAccessChain node);
+
+    public abstract void VisitExeASTNodeComposite(EXEASTNodeComposite node);
+    public abstract void VisitExeASTNodeLeaf(EXEASTNodeLeaf node);
+    public abstract void VisitExeASTNodeMethodCall(EXEASTNodeMethodCall node);
 }

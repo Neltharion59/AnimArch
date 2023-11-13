@@ -124,14 +124,14 @@ namespace OALProgramControl
             return this.EvaluationResult;
         }
 
-        public override string ToCode()
-        {
-            return this.MethodName + "(" + string.Join(", ", this.Arguments.Select(arg => arg.ToCode())) + ")";
-        }
-
         public override EXEASTNodeBase Clone()
         {
             return new EXEASTNodeMethodCall(this.MethodName);
+        }
+
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeASTNodeMethodCall(this);
         }
     }
 }

@@ -379,4 +379,28 @@ public class VisitorCommandToString : Visitor
         HighlightEnd(scope);
 
     }
+
+    public override void VisitExeASTNodeAccesChain(EXEASTNodeAccessChain node)
+    {
+        commandString.AppendJoin(".", node.GetElements().Select(element => element.NodeValue.ToCode()));
+    }
+
+    public override void VisitExeASTNodeComposite(EXEASTNodeComposite node)
+    {
+           commandString.Append(node.Operands.Count == 1
+                ?
+               (node.Operation + " " + node.Operands.First().ToCode())
+                :
+               (string.Join(" " + node.Operation + " ", node.Operands.Select(operand => operand.ToCode()))));
+    }
+
+    public override void VisitExeASTNodeLeaf(EXEASTNodeLeaf node)
+    {
+        commandString.Append(node.Value);
+    }
+
+    public override void VisitExeASTNodeMethodCall(EXEASTNodeMethodCall node)
+    {
+        commandString.Append(node.MethodName + "(" + string.Join(", ", node.Arguments.Select(arg => arg.ToCode())) + ")");
+    }
 }
