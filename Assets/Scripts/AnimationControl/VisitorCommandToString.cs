@@ -118,68 +118,48 @@ public class VisitorCommandToString : Visitor
         }
     }
 
-    public override void VisitExeCommand(EXECommand command)
-    {
+    private void HandleBasicEXECommand(EXECommand command, string simpleStringCommand) {
         HighlightBegin(command);
         WriteIndentation();
-        commandString.Append("Command");
+        commandString.Append(simpleStringCommand);
         AddEOL();
         HighlightEnd(command);
+    }
+
+    public override void VisitExeCommand(EXECommand command)
+    {
+        HandleBasicEXECommand(command, "Command");
     }
 
     public override void VisitExeCommandBreak(EXECommandBreak command)
     {   
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("break");
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "break");
     }
 
     public override void VisitExeCommandCall(EXECommandCall command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append(command.MethodAccessChainS + "." + command.MethodCall.ToCode());
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, command.MethodAccessChainS + "." + command.MethodCall.ToCode());
     }
 
     public override void VisitExeCommandContinue(EXECommandContinue command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("continue");
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "continue");
     }
 
     public override void VisitExeCommandAddingToList(EXECommandAddingToList command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("add " + command.AddedElement.ToCode() + " to " + command.Array.ToCode());
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "add " + command.AddedElement.ToCode() + " to " + command.Array.ToCode());
     }
 
     public override void VisitExeCommandAssignment(EXECommandAssignment command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append(command.AssignmentTarget.ToCode() + " = " + command.AssignedExpression.ToCode());
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, command.AssignmentTarget.ToCode() + " = " + command.AssignedExpression.ToCode());
     }
 
     public override void VisitExeCommandCreateList(EXECommandCreateList command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("create list " + command.AssignmentTarget.ToCode()
+        HandleBasicEXECommand(command, "create list " + command.AssignmentTarget.ToCode()
                + " of " + command.ArrayType + " { " + string.Join(", ", command.Items.Select(item => item.ToCode())) + " }");
-        AddEOL();
-        HighlightEnd(command);
     }
 
     public override void VisitExeCommandMulti(EXECommandMulti command)
@@ -189,61 +169,36 @@ public class VisitorCommandToString : Visitor
 
     public override void VisitExeCommandQueryCreate(EXECommandQueryCreate command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("create object instance " + (command.AssignmentTarget?.ToCode() ?? string.Empty) + " of " + command.ClassName);
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "create object instance " + (command.AssignmentTarget?.ToCode() ?? string.Empty) + " of " + command.ClassName);
     }
 
     public override void VisitExeCommandQueryDelete(EXECommandQueryDelete command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("delete object instance " + command.DeletedVariable.ToCode());
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "delete object instance " + command.DeletedVariable.ToCode());
     }
 
     public override void VisitExeCommandRead(EXECommandRead command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append(
-               command.AssignmentTarget.ToCode()
+        HandleBasicEXECommand(command, command.AssignmentTarget.ToCode()
                    + " = "
                    + command.AssignmentType
                   + (command.Prompt?.ToCode() ?? string.Empty)
                    + (EXETypes.StringTypeName.Equals(command.AssignmentType) ? ")" : "))"));
-        AddEOL();
-        HighlightEnd(command);
     }
 
     public override void VisitExeCommandRemovingFromList(EXECommandRemovingFromList command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("remove " + command.Item.ToCode() + " from " + command.Array.ToCode());
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "remove " + command.Item.ToCode() + " from " + command.Array.ToCode());
     }
 
     public override void VisitExeCommandReturn(EXECommandReturn command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append(command.Expression == null ? "return" : ("return " + command.Expression.ToCode()));
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, command.Expression == null ? "return" : ("return " + command.Expression.ToCode()));
     }
 
     public override void VisitExeCommandWrite(EXECommandWrite command)
     {
-        HighlightBegin(command);
-        WriteIndentation();
-        commandString.Append("write(" + string.Join(", ", command.Arguments.Select(argument => argument.ToCode())) + ")");
-        AddEOL();
-        HighlightEnd(command);
+        HandleBasicEXECommand(command, "write(" + string.Join(", ", command.Arguments.Select(argument => argument.ToCode())) + ")");
     }
 
     public override void VisitExeScope(EXEScope scope)
