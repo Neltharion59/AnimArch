@@ -267,6 +267,386 @@ MonoBehaviour:
     m_Key: completed2Key
     m_Metadata:
       m_Items: []
+  - m_Id: 2493009494110208
+    m_Key: classesChangeNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2493563834298368
+    m_Key: classPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2502713846886400
+    m_Key: classNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2502992524832768
+    m_Key: classPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506838730960896
+    m_Key: classErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2507458779115520
+    m_Key: attributesTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2507902096076800
+    m_Key: atrPDropdownItemLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2508266706923520
+    m_Key: artPFieldPlaceholderKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2508603970908160
+    m_Key: attributeNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2510739014250496
+    m_Key: attributeTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2510983189852160
+    m_Key: attributeOptionsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511206268104704
+    m_Key: attributeArrayKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511557725614080
+    m_Key: atrCustomTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2512791186534400
+    m_Key: atrCustomPFieldPlaceholderKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2513044321169408
+    m_Key: attributeErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2513447104376832
+    m_Key: atrPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2514037968564224
+    m_Key: addMethodMethodsTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2514436020596736
+    m_Key: methodsPDropdownItemLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2514761771216896
+    m_Key: methodPFieldPlaceholderKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515620676595712
+    m_Key: methodNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515787966410752
+    m_Key: methodPFieldParametersKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515991008473088
+    m_Key: methodPFieldReturnValKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516200929193984
+    m_Key: methodPFieldMethodOptionsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516470056710144
+    m_Key: methodParameterButtonKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517107964211200
+    m_Key: methodPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517270321524736
+    m_Key: methodCustomType
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517471794917376
+    m_Key: methodCustomPFieldPlaceholderKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517738821087232
+    m_Key: methodArrayKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517892491997184
+    m_Key: methodErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2518190220472320
+    m_Key: selectionPopUpAddRelationKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2518484522201088
+    m_Key: selectionPopUpPDropdownKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2518861523021824
+    m_Key: selectionPDropdownItemLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519141350207488
+    m_Key: chooseRelationTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519438407593984
+    m_Key: selectionPConfirmTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2520326236893184
+    m_Key: errorPopUpWarningKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2520559939317760
+    m_Key: errorPopUpLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2521121011363840
+    m_Key: addParemetersParametersTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2521433277296640
+    m_Key: paramPDropdownItemKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2521695500988416
+    m_Key: paramPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2522207315128320
+    m_Key: parameterNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2522517932699648
+    m_Key: parameterTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2522690733830144
+    m_Key: parameterPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523216259149824
+    m_Key: parameterOptionsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523363688935424
+    m_Key: parameterArrayKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523532056686592
+    m_Key: parameterCustomTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523687233351680
+    m_Key: parameterCustomPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523842787504128
+    m_Key: parameterErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524070324301824
+    m_Key: confirmChangeNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524790557601792
+    m_Key: confirmPconfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524951648235520
+    m_Key: confirmPopUpConfirmTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525200219467776
+    m_Key: confirmPCancelTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525328208654336
+    m_Key: renameClassChangeNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525524917317632
+    m_Key: renameClassClassPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525705851203584
+    m_Key: renameClassClassNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525853658476544
+    m_Key: classPConfirmTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526062060859392
+    m_Key: RenameClassErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526285457879040
+    m_Key: renameAttributesTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526515624505344
+    m_Key: renameAttributeItemKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526792498900992
+    m_Key: atrPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527033033846784
+    m_Key: atrPFieldAttributeNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527253377413120
+    m_Key: atrPFieldAttributeTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527391273545728
+    m_Key: atrPFieldAttributeOptionsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527542981521408
+    m_Key: atrPFieldAttributeArrayKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528235339476992
+    m_Key: atrPFieldCustomTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528464692408320
+    m_Key: atrPFieldCustomPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528638638583808
+    m_Key: atrPFieldAttributeErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528865697230848
+    m_Key: atrPFieldConfirmTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529064930865152
+    m_Key: editMethodsMethodsTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529297291112448
+    m_Key: methodsPDropdownItemKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529776645533696
+    m_Key: methodPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529999048503296
+    m_Key: methodPFieldMethodNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530198999363584
+    m_Key: editMethodPopUpParametersKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530482945355776
+    m_Key: editMethodPopUpReturnValKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530692501172224
+    m_Key: editMethodOptionsKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530872877215744
+    m_Key: editMethodParameterButtonKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531331125899264
+    m_Key: editMethodPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531489385377792
+    m_Key: editMethodCustomTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531631429677056
+    m_Key: editMethodCustomPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531821129658368
+    m_Key: editMethodArrayKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531950993698816
+    m_Key: editMethodErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2532127221575680
+    m_Key: editParametersTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2532630017961984
+    m_Key: editParameterItemKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2532850416054272
+    m_Key: editParameterParamPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533020780294144
+    m_Key: editParameterNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533160295428096
+    m_Key: editParameterTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533316310953984
+    m_Key: editParamPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533559320539136
+    m_Key: 'editParameterOptionsKey:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533692951064576
+    m_Key: editParameterArrayKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533842423476224
+    m_Key: editParameterCustomTypeKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534031515283456
+    m_Key: editParameterCustomPFieldKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534193537052672
+    m_Key: editParameterErrorKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534400169439232
+    m_Key: exitChangeNameKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534913015377920
+    m_Key: exitConfirmTextKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2535260207280128
+    m_Key: exitConfirmPConfirmKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2535451161358336
+    m_Key: exitConfirmPCancelKey
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
