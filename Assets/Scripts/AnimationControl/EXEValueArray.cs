@@ -52,13 +52,8 @@ namespace OALProgramControl
             return new EXEValueArray(this.TypeName, this.Elements.Select(element => element.DeepClone()).ToList());
         }
 
-        public override string ToText()
-        {
-            return Elements == null
-                ?
-                EXETypes.UnitializedName
-                :
-                ("[" + string.Join(", ", this.Elements.Select(element => element.ToText())) + "]");
+        public override void Accept(Visitor v) {
+            v.VisitExeValueArray(this);
         }
         protected override EXEExecutionResult AssignValueFromConcrete(EXEValueBase assignmentSource)
         {

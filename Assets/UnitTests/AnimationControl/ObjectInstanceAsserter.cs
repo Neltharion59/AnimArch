@@ -47,7 +47,11 @@ namespace Assets.UnitTests.AnimationControl
                 {
                     if (instancePair.Item1.State[attributeName] is not EXEValueReference)
                     {
-                        Assert.AreEqual(instancePair.Item1.State[attributeName].ToText(), instancePair.Item2.State[attributeName].ToText(), "Invalid value of attribute.");
+                        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                        instancePair.Item1.State[attributeName].Accept(visitor);
+                        VisitorCommandToString visitor2 = VisitorCommandToString.BorrowAVisitor();
+                        instancePair.Item2.State[attributeName].Accept(visitor2);
+                        Assert.AreEqual(visitor.GetCommandStringAndResetStateNow(), visitor2.GetCommandStringAndResetStateNow(), "Invalid value of attribute.");
                     }
                     else
                     {

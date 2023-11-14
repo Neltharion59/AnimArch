@@ -40,14 +40,18 @@ namespace OALProgramControl
                 return iterableEvaluationResult;
             }
 
+            VisitorCommandToString visitor2 = VisitorCommandToString.BorrowAVisitor();
+            iterableEvaluationResult.ReturnedOutput.Accept(visitor2);
             if (iterableEvaluationResult.ReturnedOutput is not EXEValueArray)
             {
-                return Error(ErrorMessage.IsNotIterable(iterableEvaluationResult.ReturnedOutput.ToText()), "XEC2028");
+                return Error(ErrorMessage.IsNotIterable(visitor2.GetCommandStringAndResetStateNow()), "XEC2028");
             }
 
             EXEValueArray iterableValue = iterableEvaluationResult.ReturnedOutput as EXEValueArray;
 
-            if (EXETypes.UnitializedName.Equals(iterableValue.ToText()))
+            VisitorCommandToString visitor3 = VisitorCommandToString.BorrowAVisitor();
+            iterableValue.Accept(visitor3);
+            if (EXETypes.UnitializedName.Equals(visitor3.GetCommandStringAndResetStateNow()))
             {
                 return Error("Cannot iterate over uninitialized collection.", "XEC2027");
             }

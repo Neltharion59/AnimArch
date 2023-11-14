@@ -34,9 +34,10 @@ namespace OALProgramControl
         {
             return new EXEValueInt(this);
         }
-        public override string ToText()
+
+        public override void Accept(Visitor v)
         {
-            return Value.ToString();
+            v.VisitExeValueInt(this);
         }
         protected override EXEExecutionResult AssignValueFromConcrete(EXEValueBase assignmentSource)
         {
@@ -261,5 +262,7 @@ namespace OALProgramControl
         {
             return this.Value.ToString();
         }
+
+        
     }
 }

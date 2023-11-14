@@ -45,7 +45,13 @@ namespace OALProgramControl
                 return Error(string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName), "XEC2025");
             }
 
-            string prompt = (promptEvaluationResult.ReturnedOutput as EXEValueString)?.ToText() ?? string.Empty;
+            string prompt = string.Empty;
+            EXEValueString retOutput = promptEvaluationResult.ReturnedOutput as EXEValueString;
+            if (retOutput != null) {
+                VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                retOutput.Accept(visitor);
+                prompt = visitor.GetCommandStringAndResetStateNow();
+            }
 
             ConsolePanel.Instance.YieldOutput(prompt);
 

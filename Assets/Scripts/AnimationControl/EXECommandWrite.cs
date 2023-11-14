@@ -29,7 +29,11 @@ namespace OALProgramControl
                 }
             }
 
-            string result = string.Join(", ", this.Arguments.Select(argument => argument.EvaluationResult.ReturnedOutput.ToText()));
+            string result = string.Join(", ", this.Arguments.Select(argument => {
+                        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                        argument.EvaluationResult.ReturnedOutput.Accept(visitor);
+                        return visitor.GetCommandStringAndResetStateNow();
+            }));
 
             ConsolePanel.Instance.YieldOutput(result);
 

@@ -90,7 +90,11 @@ namespace Assets.UnitTests.AnimationControl
 
                         if (actualVariable.Value is not EXEValueReference)
                         {
-                            Assert.AreEqual(expectedVariable.Value.ToText(), actualVariable.Value.ToText(), string.Format("The expected variable '{0}' has invalid value.\n{1}", expectedVariable.Name, variableDumpMessage));
+                            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                            expectedVariable.Value.Accept(visitor);
+                            VisitorCommandToString visitor2 = VisitorCommandToString.BorrowAVisitor();
+                            actualVariable.Value.Accept(visitor2);
+                            Assert.AreEqual(visitor.GetCommandStringAndResetStateNow(), visitor2.GetCommandStringAndResetStateNow(), string.Format("The expected variable '{0}' has invalid value.\n{1}", expectedVariable.Name, variableDumpMessage));
                         }
                         else
                         {

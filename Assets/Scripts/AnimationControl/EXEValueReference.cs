@@ -35,9 +35,9 @@ namespace OALProgramControl
         {
             return new EXEValueReference(this);
         }
-        public override string ToText()
+        public override void Accept(Visitor v)
         {
-            return this.TypeName + "<" + this.ClassInstance.UniqueID + ">";
+            v.VisitExeValueReference(this);
         }
         public override bool AttributeExists(string attributeName)
         {
@@ -195,5 +195,6 @@ namespace OALProgramControl
         {
             return this.ClassInstance.UniqueID.ToString();
         }
+
     }
 }

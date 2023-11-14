@@ -7,7 +7,7 @@ namespace OALProgramControl
 {
     public class EXEValueString : EXEValuePrimitive
     {
-        protected string Value;
+        public string Value {get; protected set; }
         public override string TypeName => EXETypes.StringTypeName;
 
         public EXEValueString(EXEValueString original)
@@ -32,9 +32,9 @@ namespace OALProgramControl
         {
             return new EXEValueString(this);
         }
-        public override string ToText()
+        public override void Accept(Visitor v)
         {
-            return "\"" + this.Value + "\"";
+            throw new NotImplementedException();
         }
         protected override EXEExecutionResult AssignValueFromConcrete(EXEValueBase assignmentSource)
         {

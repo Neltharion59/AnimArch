@@ -539,4 +539,38 @@ public class VisitorCommandToString : Visitor
         }
         commandString.Append(")");
     }
+
+    public override void VisitExeValueArray(EXEValueArray value)
+    {
+        commandString.Append(value.Elements == null
+                ?
+                EXETypes.UnitializedName
+                :
+                ("[" + string.Join(", ", value.Elements.Select(element => element.ToText())) + "]"));
+    }
+
+    public override void VisitExeValueBool(EXEValueBool value)
+    {
+        commandString.Append(value.Value ? EXETypes.BooleanTrue : EXETypes.BooleanFalse);
+    }
+
+    public override void VisitExeValueInt(EXEValueInt value)
+    {
+        commandString.Append(value.Value.ToString());
+    }
+
+    public override void VisitExeValueReal(EXEValueReal value)
+    {
+        commandString.Append(value.Value.ToString());
+    }
+
+    public override void VisitExeValueReference(EXEValueReference value)
+    {
+        commandString.Append(value.TypeName + "<" + value.ClassInstance.UniqueID + ">");
+    }
+
+    public override void VisitExeValueString(EXEValueString value)
+    {
+        commandString.Append("\"" + value.Value + "\"");
+    }
 }

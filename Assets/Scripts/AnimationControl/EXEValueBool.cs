@@ -24,9 +24,10 @@ namespace OALProgramControl
         {
             return new EXEValueBool(this);
         }
-        public override string ToText()
+
+        public override void Accept(Visitor v)
         {
-            return this.Value ? EXETypes.BooleanTrue : EXETypes.BooleanFalse;
+            v.VisitExeValueBool(this);
         }
         protected override EXEExecutionResult AssignValueFromConcrete(EXEValueBase assignmentSource)
         {
