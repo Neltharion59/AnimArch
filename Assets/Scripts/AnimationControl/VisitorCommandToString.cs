@@ -237,11 +237,12 @@ public class VisitorCommandToString : Visitor
         HandleBasicEXECommand(command, (visitor) => {
             command.AssignmentTarget.Accept(visitor);
             visitor.commandString.Append(" = " + command.AssignmentType);
+            visitor.commandString.Append((EXETypes.StringTypeName.Equals(command.AssignmentType) ? " " : " (") + "read( ");
             if (command.Prompt != null)
             {
                 command.Prompt.Accept(visitor);
             }
-            visitor.commandString.Append(EXETypes.StringTypeName.Equals(command.AssignmentType) ? ")" : "))");
+            visitor.commandString.Append(EXETypes.StringTypeName.Equals(command.AssignmentType) ? " )" : " ))");
             return false;
         });
     }
@@ -542,11 +543,27 @@ public class VisitorCommandToString : Visitor
 
     public override void VisitExeValueArray(EXEValueArray value)
     {
-        commandString.Append(value.Elements == null
-                ?
-                EXETypes.UnitializedName
-                :
-                ("[" + string.Join(", ", value.Elements.Select(element => element.ToText())) + "]"));
+        if (value.Elements == null)
+        {
+            commandString.Append(EXETypes.UnitializedName);
+        }
+        else
+        {
+            commandString.Append("[");
+            bool first = true;
+            foreach (var element in value.Elements) {
+                if (first)
+                {
+                    first = false;
+                }
+                else
+                {
+                    commandString.Append(", ");
+                }
+                element.Accept(this);
+            }
+            commandString.Append("]");
+        }
     }
 
     public override void VisitExeValueBool(EXEValueBool value)
