@@ -21,7 +21,7 @@ namespace Visualization.ClassDiagram
             DiagramPool.Instance.ClassDiagram.graph.nodePrefab = DiagramPool.Instance.networkClassPrefab;
             GameObject.Find("EditBtn").GetComponentInChildren<Button>().interactable = true;
             GameObject.Find("Create").GetComponentInChildren<Button>().interactable = true;
-            GameObject.Find("Edit (1)").GetComponentInChildren<Button>().interactable = true;
+            GameObject.Find("Open").GetComponentInChildren<Button>().interactable = true;
         }
 
         public override void MakeNetworkedGraph()

@@ -1,0 +1,657 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 16b6cc14bc8b80b40a8d33c8d619201c, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 3086442565632
+    m_Localized: Create Diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4026562252800
+    m_Localized: Load Diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4393018593280
+    m_Localized: Edit Diagram
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5327710851072
+    m_Localized: Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5743567704064
+    m_Localized: Edit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6275166375936
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6926202048512
+    m_Localized: Open
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7783454871552
+    m_Localized: 'Manage Animation:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8236884299776
+    m_Localized: Show graph relations
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8901480157184
+    m_Localized: Animation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9621885423616
+    m_Localized: 'Play Animation:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2248790300954624
+    m_Localized: Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249262525059072
+    m_Localized: To Python
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2249557837615104
+    m_Localized: Enter text...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250148370452480
+    m_Localized: Enter script...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250389819756544
+    m_Localized: Enter script...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250616647716864
+    m_Localized: class unselected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250788270247936
+    m_Localized: method unselected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2250944591958016
+    m_Localized: Check
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251300663201792
+    m_Localized: full
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2251796094390272
+    m_Localized: Step mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252023090122752
+    m_Localized: Play mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252558769852416
+    m_Localized: Show error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2252716727341056
+    m_Localized: 'Time per animation:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253394736582656
+    m_Localized: Color selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253534985719808
+    m_Localized: Class
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253651092443136
+    m_Localized: Relation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2253857032769536
+    m_Localized: Random pallete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254294465122304
+    m_Localized: Method
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254749161230336
+    m_Localized: Select class
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2254970905694208
+    m_Localized: Directly click on the diagram and select the initial class.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255401761378304
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255678266675200
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255681676644352
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256150335590400
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256354849853440
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256580595683328
+    m_Localized: Error
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2256888809918464
+    m_Localized: 'Description:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257134457720832
+    m_Localized: 'Type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2257241072734208
+    m_Localized: 'Source code:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2258619253919744
+    m_Localized: "Select Class \ndirectly in diagram\nto animate\n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452717717950464
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452924434223104
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452928951488512
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2452937205878784
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2453396050153472
+    m_Localized: Method 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2453514610544640
+    m_Localized: 'Select color for Class:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454312216170496
+    m_Localized: Enter text...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2454737417932800
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455044705226752
+    m_Localized: Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455356279099392
+    m_Localized: 'Add elements:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455731216322560
+    m_Localized: Add relation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2455996095008768
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2456277792854016
+    m_Localized: 'Select Nodes
+
+      to connect...'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469463778660352
+    m_Localized: 'Call source:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2469854536798208
+    m_Localized: 'Call target:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470212164128768
+    m_Localized: 'Class:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470323799724032
+    m_Localized: 'Method:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470429529739264
+    m_Localized: 'Class:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470646769520640
+    m_Localized: 'Method:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2470857344552960
+    m_Localized: 'Selection
+
+      Complete'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2472202713698304
+    m_Localized: "New call was added to \nthe animation code script!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2493009494110208
+    m_Localized: Classes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2493563834298368
+    m_Localized: Enter class name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2502713846886400
+    m_Localized: 'Class name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2502992524832768
+    m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2506838730960896
+    m_Localized: Class with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2507458779115520
+    m_Localized: Attributes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2507902096076800
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2508266706923520
+    m_Localized: Enter attribute name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2508603970908160
+    m_Localized: 'Attribute name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2510739014250496
+    m_Localized: 'Attribute type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2510983189852160
+    m_Localized: 'Options:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511206268104704
+    m_Localized: is array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2511557725614080
+    m_Localized: 'Custom type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2512791186534400
+    m_Localized: Enter custom type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2513044321169408
+    m_Localized: Attribute with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2513447104376832
+    m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2514037968564224
+    m_Localized: Methods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2514436020596736
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2514761771216896
+    m_Localized: Enter attribute name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515620676595712
+    m_Localized: 'Method name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515787966410752
+    m_Localized: 'Parameters:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515991008473088
+    m_Localized: 'Return value:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516200929193984
+    m_Localized: 'Options:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516470056710144
+    m_Localized: Add parameter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517107964211200
+    m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517270321524736
+    m_Localized: 'Custom type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517471794917376
+    m_Localized: Enter custom type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517738821087232
+    m_Localized: is array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2517892491997184
+    m_Localized: Method with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2518190220472320
+    m_Localized: Add relation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2518484522201088
+    m_Localized: Association
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2518861523021824
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519141350207488
+    m_Localized: 'Choose relation type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2519438407593984
+    m_Localized: Choose nodes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2520326236893184
+    m_Localized: Warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2520559939317760
+    m_Localized: Specified relation between classes already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2521121011363840
+    m_Localized: Parameters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2521433277296640
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2521695500988416
+    m_Localized: Enter parameter name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2522207315128320
+    m_Localized: 'Parameter name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2522517932699648
+    m_Localized: 'Parameter type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2522690733830144
+    m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523216259149824
+    m_Localized: 'Options:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523363688935424
+    m_Localized: is array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523532056686592
+    m_Localized: 'Custom type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523687233351680
+    m_Localized: Enter custom type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2523842787504128
+    m_Localized: Parameter with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524070324301824
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524790557601792
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524951648235520
+    m_Localized: Do you wish to delete component?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525200219467776
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525328208654336
+    m_Localized: Classes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525524917317632
+    m_Localized: Enter class name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525705851203584
+    m_Localized: 'Class name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525853658476544
+    m_Localized: Edit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526062060859392
+    m_Localized: Class with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526285457879040
+    m_Localized: Attributes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526515624505344
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2526792498900992
+    m_Localized: Enter attribute name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527033033846784
+    m_Localized: 'Attribute name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527253377413120
+    m_Localized: 'Attribute type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527391273545728
+    m_Localized: 'Options:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527542981521408
+    m_Localized: is array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528235339476992
+    m_Localized: 'Custom type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528464692408320
+    m_Localized: Enter custom type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528638638583808
+    m_Localized: Attribute with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2528865697230848
+    m_Localized: Edit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529064930865152
+    m_Localized: Methods
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529297291112448
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529776645533696
+    m_Localized: Enter attribute name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2529999048503296
+    m_Localized: 'Method name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530198999363584
+    m_Localized: 'Parameters:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530482945355776
+    m_Localized: 'Return value:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530692501172224
+    m_Localized: 'Options:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2530872877215744
+    m_Localized: Add parameter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531331125899264
+    m_Localized: Edit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531489385377792
+    m_Localized: 'Custom type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531631429677056
+    m_Localized: Enter custom type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531821129658368
+    m_Localized: is array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2531950993698816
+    m_Localized: Method with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2532127221575680
+    m_Localized: 'Parameters
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2532630017961984
+    m_Localized: Option A
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2532850416054272
+    m_Localized: Enter parameter name...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533020780294144
+    m_Localized: 'Parameter name:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533160295428096
+    m_Localized: 'Parameter type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533316310953984
+    m_Localized: Edit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533559320539136
+    m_Localized: 'Options:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533692951064576
+    m_Localized: is array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2533842423476224
+    m_Localized: 'Custom type:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534031515283456
+    m_Localized: Enter custom type...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534193537052672
+    m_Localized: Parameter with the same name already exists
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534400169439232
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2534913015377920
+    m_Localized: Do you really wish to exit AnimArch?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2535260207280128
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2535451161358336
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
