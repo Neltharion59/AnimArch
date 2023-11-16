@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 8901480157184
-    m_Localized: Animation
+    m_Localized: Masking
     m_Metadata:
       m_Items: []
   - m_Id: 9621885423616
@@ -650,6 +650,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2535451161358336
     m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3927985179594752
+    m_Localized: Animation
     m_Metadata:
       m_Items: []
   references:

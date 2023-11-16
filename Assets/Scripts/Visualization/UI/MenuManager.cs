@@ -67,6 +67,12 @@ namespace Visualization.UI
         public void SetLanguage(int language)
         {
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[language];
+            // pokus o zmenu jazyka na slovencinu pri animacii select class...
+            // var tableReference = LocalizationSettings.StringDatabase.GetTable("StringTable");
+            // var tableEntryReference = tableReference.GetEntry("playIntro1Key");
+            // InteractiveText.GetComponent<DotsAnimation>().currentText = tableEntryReference.GetLocalizedString();
+            // Debug.LogError("AAAAAAAAAAAAAA");
+            // Debug.LogError(tableEntryReference.GetLocalizedString());
         }
 
         // executed on pressing show error button
