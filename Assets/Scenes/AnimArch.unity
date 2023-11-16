@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5654,6 +5654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 130593517}
   - component: {fileID: 130593516}
+  - component: {fileID: 130593518}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -5713,8 +5714,6 @@ MonoBehaviour:
   PanelSourceCodeAnimation: {fileID: 1792605010}
   ShowErrorBtn: {fileID: 874806523}
   ErrorPanel: {fileID: 376187649}
-  EnglishBtn: {fileID: 0}
-  SlovakBtn: {fileID: 0}
   createdAnim:
     Code: 
     AnimationName: 
@@ -5745,6 +5744,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &130593518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130593515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71f0b940735e674abfc665b0e3cf4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _persistent: 1
+  MaskingFileLabel: {fileID: 1255998730}
+  RemoveMaskingBtn: {fileID: 144987128}
 --- !u!1 &136787970
 GameObject:
   m_ObjectHideFlags: 0
@@ -6824,7 +6838,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 144987129}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 130593518}
+        m_TargetAssemblyTypeName: MaskingHandler, XDE
+        m_MethodName: RemoveMasking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &144987129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25883,9 +25909,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1205360392}
-        m_TargetAssemblyTypeName: FileLoader, XDE
-        m_MethodName: SaveAnimationToPython
+      - m_Target: {fileID: 130593518}
+        m_TargetAssemblyTypeName: MaskingHandler, XDE
+        m_MethodName: RemoveMasking
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27831,7 +27857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -962.3371, y: -470.76917}
+  m_AnchoredPosition: {x: -962.33704, y: -470.76917}
   m_SizeDelta: {x: 200.454, y: 258.452}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &716113961
@@ -46890,7 +46916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: file selected
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -46917,8 +46943,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 1
@@ -46933,9 +46959,9 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 3
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
@@ -73806,6 +73832,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 130593518}
+        m_TargetAssemblyTypeName: MaskingHandler, XDE
+        m_MethodName: RemoveMasking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2097194284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75122,7 +75160,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2140888580}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1205360392}
+        m_TargetAssemblyTypeName: FileLoader, XDE
+        m_MethodName: OpenMaskingFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2140888580
 MonoBehaviour:
   m_ObjectHideFlags: 0

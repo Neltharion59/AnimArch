@@ -22,6 +22,7 @@ namespace Visualization.ClassDiagram
             GameObject.Find("EditBtn").GetComponentInChildren<Button>().interactable = true;
             GameObject.Find("Create").GetComponentInChildren<Button>().interactable = true;
             GameObject.Find("Open").GetComponentInChildren<Button>().interactable = true;
+            GameObject.Find("OpenMaskingFile").GetComponentInChildren<Button>().interactable = true;
         }
 
         public override void MakeNetworkedGraph()

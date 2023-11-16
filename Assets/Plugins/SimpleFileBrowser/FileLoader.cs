@@ -102,6 +102,16 @@ public class FileLoader : MonoBehaviour
         _classDiagramBuilder.LoadDiagram();
     }
 
+    private IEnumerator LoadMaskingFileCoroutine()
+    {
+        FileBrowser.SetDefaultFilter(".json");
+        yield return FileBrowser.WaitForLoadDialog(false, @"Assets\Resources\MaskingFiles", "Load Masking File", "Load");
+
+        if (!FileBrowser.Success) yield break;
+        Debug.Log("File found!");
+        MaskingHandler.Instance.HandleMaskingFile(FileBrowser.Result);
+    }
+
     private static IEnumerator SaveAnimationCoroutine(Anim newAnim)
     {
         FileBrowser.SetDefaultFilter(".json");
@@ -140,5 +150,10 @@ public class FileLoader : MonoBehaviour
     {
         MenuManager.Instance.generatePythonBtn.interactable = true;
         StartCoroutine(LoadAnimationCoroutine());
+    }
+
+    public void OpenMaskingFile()
+    {
+        StartCoroutine(LoadMaskingFileCoroutine());
     }
 }
