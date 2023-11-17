@@ -83,39 +83,48 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeCommand(EXECommand command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("Command");
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandBreak(EXECommandBreak command)
     {   
+        
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("break");
             return false;
         });
+        
     }
 
     public override void VisitExeCommandCall(EXECommandCall command)
     {
+        
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append(command.MethodAccessChainS + ".");
             command.MethodCall.Accept(visitor);
             return false;
         });
+        
     }
 
     public override void VisitExeCommandContinue(EXECommandContinue command)
     {
+        
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("continue");
             return false;
         });
+        
     }
 
     public override void VisitExeCommandAddingToList(EXECommandAddingToList command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("add ");
             command.AddedElement.Accept(visitor);
@@ -123,20 +132,24 @@ public class VisitorPythonCode : Visitor
             command.Array.Accept(visitor);
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandAssignment(EXECommandAssignment command)
     {
+        
         HandleBasicEXECommand(command, (visitor) => {
             command.AssignmentTarget.Accept(visitor);
             visitor.commandString.Append(" = ");
             command.AssignedExpression.Accept(visitor);
             return false;
         });
+        
     }
 
     public override void VisitExeCommandCreateList(EXECommandCreateList command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("create list ");
             command.AssignmentTarget.Accept(visitor);
@@ -157,15 +170,19 @@ public class VisitorPythonCode : Visitor
             visitor.commandString.Append(" }");
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandMulti(EXECommandMulti command)
     {
+        /*
         VisitExeCommand(command);
+        */
     }
 
     public override void VisitExeCommandQueryCreate(EXECommandQueryCreate command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("create object instance ");
             if (command.AssignmentTarget != null)
@@ -175,19 +192,23 @@ public class VisitorPythonCode : Visitor
             visitor.commandString.Append(" of " + command.ClassName);
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandQueryDelete(EXECommandQueryDelete command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("delete object instance ");
             command.DeletedVariable.Accept(visitor);
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandRead(EXECommandRead command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             command.AssignmentTarget.Accept(visitor);
             visitor.commandString.Append(" = " + command.AssignmentType);
@@ -199,10 +220,12 @@ public class VisitorPythonCode : Visitor
             visitor.commandString.Append(EXETypes.StringTypeName.Equals(command.AssignmentType) ? " )" : " ))");
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandRemovingFromList(EXECommandRemovingFromList command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("remove ");
             command.Item.Accept(visitor);
@@ -210,10 +233,12 @@ public class VisitorPythonCode : Visitor
             command.Array.Accept(visitor);
             return false;
         });
+        */
     }
 
     public override void VisitExeCommandReturn(EXECommandReturn command)
     {
+        
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("return");
             if (command.Expression != null)
@@ -223,10 +248,12 @@ public class VisitorPythonCode : Visitor
             }
             return false;
         });
+        
     }
 
     public override void VisitExeCommandWrite(EXECommandWrite command)
     {
+        /*
         HandleBasicEXECommand(command, (visitor) => {
             visitor.commandString.Append("write(");
             bool first = true;
@@ -245,35 +272,43 @@ public class VisitorPythonCode : Visitor
             visitor.commandString.Append(")");
             return false;
         });
+        */
     }
 
     public override void VisitExeScope(EXEScope scope)
-    {
-        foreach (EXECommand Command in scope.Commands)
-        {
-            Command.Accept(this);
-        }
-    }
-
-    public override void VisitExeScopeLoop(EXEScopeLoop scope)
     {
         
         foreach (EXECommand Command in scope.Commands)
         {
             Command.Accept(this);
         }
+        
     }
 
-    public override void VisitExeScopeMethod(EXEScopeMethod scope)
+    public override void VisitExeScopeLoop(EXEScopeLoop scope)
     {
+
+        
         foreach (EXECommand Command in scope.Commands)
         {
             Command.Accept(this);
         }
+        
+    }
+
+    public override void VisitExeScopeMethod(EXEScopeMethod scope)
+    {
+        
+        foreach (EXECommand Command in scope.Commands)
+        {
+            Command.Accept(this);
+        }
+        
     }
 
     public override void VisitExeScopeForEach(EXEScopeForEach scope)
     { 
+        /*
         WriteIndentation();
         commandString.Append("for each " + scope.IteratorName + " in ");
         scope.Iterable.Accept(this);
@@ -289,10 +324,12 @@ public class VisitorPythonCode : Visitor
         WriteIndentation();
         commandString.Append("end for");
         AddEOL();
+        */
     }
 
     public override void VisitExeScopeParallel(EXEScopeParallel scope)
     {
+        /*
         WriteIndentation();
         commandString.Append("par\n");
 
@@ -324,10 +361,12 @@ public class VisitorPythonCode : Visitor
         WriteIndentation();
         commandString.Append("end par");
         AddEOL();
+        */
     }
 
     public override void VisitExeScopeCondition(EXEScopeCondition scope)
     {
+        /*
         WriteIndentation();
         commandString.Append("if (");
         scope.Condition.Accept(this);
@@ -374,11 +413,13 @@ public class VisitorPythonCode : Visitor
             WriteIndentation();
             commandString.Append("end if");
             AddEOL();
+            */
 
     }
 
     public override void VisitExeScopeLoopWhile(EXEScopeLoopWhile scope)
     {
+        /*
         WriteIndentation();
         commandString.Append("while (");
         scope.Condition.Accept(this);
@@ -394,11 +435,13 @@ public class VisitorPythonCode : Visitor
         WriteIndentation();
         commandString.Append("end while");
         AddEOL();
+        */
 
     }
 
     public override void VisitExeASTNodeAccesChain(EXEASTNodeAccessChain node)
     {
+        /*
         bool first = true;
         foreach (var element in node.GetElements()) {
             if (first)
@@ -411,10 +454,12 @@ public class VisitorPythonCode : Visitor
             }
             element.NodeValue.Accept(this);
         }
+        */
     }
 
     public override void VisitExeASTNodeComposite(EXEASTNodeComposite node)
     {
+        /*
         if (node.Operands.Count == 1)
         {
             commandString.Append(node.Operation + " ");
@@ -435,15 +480,27 @@ public class VisitorPythonCode : Visitor
                 operand.Accept(this);
             }
         }
+        */
     }
 
     public override void VisitExeASTNodeLeaf(EXEASTNodeLeaf node)
     {
-        commandString.Append(node.Value);
+        if (node.Value == "FALSE") {
+            commandString.Append("False");
+        }
+        else if (node.Value == "TRUE") {
+            commandString.Append("True");
+        }
+        else {
+            commandString.Append(node.Value);
+        }
+        
+        
     }
 
     public override void VisitExeASTNodeMethodCall(EXEASTNodeMethodCall node)
     {
+        
         commandString.Append(node.MethodName + "(");
         bool first = true;
         foreach (var arg in node.Arguments) {
@@ -458,10 +515,12 @@ public class VisitorPythonCode : Visitor
             arg.Accept(this);
         }
         commandString.Append(")");
+        
     }
 
     public override void VisitExeValueArray(EXEValueArray value)
     {
+        /*
         if (value.Elements == null)
         {
             commandString.Append(EXETypes.UnitializedName);
@@ -483,31 +542,42 @@ public class VisitorPythonCode : Visitor
             }
             commandString.Append("]");
         }
+        */
     }
 
     public override void VisitExeValueBool(EXEValueBool value)
     {
+        /*
         commandString.Append(value.Value ? EXETypes.BooleanTrue : EXETypes.BooleanFalse);
+        */
     }
 
     public override void VisitExeValueInt(EXEValueInt value)
     {
+        
         commandString.Append(value.Value.ToString());
+        
     }
 
     public override void VisitExeValueReal(EXEValueReal value)
     {
+        
         commandString.Append(value.Value.ToString());
+        
     }
 
     public override void VisitExeValueReference(EXEValueReference value)
     {
+        /*
         commandString.Append(value.TypeName + "<" + value.ClassInstance.UniqueID + ">");
+        */
     }
 
     public override void VisitExeValueString(EXEValueString value)
     {
+        
         commandString.Append("\"" + value.Value + "\"");
+        
     }
 }
 
