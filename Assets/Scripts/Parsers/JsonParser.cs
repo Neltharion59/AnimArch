@@ -21,6 +21,12 @@ namespace Parsers
             _document = JObject.Parse(jsonText);
         }
 
+        public static Dictionary<string, string> LoadMaskingFile(string filePath) {
+            var encoding = Encoding.GetEncoding("UTF-8");
+            var jsonText = System.IO.File.ReadAllText(filePath, encoding);
+            return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonText);
+        }
+
         public override string SaveDiagram()
         {
             ParsedEditor.ReverseNodesGeometry();
