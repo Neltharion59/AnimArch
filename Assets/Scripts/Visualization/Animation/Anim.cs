@@ -11,6 +11,7 @@ using Assets.Scripts.AnimationControl.OAL;
 using Visualization.Animation;
 using Visualization.ClassDiagram;
 using Visualization.ClassDiagram.Relations;
+using Assets.Scripts.AnimationControl;
 
 namespace Visualisation.Animation
 {
@@ -233,7 +234,12 @@ namespace Visualisation.Animation
 
                     if (!string.Empty.Equals(constructor.Code))
                     {
-                        string result = OALParserBridge.PythonParse(constructor.Code, classItem.Attributes);
+                        VisitorPythonCode visitor = VisitorPythonCode.BorrowAVisitor();
+                        EXEScopeMethod _scope = OALParserBridge.Parse(constructor.Code);
+                        visitor.SetIndentation(2);
+                        _scope.Accept(visitor);
+                        //Debug.Log("ftfufufufu" + constructor.Code);
+                        string result = visitor.GetCommandStringAndResetStateNow();//OALParserBridge.PythonParse(constructor.Code, classItem.Attributes);
                         Code.AppendLine(result);
                     }
 
@@ -262,7 +268,13 @@ namespace Visualisation.Animation
                     }
                     else
                     {
-                        string result = OALParserBridge.PythonParse(methodItem.Code, classItem.Attributes);
+                        VisitorPythonCode visitor = VisitorPythonCode.BorrowAVisitor();
+                        EXEScopeMethod _scope = OALParserBridge.Parse(methodItem.Code);
+                        visitor.SetIndentation(2);
+                        _scope.Accept(visitor);
+                        //Debug.Log("ftfufufufu" + constructor.Code);
+                        string result = visitor.GetCommandStringAndResetStateNow();
+                        //string result = OALParserBridge.PythonParse(methodItem.Code, classItem.Attributes);
                         Code.AppendLine(result);
                     }
                 }
