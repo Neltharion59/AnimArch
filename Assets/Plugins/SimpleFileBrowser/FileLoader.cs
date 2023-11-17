@@ -36,6 +36,7 @@ public class FileLoader : MonoBehaviour
     {
         StartCoroutine(SaveAnimationCoroutine(newAnim));
     }
+    
     public void SaveAnimationToPython()
     {
         if (AnimationData.Instance.getAnimList().Count > 0)
@@ -43,6 +44,7 @@ public class FileLoader : MonoBehaviour
             StartCoroutine(SaveAnimationToPythonCoroutine());
         }
     }
+    
     IEnumerator SaveAnimationToPythonCoroutine()
     {
         FileBrowser.SetDefaultFilter(".py");
@@ -90,7 +92,6 @@ public class FileLoader : MonoBehaviour
         MenuManager.Instance.UpdateAnimations();
         MenuManager.Instance.SetSelectedAnimation(loadedAnim.AnimationName);
     }
-
 
     private IEnumerator LoadDiagramCoroutine()
     {
