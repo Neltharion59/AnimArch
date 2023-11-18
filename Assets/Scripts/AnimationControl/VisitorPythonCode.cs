@@ -212,6 +212,7 @@ public class VisitorPythonCode : Visitor
         
         HandleBasicEXECommand(command, (visitor) => {
             command.AssignmentTarget.Accept(visitor);
+            visitor.commandString.Append(" = ");
             if (!EXETypes.StringTypeName.Equals(command.AssignmentType)) {
                 if (command.AssignmentType.Equals("int")) {
                     visitor.commandString.Append("int(");
@@ -224,7 +225,6 @@ public class VisitorPythonCode : Visitor
                 }
             }
             visitor.commandString.Append("input(");
-            visitor.commandString.Append(" = ");
             if (command.Prompt != null)
             {
                 command.Prompt.Accept(visitor);
@@ -479,7 +479,7 @@ public class VisitorPythonCode : Visitor
                 }
                 else
                 {
-                    commandString.Append(" " + node.Operation + " ");
+                    commandString.Append(" " + node.Operation.ToLower() + " ");
                 }
                 operand.Accept(this);
             }
