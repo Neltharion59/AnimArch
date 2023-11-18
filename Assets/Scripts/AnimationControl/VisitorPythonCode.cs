@@ -212,13 +212,27 @@ public class VisitorPythonCode : Visitor
         
         HandleBasicEXECommand(command, (visitor) => {
             command.AssignmentTarget.Accept(visitor);
+            if (!EXETypes.StringTypeName.Equals(command.AssignmentType)) {
+                if (command.AssignmentType.Equals("int")) {
+                    visitor.commandString.Append("int(");
+                }
+                else if (command.AssignmentType.Equals("real")) {
+                    visitor.commandString.Append("float(");
+                }
+                else if (command.AssignmentType.Equals("bool")) {
+                    visitor.commandString.Append("boolean(");
+                }
+            }
+            visitor.commandString.Append("input(");
             visitor.commandString.Append(" = ");
-            visitor.commandString.Append((EXETypes.StringTypeName.Equals(command.AssignmentType) ? "" : "(") + "input(");
             if (command.Prompt != null)
             {
                 command.Prompt.Accept(visitor);
             }
-            visitor.commandString.Append(EXETypes.StringTypeName.Equals(command.AssignmentType) ? ")" : "))");
+            visitor.commandString.Append(")");
+            if (!EXETypes.StringTypeName.Equals(command.AssignmentType)) {
+                visitor.commandString.Append(")");
+            }
             return false;
         });
         
@@ -226,12 +240,13 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeCommandRemovingFromList(EXECommandRemovingFromList command)
     {
-        
         HandleBasicEXECommand(command, (visitor) => {
             command.Array.Accept(visitor);
-            visitor.commandString.Append(".remove(");
+            visitor.commandString.Append(" = [x for x in ");
+            command.Array.Accept(visitor);
+            visitor.commandString.Append(" if x != ");
             command.Item.Accept(visitor);
-            visitor.commandString.Append(")");
+            visitor.commandString.Append("]");
             
             return false;
         });
@@ -305,7 +320,8 @@ public class VisitorPythonCode : Visitor
         WriteIndentation();
         commandString.Append("for " + scope.IteratorName + " in ");
         scope.Iterable.Accept(this);
-        commandString.Append(":\n");
+        commandString.Append(":");
+        AddEOL();
 
         IncreaseIndentation();
         foreach (EXECommand Command in scope.Commands)
@@ -355,9 +371,10 @@ public class VisitorPythonCode : Visitor
     public override void VisitExeScopeCondition(EXEScopeCondition scope)
     {
         WriteIndentation();
-        commandString.Append("if ");
+        commandString.Append("if (");
         scope.Condition.Accept(this);
-        commandString.Append(":\n");
+        commandString.Append("):");
+        AddEOL();
 
         IncreaseIndentation();
         foreach (EXECommand Command in scope.Commands)
@@ -371,9 +388,10 @@ public class VisitorPythonCode : Visitor
             foreach (EXEScopeCondition Elif in scope.ElifScopes)
             {
                 WriteIndentation();
-                commandString.Append("elif ");
+                commandString.Append("elif (");
                 Elif.Condition.Accept(this);
-                commandString.Append(":\n");
+                commandString.Append("):");
+                AddEOL();
 
                 IncreaseIndentation();
                 foreach (EXECommand Command in Elif.Commands)
@@ -386,8 +404,8 @@ public class VisitorPythonCode : Visitor
             if (scope.ElseScope != null)
             {
                 WriteIndentation();
-                commandString.Append("else:\n");
-
+                commandString.Append("else:");
+                AddEOL();
 
                 IncreaseIndentation();
                 foreach (EXECommand Command in scope.ElseScope.Commands)
@@ -401,9 +419,10 @@ public class VisitorPythonCode : Visitor
     public override void VisitExeScopeLoopWhile(EXEScopeLoopWhile scope)
     {
         WriteIndentation();
-        commandString.Append("while ");
+        commandString.Append("while (");
         scope.Condition.Accept(this);
-        commandString.Append(":\n");
+        commandString.Append("):");
+        AddEOL();
 
         IncreaseIndentation();
         foreach (EXECommand Command in scope.Commands)
@@ -433,8 +452,22 @@ public class VisitorPythonCode : Visitor
     {
         if (node.Operands.Count == 1)
         {
-            commandString.Append(node.Operation + " ");
-            node.Operands.First().Accept(this);
+            if (node.Operation.ToLower().Equals("not") || node.Operation.ToLower().Equals("empty")) {
+                commandString.Append("not ");
+                node.Operands.First().Accept(this);
+            }
+            else if (node.Operation.ToLower().Equals("cardinality")) {
+                commandString.Append("cardinality(");
+                node.Operands.First().Accept(this);
+                commandString.Append(")");
+            }
+            if (node.Operation.ToLower().Equals("not_empty")) {
+                node.Operands.First().Accept(this);
+            }
+            else {
+                commandString.Append(node.Operation + " ");
+                node.Operands.First().Accept(this);
+            }
         }
         else
         {
