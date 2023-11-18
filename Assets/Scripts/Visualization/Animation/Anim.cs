@@ -12,6 +12,7 @@ using Visualization.Animation;
 using Visualization.ClassDiagram;
 using Visualization.ClassDiagram.Relations;
 using Assets.Scripts.AnimationControl;
+using Microsoft.Msagl.Core.DataStructures;
 
 namespace Visualisation.Animation
 {
@@ -190,11 +191,31 @@ namespace Visualisation.Animation
             Code = anim.Code;   //zatial davame aj code
         }
 
+        private List<AnimClass> utriedenieTried() {
+            List<AnimClass> usporiadaneTriedy = new List<AnimClass>();
+            HashSet<string> pouziteTriedy = new HashSet<string>();
+            while (usporiadaneTriedy.Count() < MethodsCodes.Count()) {
+                foreach (AnimClass classItem in MethodsCodes) {
+                    if (pouziteTriedy.Contains(classItem.Name)) {
+                        continue;
+                    }
+                    if (!string.Empty.Equals(classItem.SuperClass) && !pouziteTriedy.Contains(classItem.SuperClass)) {
+                        continue;
+                    }
+                    pouziteTriedy.Add(classItem.Name);
+                    usporiadaneTriedy.Add(classItem);
+                }
+            }
+            return usporiadaneTriedy;
+        }
+
         public string GeneratePythonCode()
         {
             StringBuilder Code = new StringBuilder();
 
-            foreach (AnimClass classItem in MethodsCodes)
+            HashSet<string> prejdeneTriedy = new HashSet<string>();
+
+            foreach (AnimClass classItem in utriedenieTried())
             {
                 if (string.Empty.Equals(classItem.SuperClass))
                 {
