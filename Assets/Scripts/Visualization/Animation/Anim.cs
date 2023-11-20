@@ -212,8 +212,8 @@ namespace Visualisation.Animation
         public string GeneratePythonCode()
         {
             StringBuilder Code = new StringBuilder();
-
-            HashSet<string> prejdeneTriedy = new HashSet<string>();
+            OALProgram currentProgram = Visualization.Animation.Animation.Instance.CurrentProgramInstance;
+            currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == null);
 
             foreach (AnimClass classItem in utriedenieTried())
             {

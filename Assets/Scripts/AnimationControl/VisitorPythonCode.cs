@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using Microsoft.Msagl.Drawing;
 using OALProgramControl;
 using UnityEngine;
@@ -83,12 +84,12 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeCommand(EXECommand command)
     {
-        /*
-        HandleBasicEXECommand(command, (visitor) => {
-            visitor.commandString.Append("Command");
-            return false;
-        });
-        */
+        if (!typeof(EXECommand).GetTypeInfo().IsAbstract)
+        {
+            throw new Exception("We expect EXECommand to be abstract.");
+        }
+
+        command.Accept(this);
     }
 
     public override void VisitExeCommandBreak(EXECommandBreak command)
@@ -175,9 +176,7 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeCommandMulti(EXECommandMulti command)
     {
-        /*
-        VisitExeCommand(command);
-        */
+        throw new Exception("Tried to convert EXECommandMulti to Python.");
     }
 
     public override void VisitExeCommandQueryCreate(EXECommandQueryCreate command)
@@ -479,7 +478,7 @@ public class VisitorPythonCode : Visitor
                 }
                 else
                 {
-                    commandString.Append(" " + node.Operation.ToLower() + " ");
+                    commandString.AppendFormat(" {0} ", node.Operation.ToLower());
                 }
                 operand.Accept(this);
             }
@@ -568,9 +567,7 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeValueReference(EXEValueReference value)
     {
-        /*
-        commandString.Append(value.TypeName + "<" + value.ClassInstance.UniqueID + ">");
-        */
+        throw new Exception("Tried to visit EXEValueReference.");
     }
 
     public override void VisitExeValueString(EXEValueString value)
