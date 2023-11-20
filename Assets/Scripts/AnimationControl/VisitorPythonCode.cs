@@ -370,9 +370,9 @@ public class VisitorPythonCode : Visitor
     public override void VisitExeScopeCondition(EXEScopeCondition scope)
     {
         WriteIndentation();
-        commandString.Append("if (");
+        commandString.Append("if ");
         scope.Condition.Accept(this);
-        commandString.Append("):");
+        commandString.Append(":");
         AddEOL();
 
         IncreaseIndentation();
@@ -387,9 +387,9 @@ public class VisitorPythonCode : Visitor
             foreach (EXEScopeCondition Elif in scope.ElifScopes)
             {
                 WriteIndentation();
-                commandString.Append("elif (");
+                commandString.Append("elif ");
                 Elif.Condition.Accept(this);
-                commandString.Append("):");
+                commandString.Append(":");
                 AddEOL();
 
                 IncreaseIndentation();
@@ -418,9 +418,9 @@ public class VisitorPythonCode : Visitor
     public override void VisitExeScopeLoopWhile(EXEScopeLoopWhile scope)
     {
         WriteIndentation();
-        commandString.Append("while (");
+        commandString.Append("while ");
         scope.Condition.Accept(this);
-        commandString.Append("):");
+        commandString.Append(":");
         AddEOL();
 
         IncreaseIndentation();
@@ -487,13 +487,13 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeASTNodeLeaf(EXEASTNodeLeaf node)
     {
-        if (node.Value == "FALSE") {
+        if (node.Value.Equals("FALSE")) {
             commandString.Append("False");
         }
-        else if (node.Value == "TRUE") {
+        else if (node.Value.Equals("TRUE")) {
             commandString.Append("True");
         }
-        else if (node.Value == "UNDEFINED") {
+        else if (node.Value.Equals("UNDEFINED")) {
             commandString.Append("None");
         }
         else {

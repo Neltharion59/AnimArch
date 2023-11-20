@@ -209,15 +209,8 @@ namespace Visualisation.Animation
             return usporiadaneTriedy;
         }
 
-        public string GeneratePythonCode()
-        {
-            StringBuilder Code = new StringBuilder();
-            OALProgram currentProgram = Visualization.Animation.Animation.Instance.CurrentProgramInstance;
-            currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == null);
-
-            foreach (AnimClass classItem in utriedenieTried())
-            {
-                if (string.Empty.Equals(classItem.SuperClass))
+        private void ClassToPython(StringBuilder Code, AnimClass classItem) {
+            if (string.Empty.Equals(classItem.SuperClass))
                 {
                     Code.AppendLine("class " + classItem.Name + ":");
                 }
@@ -298,7 +291,18 @@ namespace Visualisation.Animation
                         //string result = OALParserBridge.PythonParse(methodItem.Code, classItem.Attributes);
                         Code.AppendLine(result);
                     }
-                }
+            }
+        }
+
+        public string GeneratePythonCode()
+        {
+            StringBuilder Code = new StringBuilder();
+            OALProgram currentProgram = Visualization.Animation.Animation.Instance.CurrentProgramInstance;
+            List<CDClass> classes = currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == null).ToList();
+
+            foreach (AnimClass classItem in utriedenieTried())
+            {
+                ClassToPython(Code, classItem);
             }
 
             Code.AppendLine("def boolean(value):");
