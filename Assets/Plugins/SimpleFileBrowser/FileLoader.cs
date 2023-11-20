@@ -96,7 +96,7 @@ public class FileLoader : MonoBehaviour
     private IEnumerator LoadDiagramCoroutine()
     {
         FileBrowser.SetDefaultFilter(".xml");
-        yield return FileBrowser.WaitForLoadDialog(false, @"Assets\Resources\", "Load Diagram", "Load");
+        yield return FileBrowser.WaitForLoadDialog(false, @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar, "Load Diagram", "Load");
 
         if (!FileBrowser.Success) yield break;
         AnimationData.Instance.SetDiagramPath(FileBrowser.Result);
@@ -106,7 +106,7 @@ public class FileLoader : MonoBehaviour
     private IEnumerator LoadMaskingFileCoroutine()
     {
         FileBrowser.SetDefaultFilter(".json");
-        yield return FileBrowser.WaitForLoadDialog(false, @"Assets\Resources\MaskingFiles", "Load Masking File", "Load");
+        yield return FileBrowser.WaitForLoadDialog(false, @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar + "MaskingFiles", "Load Masking File", "Load");
 
         if (!FileBrowser.Success) yield break;
         Debug.Log("File found!");
@@ -116,7 +116,7 @@ public class FileLoader : MonoBehaviour
     private static IEnumerator SaveAnimationCoroutine(Anim newAnim)
     {
         FileBrowser.SetDefaultFilter(".json");
-        yield return FileBrowser.WaitForSaveDialog(false, @"Assets\Resources\Animations\", "Save Animation");
+        yield return FileBrowser.WaitForSaveDialog(false, @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar + "Animations" + Path.DirectorySeparatorChar, "Save Animation");
         if (!FileBrowser.Success) yield break;
         var path = FileBrowser.Result;
         var fileName = FileBrowserHelpers.GetFilename(FileBrowser.Result);
@@ -133,7 +133,7 @@ public class FileLoader : MonoBehaviour
     private static IEnumerator SaveDiagramCoroutine()
     {
         FileBrowser.SetDefaultFilter(".json");
-        yield return FileBrowser.WaitForSaveDialog(false, @"Assets\Resources\", "Save Diagram");
+        yield return FileBrowser.WaitForSaveDialog(false, @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar, "Save Diagram");
         if (!FileBrowser.Success) yield break;
         
         var parser = Parser.GetParser(Path.GetExtension(FileBrowser.Result));
