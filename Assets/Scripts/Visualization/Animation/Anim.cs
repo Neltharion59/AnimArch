@@ -191,24 +191,6 @@ namespace Visualisation.Animation
             Code = anim.Code;   //zatial davame aj code
         }
 
-        private List<AnimClass> utriedenieTried() {
-            List<AnimClass> usporiadaneTriedy = new List<AnimClass>();
-            HashSet<string> pouziteTriedy = new HashSet<string>();
-            while (usporiadaneTriedy.Count() < MethodsCodes.Count()) {
-                foreach (AnimClass classItem in MethodsCodes) {
-                    if (pouziteTriedy.Contains(classItem.Name)) {
-                        continue;
-                    }
-                    if (!string.Empty.Equals(classItem.SuperClass) && !pouziteTriedy.Contains(classItem.SuperClass)) {
-                        continue;
-                    }
-                    pouziteTriedy.Add(classItem.Name);
-                    usporiadaneTriedy.Add(classItem);
-                }
-            }
-            return usporiadaneTriedy;
-        }
-
         private void ClassToPython(StringBuilder Code, AnimClass classItem) {
             if (string.Empty.Equals(classItem.SuperClass))
                 {
@@ -252,8 +234,7 @@ namespace Visualisation.Animation
                         EXEScopeMethod _scope = OALParserBridge.Parse(constructor.Code);
                         visitor.SetIndentation(2);
                         _scope.Accept(visitor);
-                        //Debug.Log("ftfufufufu" + constructor.Code);
-                        string result = visitor.GetCommandStringAndResetStateNow();//OALParserBridge.PythonParse(constructor.Code, classItem.Attributes);
+                        string result = visitor.GetCommandStringAndResetStateNow();
                         Code.AppendLine(result);
                     }
 
@@ -286,9 +267,7 @@ namespace Visualisation.Animation
                         EXEScopeMethod _scope = OALParserBridge.Parse(methodItem.Code);
                         visitor.SetIndentation(2);
                         _scope.Accept(visitor);
-                        //Debug.Log("ftfufufufu" + constructor.Code);
                         string result = visitor.GetCommandStringAndResetStateNow();
-                        //string result = OALParserBridge.PythonParse(methodItem.Code, classItem.Attributes);
                         Code.AppendLine(result);
                     }
             }
@@ -300,9 +279,16 @@ namespace Visualisation.Animation
             OALProgram currentProgram = Visualization.Animation.Animation.Instance.CurrentProgramInstance;
             List<CDClass> classes = currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == null).ToList();
 
-            foreach (AnimClass classItem in utriedenieTried())
+            while (classes.Count() > 0)
             {
-                ClassToPython(Code, classItem);
+                List<CDClass> nextClasses = new List<CDClass>();
+                foreach (CDClass classCD in classes) {
+                    AnimClass classAnim = MethodsCodes.Where(_class => _class.Name.Equals(classCD.Name)).ToList().First();
+                    ClassToPython(Code, classAnim);
+                    nextClasses.AddRange(currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == classCD).ToList());
+                }
+                
+                classes = nextClasses;
             }
 
             Code.AppendLine("def boolean(value):");

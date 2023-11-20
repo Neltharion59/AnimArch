@@ -332,6 +332,7 @@ public class VisitorPythonCode : Visitor
 
     public override void VisitExeScopeParallel(EXEScopeParallel scope)
     {
+        throw new Exception("Tried to visit EXEScopeParallel.");
         /*
         WriteIndentation();
         commandString.Append("par\n");
@@ -525,7 +526,7 @@ public class VisitorPythonCode : Visitor
     {
         if (value.Elements == null)
         {
-            commandString.Append("[]");//EXETypes.UnitializedName);
+            commandString.Append("[]");
         }
         else
         {
