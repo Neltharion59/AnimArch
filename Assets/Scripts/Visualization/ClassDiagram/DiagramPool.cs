@@ -13,7 +13,6 @@ namespace Visualization.ClassDiagram
         public GameObject objectPrefab;
         public GameObject classAttributePrefab;
         public GameObject classMethodPrefab;
-        public GameObject classMaskingPrefab;
         public GameObject parameterMethodPrefab;
         public GameObject associationNonePrefab;
         public GameObject associationFullPrefab;

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Parsers;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,7 @@ public class MaskingHandler : Singleton<MaskingHandler>
 {
     [SerializeField] private TMP_Text MaskingFileLabel;
     [SerializeField] private Button RemoveMaskingBtn;
+    private Dictionary<string, string> maskingRules = null;
 
     private ClassDiagram.Diagrams.ClassDiagram classDiagram;
 
@@ -25,53 +27,75 @@ public class MaskingHandler : Singleton<MaskingHandler>
         classDiagram = GameObject.Find("ClassDiagram").GetComponent<ClassDiagram.Diagrams.ClassDiagram>();
     }
 
-    private void changeLabel(string filePath) {
+    private void changeLabel(string filePath) 
+    {
         MaskingFileLabel.text = filePath;
     }
 
-    private void setRemoveMaskingBtnInteractability(bool interactable) {
+    private void setRemoveMaskingBtnInteractability(bool interactable) 
+    {
         RemoveMaskingBtn.interactable = interactable;
     }
 
-    private void setObjectsActive(GameObject node, bool active) {
+    private void setObjectsActive(GameObject node, bool active)
+    {
         node.transform.Find("Attributes").gameObject.SetActive(active);
-        node.transform.Find("VLine").gameObject.SetActive(active);
         node.transform.Find("Methods").gameObject.SetActive(active);
-    }
-
-    private void beginMasking(string filePath) {
-        Dictionary<string, string> maskingRules = JsonParser.LoadMaskingFile(filePath);
-        foreach (KeyValuePair<string, string> rule in maskingRules) {
-            try {
-                GameObject node = classDiagram.FindNode(rule.Key).transform.GetChild(0).gameObject;
-                setObjectsActive(node, false);
-
-                var mask = UnityEngine.Object.Instantiate(DiagramPool.Instance.classMaskingPrefab, node.transform, false);
-                mask.name = "MaskingLabel";
-                mask.transform.Find("MaskingText").GetComponent<TextMeshProUGUI>().text += rule.Value;
-            } catch (NullReferenceException) {
-                Debug.LogError("Node: " + rule.Key + " is null!");
+        foreach (Transform child in node.transform) 
+        {
+            if (child != null && "VLine".Equals(child.name))
+            {
+                child.gameObject.SetActive(active);
             }
         }
     }
 
-    public void HandleMaskingFile(string filePath) {
+    private void beginMasking(string filePath) 
+    {
+        maskingRules = JsonParser.LoadMaskingFile(filePath);
+        foreach (KeyValuePair<string, string> rule in maskingRules) 
+        {
+            try
+            {
+                GameObject node = classDiagram.FindNode(rule.Key).transform.GetChild(0).gameObject;
+                setObjectsActive(node, false);
+                node.transform.Find("HeaderLayout").gameObject.GetComponentsInChildren<TextMeshProUGUI>().First().text = rule.Value;
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogError("Node: " + rule.Key + " is null!");
+            }
+
+        }
+        }
+
+    public void HandleMaskingFile(string filePath)
+    {
         RemoveMasking();
         changeLabel(Path.GetFileName(filePath));
         setRemoveMaskingBtnInteractability(true);
         beginMasking(filePath);
     }
 
-    public void RemoveMasking() {
+    public void RemoveMasking() 
+    {
         changeLabel("");
         setRemoveMaskingBtnInteractability(false);
-        foreach (var diagramClass in classDiagram.Classes) {
-            try {
-                GameObject node = diagramClass.VisualObject.transform.GetChild(0).gameObject;
-                setObjectsActive(node, true);
-
-                Destroy(node.transform.Find("MaskingLabel").gameObject);
-            } catch (NullReferenceException) {}
+        if (maskingRules != null)
+        {
+            foreach (KeyValuePair<string, string> rule in maskingRules)
+            {
+                try
+                {
+                    GameObject node = classDiagram.FindNode(rule.Key).transform.GetChild(0).gameObject;
+                    setObjectsActive(node, true);
+                    node.transform.Find("HeaderLayout").gameObject.GetComponentsInChildren<TextMeshProUGUI>().First().text = rule.Key;
+                }
+                    catch (NullReferenceException)
+                {
+                    Debug.LogError("Node: " + rule.Key + " is null!");
+                }
+            }
         }
     }
 
