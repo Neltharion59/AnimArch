@@ -599,14 +599,14 @@ namespace Visualization.Animation
                     if (isToBeHighlighted)
                     {
                         if (DateTime.Now.ToString("MM").Equals("06")) {
-                            classTextHighligter.HighlightMaskLine(methodName);
+                            classTextHighligter.HighlightClassNameLine();
                         }
                         classTextHighligter.HighlightClassLine(methodName);
                     }
                     else
                     {
                         if (DateTime.Now.ToString("MM").Equals("06")) {
-                            classTextHighligter.UnhighlightMaskLine(methodName);
+                            classTextHighligter.UnhighlightClassNameLine();
                         }
                         classTextHighligter.UnhighlightClassLine(methodName);
                     }

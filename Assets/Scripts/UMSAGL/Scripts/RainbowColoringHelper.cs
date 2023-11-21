@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class RainbowColoringHelper : MonoBehaviour
 {
-    public static Dictionary<string, bool> ActiveMasks { get; set; } = new Dictionary<string, bool>();
+    public static Dictionary<string, bool> ActiveRainbows { get; set; } = new Dictionary<string, bool>();
 
     public static IEnumerator ColorRainbow(TextMeshProUGUI textComponent, string line)
     {
         int count = 0;
-        while (ActiveMasks[line])
+        while (ActiveRainbows[line])
         {
             for (int i = 0; i < textComponent.textInfo.characterCount; ++i)
             {

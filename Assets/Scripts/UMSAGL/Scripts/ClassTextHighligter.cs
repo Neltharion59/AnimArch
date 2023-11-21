@@ -24,13 +24,12 @@ namespace UMSAGL.Scripts
 
         public void HighlightClassLine(string line)
         {
-            RainbowHighlightClassLine(line);
             GetLineText(line).color =
                 Animation.Instance.methodColor;
         }
 
-        public void HighlightMaskLine(string line) {
-            RainbowHighlightClassLine(line);
+        public void HighlightClassNameLine() {
+            RainbowHighlightClassLine(true);
         }
 
         public void UnhighlightClassLine(string line)
@@ -38,28 +37,27 @@ namespace UMSAGL.Scripts
             GetLineText(line).color = Color.black;
         }
 
-        public void UnhighlightMaskLine(string line) {
-            line = Regex.Replace(line, "[()]", "");
-            // var maskingLabel = methodLayoutGroup.transform.parent.parent.Find("MaskingLabel");
-            var maskingLabel = methodLayoutGroup.transform.parent.parent.Find("HeaderLayout");
-            if (maskingLabel != null) {
-                TextMeshProUGUI textComponent = maskingLabel.gameObject.GetComponentsInChildren<TextMeshProUGUI>().First();
-                textComponent.overrideColorTags = false;
-                RainbowColoringHelper.ActiveMasks[line] = false;
-            }
+        public void UnhighlightClassNameLine() {
+            RainbowHighlightClassLine(false);
         }
 
-        public void RainbowHighlightClassLine(string line) {
-            line = Regex.Replace(line, "[()]", "");
-            // var maskingLabel = methodLayoutGroup.transform.parent.parent.Find("MaskingLabel");
-            var maskingLabel = methodLayoutGroup.transform.parent.parent.Find("HeaderLayout");
-            if (maskingLabel != null) {
-                TextMeshProUGUI textComponent = maskingLabel.gameObject.GetComponentsInChildren<TextMeshProUGUI>().First();
-                textComponent.overrideColorTags = true;
-                if (!RainbowColoringHelper.ActiveMasks.TryAdd(line, true)) {
-                    RainbowColoringHelper.ActiveMasks[line] = true;
+        public void RainbowHighlightClassLine(bool shouldBeHighlighted) {
+            var background = methodLayoutGroup.transform.parent.parent;
+            string className = background.parent.name;
+            var headerLayout = background.Find("HeaderLayout");
+            if (headerLayout != null) {
+                TextMeshProUGUI textComponent = headerLayout.gameObject.GetComponentsInChildren<TextMeshProUGUI>().First();
+                if (shouldBeHighlighted) {
+                    if (RainbowColoringHelper.ActiveRainbows[className]) {return;}
+                    textComponent.overrideColorTags = true;
+                    if (!RainbowColoringHelper.ActiveRainbows.TryAdd(className, true)) {
+                        RainbowColoringHelper.ActiveRainbows[className] = true;
+                    }
+                    StartCoroutine(RainbowColoringHelper.ColorRainbow(textComponent, className));
+                } else {
+                    textComponent.overrideColorTags = false;
+                    RainbowColoringHelper.ActiveRainbows[className] = false;
                 }
-                StartCoroutine(RainbowColoringHelper.ColorRainbow(textComponent, line));
             }
         }
     }
