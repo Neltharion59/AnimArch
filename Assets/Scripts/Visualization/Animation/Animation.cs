@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnimArch.Visualization.Diagrams;
@@ -597,10 +598,16 @@ namespace Visualization.Animation
                 {
                     if (isToBeHighlighted)
                     {
+                        if (DateTime.Now.ToString("MM").Equals("06")) {
+                            classTextHighligter.HighlightMaskLine(methodName);
+                        }
                         classTextHighligter.HighlightClassLine(methodName);
                     }
                     else
                     {
+                        if (DateTime.Now.ToString("MM").Equals("06")) {
+                            classTextHighligter.UnhighlightMaskLine(methodName);
+                        }
                         classTextHighligter.UnhighlightClassLine(methodName);
                     }
                 }
