@@ -67,7 +67,7 @@ public class MaskingHandler : Singleton<MaskingHandler>
             }
 
         }
-        }
+    }
 
     public void HandleMaskingFile(string filePath)
     {
