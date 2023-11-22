@@ -11,6 +11,8 @@ using Assets.Scripts.AnimationControl.OAL;
 using Visualization.Animation;
 using Visualization.ClassDiagram;
 using Visualization.ClassDiagram.Relations;
+using Assets.Scripts.AnimationControl;
+using Microsoft.Msagl.Core.DataStructures;
 
 namespace Visualisation.Animation
 {
@@ -189,13 +191,8 @@ namespace Visualisation.Animation
             Code = anim.Code;   //zatial davame aj code
         }
 
-        public string GeneratePythonCode()
-        {
-            StringBuilder Code = new StringBuilder();
-
-            foreach (AnimClass classItem in MethodsCodes)
-            {
-                if (string.Empty.Equals(classItem.SuperClass))
+        private void ClassToPython(StringBuilder Code, AnimClass classItem) {
+            if (string.Empty.Equals(classItem.SuperClass))
                 {
                     Code.AppendLine("class " + classItem.Name + ":");
                 }
@@ -233,7 +230,11 @@ namespace Visualisation.Animation
 
                     if (!string.Empty.Equals(constructor.Code))
                     {
-                        string result = OALParserBridge.PythonParse(constructor.Code, classItem.Attributes);
+                        VisitorPythonCode visitor = VisitorPythonCode.BorrowAVisitor();
+                        EXEScopeMethod _scope = OALParserBridge.Parse(constructor.Code);
+                        visitor.SetIndentation(2);
+                        _scope.Accept(visitor);
+                        string result = visitor.GetCommandStringAndResetStateNow();
                         Code.AppendLine(result);
                     }
 
@@ -262,10 +263,32 @@ namespace Visualisation.Animation
                     }
                     else
                     {
-                        string result = OALParserBridge.PythonParse(methodItem.Code, classItem.Attributes);
+                        VisitorPythonCode visitor = VisitorPythonCode.BorrowAVisitor();
+                        EXEScopeMethod _scope = OALParserBridge.Parse(methodItem.Code);
+                        visitor.SetIndentation(2);
+                        _scope.Accept(visitor);
+                        string result = visitor.GetCommandStringAndResetStateNow();
                         Code.AppendLine(result);
                     }
+            }
+        }
+
+        public string GeneratePythonCode()
+        {
+            StringBuilder Code = new StringBuilder();
+            OALProgram currentProgram = Visualization.Animation.Animation.Instance.CurrentProgramInstance;
+            List<CDClass> classes = currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == null).ToList();
+
+            while (classes.Count() > 0)
+            {
+                List<CDClass> nextClasses = new List<CDClass>();
+                foreach (CDClass classCD in classes) {
+                    AnimClass classAnim = MethodsCodes.Where(_class => _class.Name.Equals(classCD.Name)).ToList().First();
+                    ClassToPython(Code, classAnim);
+                    nextClasses.AddRange(currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == classCD).ToList());
                 }
+                
+                classes = nextClasses;
             }
 
             Code.AppendLine("def boolean(value):");
