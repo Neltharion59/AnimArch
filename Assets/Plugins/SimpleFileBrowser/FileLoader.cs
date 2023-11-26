@@ -29,7 +29,7 @@ public class FileLoader : MonoBehaviour
         FileBrowser.SetFilters(true, filters);
         FileBrowser.SetDefaultFilter(".json");
         FileBrowser.SetExcludedExtensions(".lnk", ".tmp", ".zip", ".rar", ".exe");
-        FileBrowser.AddQuickLink("Resources", @"Assets\Resources\", null);
+        FileBrowser.AddQuickLink("Resources", @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar, null);
     }
 
     public void SaveAnimation(Anim newAnim)
@@ -48,7 +48,7 @@ public class FileLoader : MonoBehaviour
     IEnumerator SaveAnimationToPythonCoroutine()
     {
         FileBrowser.SetDefaultFilter(".py");
-        yield return FileBrowser.WaitForSaveDialog(false, @"Assets\Resources\Python\", "Save Animation to Python", "Save");
+        yield return FileBrowser.WaitForSaveDialog(false, @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar + "Python" + Path.DirectorySeparatorChar, "Save Animation to Python", "Save");
         if (FileBrowser.Success)
         {
             string path = FileBrowser.Result;
@@ -72,7 +72,7 @@ public class FileLoader : MonoBehaviour
         // Load file/folder: file, Initial path: default (Documents), Title: "Load File", submit button text: "Load"
 
         FileBrowser.SetDefaultFilter(".json");
-        yield return FileBrowser.WaitForLoadDialog(false, @"Assets\Resources\Animations\", "Load Animation", "Load");
+        yield return FileBrowser.WaitForLoadDialog(false, @"Assets" + Path.DirectorySeparatorChar + "Resources" + Path.DirectorySeparatorChar + "Animations" + Path.DirectorySeparatorChar, "Load Animation", "Load");
 
         // Dialog is closed
         // Print whether a file is chosen (FileBrowser.Success)
