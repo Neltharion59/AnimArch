@@ -17,9 +17,12 @@ public class VisitorPythonCode : Visitor
     private bool available;
     private static readonly LinkedList<VisitorPythonCode> visitors = new LinkedList<VisitorPythonCode>();
 
-    public static VisitorPythonCode BorrowAVisitor() {
-        foreach (VisitorPythonCode v in visitors) {
-            if (v.isVisitorAvailable()) {
+    public static VisitorPythonCode BorrowAVisitor() 
+    {
+        foreach (VisitorPythonCode v in visitors) 
+        {
+            if (v.isVisitorAvailable()) 
+            {
                 return v.BorrowVisitor();
             }
         }
@@ -35,7 +38,8 @@ public class VisitorPythonCode : Visitor
         ResetState();
     }
 
-    private bool isVisitorAvailable() {
+    private bool isVisitorAvailable() 
+    {
         return available;
     }
 

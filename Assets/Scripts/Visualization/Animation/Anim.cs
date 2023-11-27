@@ -241,10 +241,11 @@ namespace Visualisation.Animation
             OALProgram currentProgram = Visualization.Animation.Animation.Instance.CurrentProgramInstance;
             List<CDClass> classes = currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == null).ToList();
 
-            while (classes.Count() > 0)
+            while (classes.Any())
             {
                 List<CDClass> nextClasses = new List<CDClass>();
-                foreach (CDClass classCD in classes) {
+                foreach (CDClass classCD in classes) 
+                {
                     AnimClass classAnim = MethodsCodes.Where(_class => _class.Name.Equals(classCD.Name)).ToList().First();
                     ClassToPython(Code, classAnim);
                     nextClasses.AddRange(currentProgram.ExecutionSpace.Classes.Where(_class => _class.SuperClass == classCD).ToList());

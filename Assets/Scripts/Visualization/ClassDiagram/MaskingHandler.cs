@@ -24,7 +24,7 @@ public class MaskingHandler : Singleton<MaskingHandler>
 
     private void Awake()
     {
-        classDiagram = GameObject.Find("ClassDiagram").GetComponent<ClassDiagram.Diagrams.ClassDiagram>();
+        classDiagram = DiagramPool.Instance.ClassDiagram.GetComponent<ClassDiagram.Diagrams.ClassDiagram>();
     }
 
     private void changeLabel(string filePath) 
