@@ -17,6 +17,7 @@ using Visualization.ClassDiagram.ComponentsInDiagram;
 using Visualization.ClassDiagram.Diagrams;
 using Visualization.ClassDiagram.Relations;
 using Visualization.UI;
+using AnimArch.Extensions;
 
 namespace Visualization.Animation
 {
@@ -598,14 +599,14 @@ namespace Visualization.Animation
                 {
                     if (isToBeHighlighted)
                     {
-                        if (DateTime.Now.ToString("MM").Equals("06")) {
+                        if (DateTime.Now.IsJune() || true) {
                             classTextHighligter.HighlightClassNameLine();
                         }
                         classTextHighligter.HighlightClassLine(methodName);
                     }
                     else
                     {
-                        if (DateTime.Now.ToString("MM").Equals("06")) {
+                        if (DateTime.Now.IsJune() || true) {
                             classTextHighligter.UnhighlightClassNameLine();
                         }
                         classTextHighligter.UnhighlightClassLine(methodName);
