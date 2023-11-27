@@ -93,7 +93,7 @@ exeCommandCall
     ;
 
 exeCommandCreateList
-    :   'create list ' accessChain ' of ' className listLiteral? ';'
+    :   'create list ' accessChain ' of ' typeName listLiteral? ';'
     ;
 
 listLiteral
@@ -163,8 +163,16 @@ bracketedExpr
     :   '(' expr ')'
     ;
 
+typeName
+    :   className arrayType*
+    ;
+
 className
     :	NAME
+    ;
+
+arrayType
+    : '[]'
     ;
 
 variableName

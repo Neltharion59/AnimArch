@@ -54,7 +54,7 @@ namespace OALProgramControl
         }
         public string AttributeValuesForClassDiagram()
         {
-            return string.Join("\n", this.State.Keys.Select(key => key + " = " + this.State[key]));
+            return string.Join("\n", this.State.Keys.Select(key => key + " = " + this.State[key].ToObjectDiagramText()));
         }
     }
 }

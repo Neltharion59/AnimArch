@@ -84,7 +84,7 @@ public class FileLoader : MonoBehaviour
         // Contrary to File.ReadAllBytes, this function works on Android 10+, as well
         //byte[] bytes = FileBrowserHelpers.ReadBytesFromFile(FileBrowser.Result)
         //string code = FileBrowserHelpers.ReadTextFromFile(FileBrowser.Result);
-        Anim loadedAnim = new Anim(FileBrowserHelpers.GetFilename(FileBrowser.Result).Replace(".json", ""), "");
+        Anim loadedAnim = new Anim(FileBrowserHelpers.GetFilename(FileBrowser.Result).Replace(".json", ""));
         loadedAnim.LoadCode(FileBrowser.Result);
         //loadedAnim.Code = GetCleanCode(loadedAnim.Code);
         AnimationData.Instance.AddAnim(loadedAnim);

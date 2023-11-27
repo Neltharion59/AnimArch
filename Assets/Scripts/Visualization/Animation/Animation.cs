@@ -129,7 +129,7 @@ namespace Visualization.Animation
 
             CDClassInstance startingInstance = MethodExecutableCode.MethodDefinition.OwningClass.CreateClassInstance();
             MethodExecutableCode.OwningObject = startingInstance;
-            AddObjectToDiagram(" ", startingInstance);
+            objectDiagram.ShowObject(AddObjectToDiagram(" ", startingInstance));
 
             MethodExecutableCode.InitializeVariables(currentProgramInstance);
 

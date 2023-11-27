@@ -230,11 +230,23 @@ public interface IOALVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitBracketedExpr([NotNull] OALParser.BracketedExprContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="OALParser.typeName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTypeName([NotNull] OALParser.TypeNameContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="OALParser.className"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitClassName([NotNull] OALParser.ClassNameContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="OALParser.arrayType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitArrayType([NotNull] OALParser.ArrayTypeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="OALParser.variableName"/>.
 	/// </summary>

@@ -193,7 +193,7 @@ namespace OALProgramControl
 
         public override string ToObjectDiagramText()
         {
-            return this.ClassInstance.UniqueID.ToString();
+            return this.ClassInstance == null ? EXETypes.UnitializedName : this.ClassInstance.UniqueID.ToString();
         }
 
     }

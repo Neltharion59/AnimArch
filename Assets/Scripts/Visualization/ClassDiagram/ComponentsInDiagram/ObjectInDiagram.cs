@@ -9,5 +9,7 @@ namespace Visualization.ClassDiagram.ComponentsInDiagram
         public ClassInDiagram Class;
         public CDClassInstance Instance;
         public GameObject VisualObject;
+
+        public ObjectInDiagram() { }
     }
 }

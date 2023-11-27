@@ -30,6 +30,7 @@ namespace OALProgramControl
             // This actually performs the assignment
             this.MethodCallOrigin.EvaluationResult = Success();
             this.MethodCallOrigin.EvaluationResult.ReturnedOutput = returnedValue;
+            this.MethodCallOrigin.ReturnCollected = true;
             return true;
         }
         protected override EXEExecutionResult Execute(OALProgram OALProgram)

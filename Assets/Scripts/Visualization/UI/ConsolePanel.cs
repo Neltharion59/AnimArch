@@ -45,7 +45,7 @@ namespace Visualization.UI
         {
             DeActivateInputField();
 
-            tmpOutpField.text += enteredText;
+            tmpOutpField.text += enteredText + "\n";
             tmpInpField.text = "";
 
             Visualization.Animation.Animation.Instance.ReadValue = enteredText;

@@ -130,7 +130,7 @@ namespace OALProgramControl
         }
         protected string AssignmentErrorMessage(string sourceType, string targetType)
         {
-            return string.Format("Cannot assign value of type \"{1}\" to a variable of type \"{0}\".", sourceType, targetType);
+            return string.Format("Cannot assign value of type \"{0}\" to a variable of type \"{1}\".", sourceType, targetType);
         }
         public override string ToString()
         {

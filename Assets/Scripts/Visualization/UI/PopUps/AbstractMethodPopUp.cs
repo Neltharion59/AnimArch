@@ -16,7 +16,7 @@ namespace Visualization.UI.PopUps
         protected const string Void = "void";
 
         [SerializeField] protected Transform parameterContent;
-        protected List<string> _parameters = new();
+        protected List<GameObject> _parameters = new();
 
         private new void Awake()
         {
@@ -40,29 +40,40 @@ namespace Visualization.UI.PopUps
 
         public bool ArgExists(string parameter)
         {
-            return _parameters.Any(x => x == parameter);
+            return _parameters.Any(paramObject => string.Equals(parameter, paramObject.name));
         }
 
         public void AddArg(string parameter)
         {
-            _parameters.Add(parameter);
-            var instance = Instantiate(DiagramPool.Instance.parameterMethodPrefab, parameterContent, false);
-            instance.name = parameter;
-            instance.transform.Find("ParameterText").GetComponent<TextMeshProUGUI>().text += parameter;
+            GameObject instance = Instantiate(DiagramPool.Instance.parameterMethodPrefab, parameterContent, false);
+            SetArgName(instance, parameter);
+            _parameters.Add(instance);
         }
 
         public void EditArg(string formerParam, string newParam)
         {
-            var index = _parameters.FindIndex(x => x == formerParam);
-            _parameters[index] = newParam;
-            parameterContent.GetComponentsInChildren<ParameterManager>()
-                .First(x => x.parameterTxt.text == formerParam).parameterTxt.text = newParam;
+            GameObject argToBeEdited = _parameters.FirstOrDefault(arg => string.Equals(formerParam, arg.name));
+            if (argToBeEdited != null)
+            {
+                SetArgName(argToBeEdited, newParam);
+            }
         }
 
         public void RemoveArg(string parameter)
         {
-            _parameters.RemoveAll(x => Equals(x, parameter));
-            Destroy(parameterContent.Find(parameter).transform.gameObject);
+            GameObject argToBeRemoved = _parameters.FirstOrDefault(arg => string.Equals(parameter, arg.name));
+            if (argToBeRemoved != null)
+            {
+                _parameters.Remove(argToBeRemoved);
+                argToBeRemoved.transform.SetParent(null);
+                DestroyImmediate(argToBeRemoved);
+            }
+        }
+
+        private void SetArgName(GameObject argObject, string newName)
+        {
+            argObject.name = newName;
+            argObject.GetComponent<ParameterManager>().parameterTxt.SetText(newName);
         }
     }
 }

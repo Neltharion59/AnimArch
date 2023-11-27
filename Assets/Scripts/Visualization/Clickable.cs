@@ -17,12 +17,13 @@ namespace Visualization
     {
         public GameObjectEvent triggerHighlighAction;
         public GameObjectEvent triggerUnhighlighAction;
+        public bool IsObject = false;
+
         protected Vector3 _screenPoint;
         protected Vector3 _offset;
 
         protected bool _selectedElement;
         protected bool _changedPos;
-
 
         private void OnMouseDown()
         {
@@ -32,6 +33,7 @@ namespace Visualization
 
         private void OnClassSelected()
         {
+            Debug.Log("Clickable::OnClassSelected");
             _selectedElement = true;
             var position = gameObject.transform.position;
             if (Camera.main == null) return;
@@ -75,16 +77,14 @@ namespace Visualization
 
         private void OnMouseOver()
         {
-            if (!Animation.Animation.Instance.AnimationIsRunning)
+            if (!IsObject && !Animation.Animation.Instance.AnimationIsRunning && !IsMouseOverUI())
             {
-                if (Input.GetMouseButtonDown(0) && ToolManager.Instance.SelectedTool == ToolManager.Tool.Highlighter &&
-                    !IsMouseOverUI())
+                if( Input.GetMouseButtonDown(0) && ToolManager.Instance.SelectedTool == ToolManager.Tool.Highlighter)
                 {
                     triggerHighlighAction.Invoke(gameObject);
                 }
 
-                if (Input.GetMouseButtonDown(1) && ToolManager.Instance.SelectedTool == ToolManager.Tool.Highlighter &&
-                    !IsMouseOverUI())
+                if (Input.GetMouseButtonDown(1) && ToolManager.Instance.SelectedTool == ToolManager.Tool.Highlighter)
                 {
                     triggerUnhighlighAction.Invoke(gameObject);
                 }

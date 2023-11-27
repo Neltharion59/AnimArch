@@ -81,7 +81,7 @@ namespace Visualization.UI.PopUps
             {
                 Name = inp.text,
                 ReturnValue = GetType(),
-                arguments = _parameters
+                arguments = _parameters.Select(param => param.name).ToList()
             };
 
             if (UIEditorManager.Instance.isNetworkDisabledOrIsServer())
@@ -94,7 +94,7 @@ namespace Visualization.UI.PopUps
         public override void Deactivate()
         {
             base.Deactivate();
-            _parameters = new List<string>();
+            _parameters = new ();
             parameterContent.DetachChildren();
             _formerMethod = null;
         }

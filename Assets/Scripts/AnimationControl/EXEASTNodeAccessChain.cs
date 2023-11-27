@@ -77,6 +77,7 @@ namespace OALProgramControl
             element.PreviousNode = this.LastElement;
             element.NextNode = null;
             this.LastElement.NextNode = element;
+            this.LastElement = element;
         }
 
         public override EXEASTNodeBase Clone()

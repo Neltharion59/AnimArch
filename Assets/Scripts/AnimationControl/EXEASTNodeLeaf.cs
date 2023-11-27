@@ -44,6 +44,15 @@ namespace OALProgramControl
                 {
                     // Variable not found
 
+                    // It also might be implicit reference to attribute of current class
+                    EXEVariable selfVariable = currentScope.FindVariable(EXETypes.SelfReferenceName);
+
+                    if (selfVariable.Value.AttributeExists(this.Value))
+                    {
+                        this.EvaluationResult = selfVariable.Value.RetrieveAttributeValue(this.Value);
+                        return this.EvaluationResult;
+                    }
+
                     if (valueContext != null && valueContext.CreateVariableIfItDoesNotExist)
                     {
                         // We want to create a new variable - so let us do it
@@ -66,15 +75,6 @@ namespace OALProgramControl
                     }
                     else
                     {
-                        // Either we want to access an existing variable or an attribute of the method owning object
-                        EXEVariable selfVariable = currentScope.FindVariable(EXETypes.SelfReferenceName);
-
-                        if (selfVariable.Value.AttributeExists(this.Value))
-                        {
-                            this.EvaluationResult = selfVariable.Value.RetrieveAttributeValue(this.Value);
-                            return this.EvaluationResult;
-                        }
-
                         // We want to access an existing variable, but it was not found - so let us report the error
                         this.EvaluationResult = EXEExecutionResult.Error(ErrorMessage.VariableNotFound(this.Value, currentScope), "XEC2001");
                         return this.EvaluationResult;

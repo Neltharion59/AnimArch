@@ -432,6 +432,18 @@ public partial class OALBaseListener : IOALListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitBracketedExpr([NotNull] OALParser.BracketedExprContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="OALParser.typeName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTypeName([NotNull] OALParser.TypeNameContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="OALParser.typeName"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTypeName([NotNull] OALParser.TypeNameContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="OALParser.className"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -443,6 +455,18 @@ public partial class OALBaseListener : IOALListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitClassName([NotNull] OALParser.ClassNameContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="OALParser.arrayType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterArrayType([NotNull] OALParser.ArrayTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="OALParser.arrayType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitArrayType([NotNull] OALParser.ArrayTypeContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="OALParser.variableName"/>.
 	/// <para>The default implementation does nothing.</para>

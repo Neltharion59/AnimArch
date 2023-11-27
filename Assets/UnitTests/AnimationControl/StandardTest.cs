@@ -7,14 +7,16 @@ namespace Assets.UnitTests.AnimationControl
 {
     public abstract class StandardTest
     {
-        private const int LIMIT = 10000;
+        private const int LIMIT = 200;
 
         protected EXEExecutionResult PerformExecution(OALProgram programInstance)
         {
             EXEScopeMethod executedMethod = programInstance.SuperScope as EXEScopeMethod;
 
             // Object owning the executed method
-            executedMethod.OwningObject = executedMethod.MethodDefinition.OwningClass.CreateClassInstance();
+            CDClassInstance owningObject = executedMethod.MethodDefinition.OwningClass.CreateClassInstance();
+            executedMethod.OwningObject = owningObject;
+            executedMethod.AddVariable(new EXEVariable(EXETypes.SelfReferenceName, new EXEValueReference(owningObject)));
 
             EXEExecutionResult _executionResult = EXEExecutionResult.Success();
 
@@ -22,9 +24,11 @@ namespace Assets.UnitTests.AnimationControl
             while (_executionResult.IsSuccess && programInstance.CommandStack.HasNext())
             {
                 EXECommand currentCommand = programInstance.CommandStack.Next();
+              
                 VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
                 currentCommand.Accept(visitor);
                 Debug.Log(i.ToString() + visitor.GetCommandStringAndResetStateNow());
+              
                 _executionResult = currentCommand.PerformExecution(programInstance);
 
                 if (!_executionResult.IsSuccess)
@@ -32,7 +36,7 @@ namespace Assets.UnitTests.AnimationControl
                     break;
                 }
 
-                Debug.Log(i.ToString() + _executionResult.ToString());
+                Debug.Log(_executionResult.ToString());
                 i++;
 
                 if (i > LIMIT)

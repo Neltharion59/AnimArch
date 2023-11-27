@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Util;
 using OALProgramControl;
 using TMPro;
 using UnityEngine;
@@ -10,6 +12,8 @@ using Visualization.ClassDiagram;
 using Visualization.ClassDiagram.ClassComponents;
 using Visualization.ClassDiagram.ComponentsInDiagram;
 using UnityEngine.Localization.Settings;
+using AnimArch.Extensions;
+using UnityEditor;
 
 namespace Visualization.UI
 {
@@ -32,12 +36,12 @@ namespace Visualization.UI
         public bool isCreating = false;
         [SerializeField] private List<GameObject> methodButtons;
         [SerializeField] private TMP_Text ClassNameTxt;
-        [SerializeField] private GameObject InteractiveText;
-        [SerializeField] private GameObject PanelInteractiveShow;
-        [SerializeField] private TMP_Text classFromTxt;
-        [SerializeField] private TMP_Text classToTxt;
-        [SerializeField] private TMP_Text methodFromTxt;
-        [SerializeField] private TMP_Text methodToTxt;
+        [SerializeField] private GameObject InteractiveText; // Modify to have static text - Click class in the diagram to start editing (InteractiveText.GetComponent<DotsAnimation>().currentText)
+        [SerializeField] private GameObject PanelInteractiveShow; // To be deleleted
+        [SerializeField] private TMP_Text classFromTxt; // To be deleleted
+        [SerializeField] private TMP_Text classToTxt; // To be deleleted
+        [SerializeField] private TMP_Text methodFromTxt; // To be deleleted
+        [SerializeField] private TMP_Text methodToTxt; // To be deleleted
         [SerializeField] private GameObject PanelInteractiveCompleted;
         [SerializeField] private Slider speedSlider;
         [SerializeField] private TMP_Text speedLabel;
@@ -75,6 +79,10 @@ namespace Visualization.UI
         }
 
         // executed on pressing show error button
+
+        private MethodPagination SourceCodeMethodPagination;
+        private MethodPagination StartingMethodPagination;
+
         public void ShowErrorPanel()
         {
             ShowErrorPanel(null);
@@ -102,14 +110,25 @@ namespace Visualization.UI
             ShowErrorBtn.GetComponent<Button>().interactable = false;
         }
 
-
-        struct InteractiveData
+        class InteractiveData
         {
-            public string fromClass;
-            public string fromMethod;
-            public string relationshipName;
-            public string toClass;
-            public string toMethod;
+            public Subject<string> ClassClickedInClassDiagram;
+            public Subject<string> CurrentMethodOwningClass;
+            public Subject<string> CurrentMethod;
+
+            public InteractiveData()
+            {
+                this.ClassClickedInClassDiagram = new Subject<string>(string.Empty);
+                this.CurrentMethodOwningClass = new Subject<string>(string.Empty);
+                this.CurrentMethod = new Subject<string>(string.Empty);
+            }
+
+            public void Clear()
+            {
+                this.ClassClickedInClassDiagram.SetValue(string.Empty);
+                this.CurrentMethodOwningClass.SetValue(string.Empty);
+                this.CurrentMethod.SetValue(string.Empty);
+            }
         }
 
 
@@ -118,6 +137,15 @@ namespace Visualization.UI
         private void Awake()
         {
             fileLoader = GameObject.Find("FileManager").GetComponent<FileLoader>();
+
+            this.interactiveData = new InteractiveData();
+            this.interactiveData.ClassClickedInClassDiagram.Register((string value) => { ClassNameTxt.text = value; });
+            this.interactiveData.CurrentMethodOwningClass.Register((string value) => { classTxt.text = value; });
+            this.interactiveData.CurrentMethod.Register((string value) => { methodTxt.text = value; });
+
+            // Method button pagination
+            SourceCodeMethodPagination = new MethodPagination(methodButtons);
+            StartingMethodPagination = new MethodPagination(playBtns.Select(btn => btn.gameObject).ToList());
         }
 
         private void Start()
@@ -155,11 +183,7 @@ namespace Visualization.UI
 
         public void StartAnimate()
         {
-            InteractiveText.GetComponent<DotsAnimation>().currentText =
-                "Select source class\n for call function\ndirectly in diagram\n.";
-            scriptCode.text = "";
-            //OALScriptBuilder.GetInstance().Clear();
-            InteractiveData interactiveData = new InteractiveData();
+            scriptCode.text = string.Empty;
             isCreating = true;
             introScreen.SetActive(false);
             PanelInteractiveIntro.SetActive(true);
@@ -180,147 +204,104 @@ namespace Visualization.UI
             mainScreen.SetActive(true);
             introScreen.SetActive(true);
             PanelInteractiveCompleted.SetActive(false);
-            PanelInteractiveShow.SetActive(false);
         }
 
         public void SelectClass(String name)
         {
-            foreach (GameObject button in methodButtons)
-            {
-                button.SetActive(false);
-            }
 
+            // Save animation code
+            SaveCurrentAnimation();
+
+            // Unhighlight
+            UnselectMethod();
+            UnselectClass();
+
+            // Set and highlight currently selected classs
+            interactiveData.ClassClickedInClassDiagram.SetValue(name);
+            Animation.Animation.Instance.HighlightClass(interactiveData.ClassClickedInClassDiagram.GetValue(), true);
+
+            // Setup method buttons
             Class selectedClass = DiagramPool.Instance.ClassDiagram.FindClassByName(name).ParsedClass;
             PanelInteractiveIntro.SetActive(false);
-            ClassNameTxt.text = name;
+            
             PanelMethod.SetActive(true);
-            int i = 0;
-            if (selectedClass.Methods != null)
-            {
-                foreach (Method m in selectedClass.Methods)
-                {
-                    if (interactiveData.fromMethod == null)
-                    {
-                        if (i < methodButtons.Count)
-                        {
-                            methodButtons[i].SetActive(true);
-                            methodButtons[i].GetComponentInChildren<TMP_Text>().text = m.Name + "()";
-                        }
+            SourceCodeMethodPagination.FillItems(selectedClass.Methods.Select(method => method.Name).ToList());
 
-                        if (interactiveData.fromClass != null)
-                        {
-                            Animation.Animation.Instance.HighlightClass(interactiveData.fromClass, false, -1);
-                        }
-
-                        interactiveData.fromClass = name;
-                        Animation.Animation.Instance.HighlightClass(interactiveData.fromClass, true);
-                        i++;
-                        if (sepInput.text.Length > 2 && !classTxt.text.Equals("class unselected") &&
-                            !methodTxt.text.Equals("method unselected"))
-                        {
-                            createdAnim.SetMethodCode(classTxt.text, methodTxt.text, sepInput.text);
-                        }
-
-                        sepInput.interactable = false;
-                        classTxt.text = name;
-                        methodTxt.text = "method unselected";
-                    }
-                    else
-                    {
-                        if (i < methodButtons.Count &&
-                            DiagramPool.Instance.ClassDiagram.FindEdge(interactiveData.fromClass, name) != null)
-                        {
-                            methodButtons[i].SetActive(true);
-                            methodButtons[i].GetComponentInChildren<TMP_Text>().text = m.Name + "()";
-                        }
-
-                        if (interactiveData.toClass != null)
-                        {
-                            Animation.Animation.Instance.HighlightClass(interactiveData.toClass, false);
-                        }
-
-                        interactiveData.toClass = name;
-                        Animation.Animation.Instance.HighlightClass(interactiveData.toClass, true);
-                        i++;
-                    }
-                }
-            }
-
-            UpdateInteractiveShow();
             PanelInteractiveIntro.SetActive(false);
             PanelMethod.SetActive(true);
         }
 
+        private void UnselectClass()
+        {
+            if (!string.IsNullOrEmpty(interactiveData.ClassClickedInClassDiagram.GetValue()))
+            {
+                Animation.Animation.Instance.HighlightClass(interactiveData.ClassClickedInClassDiagram.GetValue(), false);
+            }
+
+            if (!string.IsNullOrEmpty(interactiveData.CurrentMethodOwningClass.GetValue()))
+            {
+                Animation.Animation.Instance.HighlightClass(interactiveData.CurrentMethodOwningClass.GetValue(), false);
+            }
+        }
+
         public void SelectMethod(int buttonID)
         {
-            if (interactiveData.fromMethod == null)
-            {
-                string methodName = methodButtons[buttonID].GetComponentInChildren<TMP_Text>().text;
-                //scriptCode.text += "\n" + "call(\n" + ClassNameTxt.text + ", " + methodName+",";
-                InteractiveText.GetComponent<DotsAnimation>().currentText =
-                    "Select target class\nfor call function\ndirectly in diagram\n.";
-                interactiveData.fromMethod = methodName;
-                Animation.Animation.Instance.HighlightMethod(interactiveData.fromClass, interactiveData.fromMethod, true);
-                sepInput.interactable = true;
-                sepInput.text = createdAnim.GetMethodBody(interactiveData.fromClass, interactiveData.fromMethod);
-                UpdateInteractiveShow();
-            }
-            else
-            {
-                string methodName = methodButtons[buttonID].GetComponentInChildren<TMP_Text>().text;
-                //scriptCode.text += "\n"+ClassNameTxt.text+", "+methodName+"\n);";
-                InteractiveText.GetComponent<DotsAnimation>().currentText =
-                    "Select source class\nfor call function\ndirectly in diagram\n.";
-                interactiveData.toMethod = methodName;
-                UpdateInteractiveShow();
-                Animation.Animation.Instance.HighlightClass(interactiveData.fromClass, false);
-                Animation.Animation.Instance.HighlightClass(interactiveData.toClass, false);
-                Animation.Animation.Instance.HighlightMethod(interactiveData.fromClass, interactiveData.fromMethod,
-                    false);
-                WriteCode();
-            }
+            string methodName = SourceCodeMethodPagination.GetSelectedItem(buttonID);
+
+            interactiveData.CurrentMethodOwningClass.SetValue(interactiveData.ClassClickedInClassDiagram.GetValue());
+            interactiveData.ClassClickedInClassDiagram.SetValue(string.Empty);
+            interactiveData.CurrentMethod.SetValue(methodName);
+
+            Animation.Animation.Instance.HighlightMethod
+            (
+                interactiveData.CurrentMethodOwningClass.GetValue(),
+                interactiveData.CurrentMethod.GetValue(),
+                true
+            );
+            sepInput.interactable = true;
+            sepInput.text
+                = createdAnim.GetMethodBody
+                (
+                    interactiveData.CurrentMethodOwningClass.GetValue(),
+                    interactiveData.CurrentMethod.GetValue()
+                );
 
             PanelInteractiveIntro.SetActive(true);
             PanelMethod.SetActive(false);
         }
 
-        private void WriteCode()
+        private void UnselectMethod()
         {
-            if (!scriptCode.text.EndsWith("\n") && scriptCode.text.Length > 1)
-                scriptCode.text += "\n";
-            scriptCode.text += OALScriptBuilder.GetInstance().AddCall(
-                interactiveData.fromClass, interactiveData.fromMethod,
-                Animation.Animation.Instance.CurrentProgramInstance.RelationshipSpace
-                    .GetRelationshipByClasses(interactiveData.fromClass, interactiveData.toClass).RelationshipName,
-                interactiveData.toClass,
-                interactiveData.toMethod
-            );
-            if (!sepInput.text.EndsWith("\n") && sepInput.text.Length > 1)
-                sepInput.text += "\n";
-            sepInput.text += OALScriptBuilder.GetInstance().AddCall(
-                interactiveData.fromClass, interactiveData.fromMethod,
-                Animation.Animation.Instance.CurrentProgramInstance.RelationshipSpace
-                    .GetRelationshipByClasses(interactiveData.fromClass, interactiveData.toClass).RelationshipName,
-                interactiveData.toClass,
-                interactiveData.toMethod
-            );
-            createdAnim.SetMethodCode(interactiveData.fromClass, interactiveData.fromMethod, sepInput.text);
-            interactiveData = new InteractiveData();
+            if (!string.IsNullOrEmpty(interactiveData.CurrentMethod.GetValue()))
+            {
+                Animation.Animation.Instance.HighlightMethod(interactiveData.CurrentMethodOwningClass.GetValue(), interactiveData.CurrentMethod.GetValue(), false);
+            }
         }
 
         //Save animation to file and memory
+        private void SaveCurrentAnimation()
+        {
+            if
+            (
+                !string.IsNullOrEmpty(interactiveData.CurrentMethodOwningClass.GetValue())
+                && !string.IsNullOrEmpty(interactiveData.CurrentMethod.GetValue())
+            )
+            {
+                createdAnim.SetMethodCode
+                (
+                    interactiveData.CurrentMethodOwningClass.GetValue(),
+                    interactiveData.CurrentMethod.GetValue(),
+                    sepInput.text
+                );
+            }
+        }
         public void SaveAnimation()
         {
-            if (sepInput.text.Length > 2 && !classTxt.text.Equals("class unselected") &&
-                !methodTxt.text.Equals("method unselected"))
-            {
-                createdAnim.SetMethodCode(classTxt.text, methodTxt.text, sepInput.text);
-            }
+            SaveCurrentAnimation();
 
             scriptCode.gameObject.SetActive(true);
 
             scriptCode.GetComponent<CodeHighlighter>().RemoveColors();
-            createdAnim.Code = scriptCode.text;
             scriptCode.gameObject.SetActive(false);
             fileLoader.SaveAnimation(createdAnim);
             EndAnimate();
@@ -343,8 +324,6 @@ namespace Visualization.UI
                 SelectAnimation();
                 StartAnimate();
                 createdAnim = AnimationData.Instance.selectedAnim;
-                scriptCode.text = createdAnim.Code;
-                scriptCode.text = AnimationData.Instance.selectedAnim.Code;
                 AnimationData.Instance.RemoveAnim(AnimationData.Instance.selectedAnim);
                 UpdateAnimations();
             }
@@ -353,37 +332,6 @@ namespace Visualization.UI
         public void ActivatePanelColors(bool show)
         {
             PanelColors.SetActive(show);
-        }
-
-        public void UpdateInteractiveShow()
-        {
-            PanelInteractiveCompleted.SetActive(false);
-            PanelInteractiveShow.SetActive(true);
-            classFromTxt.text = "Class: ";
-            methodFromTxt.text = "Method: ";
-            classToTxt.text = "Class: ";
-            if (interactiveData.fromClass != null)
-            {
-                classFromTxt.text = "Class: " + interactiveData.fromClass;
-                classTxt.text = interactiveData.fromClass;
-            }
-
-            if (interactiveData.fromMethod != null)
-            {
-                methodFromTxt.text = "Method: " + interactiveData.fromMethod;
-                methodTxt.text = interactiveData.fromMethod;
-                sepInput.interactable = true;
-            }
-
-            if (interactiveData.toClass != null)
-            {
-                classToTxt.text = "Class: " + interactiveData.toClass;
-            }
-
-            if (interactiveData.toMethod != null)
-            {
-                PanelInteractiveCompleted.SetActive(true);
-            }
         }
 
         public void UpdateSpeed()
@@ -426,17 +374,22 @@ namespace Visualization.UI
 
         public void ResetInteractiveSelection()
         {
-            if (interactiveData.fromClass != null)
-                Animation.Animation.Instance.HighlightClass(interactiveData.fromClass, false);
-            if (interactiveData.toClass != null)
-                Animation.Animation.Instance.HighlightClass(interactiveData.toClass, false);
-            if (interactiveData.fromMethod != null)
-                Animation.Animation.Instance.HighlightMethod(interactiveData.fromClass, interactiveData.fromMethod,
-                    false);
-            InteractiveText.GetComponent<DotsAnimation>().currentText =
-                "Select source class\nfor call function\ndirectly in diagram\n.";
-            interactiveData = new InteractiveData();
-            UpdateInteractiveShow();
+            if (!string.IsNullOrEmpty(interactiveData.CurrentMethodOwningClass.GetValue()))
+            {
+                Animation.Animation.Instance.HighlightClass(interactiveData.CurrentMethodOwningClass.GetValue(), false);
+            }
+
+            if (interactiveData.CurrentMethod.GetValue() != null)
+            {
+                Animation.Animation.Instance.HighlightMethod
+                (
+                    interactiveData.CurrentMethodOwningClass.GetValue(),
+                    interactiveData.CurrentMethod.GetValue(),
+                    false
+                );
+            }
+
+            interactiveData.Clear();
             PanelInteractiveIntro.SetActive(true);
             PanelMethod.SetActive(false);
         }
@@ -469,40 +422,26 @@ namespace Visualization.UI
 
             playIntroTexts.SetActive(false);
             Animation.Animation.Instance.startClassName = name;
-            foreach (Button button in playBtns)
-            {
-                button.gameObject.SetActive(false);
-            }
 
             Class selectedClass = DiagramPool.Instance.ClassDiagram.FindClassByName(name).ParsedClass;
             animMethods = AnimationData.Instance.selectedAnim.GetMethodsByClassName(name);
-            int i = 0;
-            if (animMethods != null)
-            {
-                foreach (AnimMethod m in animMethods)
-                {
-                    if (i < 4)
-                    {
-                        playBtns[i].GetComponentInChildren<TMP_Text>().text = m.Name + "()";
-                        playBtns[i].gameObject.SetActive(true);
-                        i++;
-                    }
-                }
-            }
+            StartingMethodPagination.FillItems(animMethods.Select(method => method.Name).ToList());
         }
 
         public void SelectPlayMethod(int id)
         {
-            Animation.Animation.Instance.startMethodName = animMethods[id].Name;
+            string startMethodName = StartingMethodPagination.GetSelectedItem(id);
+            string startClassName = Animation.Animation.Instance.startClassName;
+
+            Animation.Animation.Instance.startMethodName = startMethodName;
             foreach (Button button in playBtns)
             {
                 button.gameObject.SetActive(false);
             }
 
             playIntroTexts.SetActive(true);
-            Debug.Log("Selected class: " + Animation.Animation.Instance.startClassName + "Selected Method: " +
-                      Animation.Animation.Instance.startMethodName);
-            Animation.Animation.Instance.HighlightClass(Animation.Animation.Instance.startClassName, false);
+            Debug.Log("Selected class: " + startClassName + "Selected Method: " + startMethodName);
+            Animation.Animation.Instance.HighlightClass(startClassName, false);
         }
 
         public void UnshowAnimation()

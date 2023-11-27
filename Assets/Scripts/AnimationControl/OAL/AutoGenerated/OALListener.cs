@@ -361,6 +361,16 @@ public interface IOALListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBracketedExpr([NotNull] OALParser.BracketedExprContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="OALParser.typeName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTypeName([NotNull] OALParser.TypeNameContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="OALParser.typeName"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTypeName([NotNull] OALParser.TypeNameContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="OALParser.className"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -370,6 +380,16 @@ public interface IOALListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitClassName([NotNull] OALParser.ClassNameContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="OALParser.arrayType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterArrayType([NotNull] OALParser.ArrayTypeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="OALParser.arrayType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitArrayType([NotNull] OALParser.ArrayTypeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="OALParser.variableName"/>.
 	/// </summary>

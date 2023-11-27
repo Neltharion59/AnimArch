@@ -45,6 +45,8 @@ namespace OALProgramControl
 
             startNewIteration = (conditionEvaluationResult.ReturnedOutput as EXEValueBool).Value;
 
+            this.Condition = this.Condition.Clone();
+
             return Success();
         }
     }
