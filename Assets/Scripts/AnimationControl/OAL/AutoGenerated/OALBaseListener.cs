@@ -348,6 +348,18 @@ public partial class OALBaseListener : IOALListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitExpr([NotNull] OALParser.ExprContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="OALParser.indexation"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIndexation([NotNull] OALParser.IndexationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="OALParser.indexation"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIndexation([NotNull] OALParser.IndexationContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="OALParser.accessChain"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>

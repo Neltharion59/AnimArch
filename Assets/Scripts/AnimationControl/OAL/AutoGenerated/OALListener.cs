@@ -291,6 +291,16 @@ public interface IOALListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitExpr([NotNull] OALParser.ExprContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="OALParser.indexation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterIndexation([NotNull] OALParser.IndexationContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="OALParser.indexation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitIndexation([NotNull] OALParser.IndexationContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="OALParser.accessChain"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

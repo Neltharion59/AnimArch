@@ -188,6 +188,12 @@ public interface IOALVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitExpr([NotNull] OALParser.ExprContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="OALParser.indexation"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndexation([NotNull] OALParser.IndexationContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="OALParser.accessChain"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
