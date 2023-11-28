@@ -132,6 +132,11 @@ expr
     |   ('not ' | 'NOT ') expr
     |   expr (' and ' | ' AND ') expr
     |   expr (' or ' | ' OR ') expr
+    |   indexation
+    ;
+
+indexation
+    :   expr '[' expr ']' ';'
     ;
 
 accessChain

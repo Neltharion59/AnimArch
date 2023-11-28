@@ -17,17 +17,23 @@ public class VisitorPythonCode : Visitor
     private bool available;
     private static readonly LinkedList<VisitorPythonCode> visitors = new LinkedList<VisitorPythonCode>();
 
+    private static bool aCoroutineIsTryingToBorrow = false;
+
     public static VisitorPythonCode BorrowAVisitor() 
     {
+        while (aCoroutineIsTryingToBorrow) {Debug.Log("Another coroutine is trying to borrow visitor, waiting for it to finish!");}
+        aCoroutineIsTryingToBorrow = true;
         foreach (VisitorPythonCode v in visitors) 
         {
             if (v.isVisitorAvailable()) 
             {
+                aCoroutineIsTryingToBorrow = false;
                 return v.BorrowVisitor();
             }
         }
         VisitorPythonCode newVisitor = new VisitorPythonCode();
         visitors.AddLast(newVisitor);
+        aCoroutineIsTryingToBorrow = false;
         return newVisitor.BorrowVisitor();
     }
 
