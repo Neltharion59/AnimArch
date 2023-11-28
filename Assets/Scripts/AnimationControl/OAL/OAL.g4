@@ -135,7 +135,7 @@ expr
     ;
 
 indexation
-    :   expr '[' expr ']' ';'
+    :   expr '[' expr ']'
     ;
 
 accessChain
