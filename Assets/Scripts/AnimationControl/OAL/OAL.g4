@@ -125,7 +125,6 @@ expr
     |   accessChain
     |   'cardinality ' expr
     |   ('empty ' | 'not_empty ') expr
-    |   indexation
     |   bracketedExpr
     |   expr ('*' | '/' | '%') expr
     |   expr ('+' | '-')  expr
@@ -133,10 +132,7 @@ expr
     |   ('not ' | 'NOT ') expr
     |   expr (' and ' | ' AND ') expr
     |   expr (' or ' | ' OR ') expr
-    ;
-
-indexation
-    :   NAME expr? '[' expr ']'
+    |   expr '[' expr ']'
     ;
 
 accessChain
