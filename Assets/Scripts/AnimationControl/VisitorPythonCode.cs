@@ -343,39 +343,6 @@ public class VisitorPythonCode : Visitor
     public override void VisitExeScopeParallel(EXEScopeParallel scope)
     {
         throw new Exception("Tried to visit EXEScopeParallel.");
-        /*
-        WriteIndentation();
-        commandString.Append("par\n");
-
-
-        if (scope.Threads != null)
-        {
-            foreach (EXEScope Thread in scope.Threads)
-            {
-                
-                WriteIndentation();
-                commandString.Append("\tthread\n");
-
-
-                IncreaseIndentation();
-                IncreaseIndentation();
-                foreach (EXECommand Command in Thread.Commands)
-                {
-                    Command.Accept(this);
-                }
-                DecreaseIndentation();
-                DecreaseIndentation();
-
-                WriteIndentation();
-                commandString.Append("\tend thread");
-                AddEOL();
-            }
-        }
-
-        WriteIndentation();
-        commandString.Append("end par");
-        AddEOL();
-        */
     }
 
     public override void VisitExeScopeCondition(EXEScopeCondition scope)
@@ -586,6 +553,14 @@ public class VisitorPythonCode : Visitor
         
         commandString.Append("\"" + value.Value + "\"");
         
+    }
+
+    public override void VisitExeASTNodeIndexation(EXEASTNodeIndexation node)
+    {
+        node.List.Accept(this);
+        commandString.Append("[");
+        node.Index.Accept(this);
+        commandString.Append("]");
     }
 }
 

@@ -596,4 +596,12 @@ public class VisitorCommandToString : Visitor
     {
         commandString.Append("\"" + value.Value + "\"");
     }
+
+    public override void VisitExeASTNodeIndexation(EXEASTNodeIndexation node)
+    {
+        node.List.Accept(this);
+        commandString.Append("[");
+        node.Index.Accept(this);
+        commandString.Append("]");
+    }
 }

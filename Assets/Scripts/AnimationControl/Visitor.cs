@@ -37,6 +37,7 @@ public abstract class Visitor
     public abstract void VisitExeASTNodeComposite(EXEASTNodeComposite node);
     public abstract void VisitExeASTNodeLeaf(EXEASTNodeLeaf node);
     public abstract void VisitExeASTNodeMethodCall(EXEASTNodeMethodCall node);
+    public abstract void VisitExeASTNodeIndexation(EXEASTNodeIndexation node);
 
     public abstract void VisitExeValueArray(EXEValueArray value);
     public abstract void VisitExeValueBool(EXEValueBool value);
