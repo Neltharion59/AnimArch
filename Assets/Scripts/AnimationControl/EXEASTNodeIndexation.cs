@@ -17,21 +17,6 @@ namespace OALProgramControl
 
         public override EXEExecutionResult Evaluate(EXEScope currentScope, OALProgram currentProgramInstance, EXEASTNodeAccessChainContext valueContext = null)
         {
-            // Prevent infinite loop if there is no return in method that is supposed to return something
-            if (this.ExpectingReturn && !this.ReturnCollected)
-            {
-                return EXEExecutionResult.Error
-                    (
-                        string.Format
-                        (
-                            "Tried to retrieve value from a method that did not return anything. The method is '{0}.{1}'.",
-                            this.Method.OwningClass.Name,
-                            this.MethodName
-                        ),
-                        "XEC2042"
-                    );
-            }
-
             if (this.EvaluationState == EEvaluationState.HasBeenEvaluated)
             {
                 return this.EvaluationResult;
@@ -131,7 +116,7 @@ namespace OALProgramControl
 
         public override void Accept(Visitor v)
         {
-            v.VisitExeASTNodeMethodCall(this);
+            v.VisitExeASTNodeIndexation(this);
         }
     }
 }
