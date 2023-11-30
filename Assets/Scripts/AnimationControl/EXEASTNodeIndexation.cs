@@ -46,6 +46,11 @@ namespace OALProgramControl
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
                 this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must not be bigger than uint32 max!", "XEC1234");
             }
+            if (evaluatedIndex.Value < 0)
+            {
+                this.EvaluationState = EEvaluationState.HasBeenEvaluated;
+                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must be bigger than 0!", "XEC1234");
+            }
 
 
             executionResult = List.Evaluate(currentScope, currentProgramInstance, valueContext);
