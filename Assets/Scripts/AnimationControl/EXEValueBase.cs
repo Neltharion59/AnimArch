@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace OALProgramControl
@@ -138,5 +139,10 @@ namespace OALProgramControl
         }
 
         public abstract void Accept(Visitor v);
+
+        public virtual EXEExecutionResult GetValueAt(UInt32 index)
+        {
+            throw new System.Exception("EXEValueBase cannot return value at index!");
+        }
     }
 }

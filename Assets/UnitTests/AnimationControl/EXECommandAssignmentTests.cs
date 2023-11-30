@@ -709,5 +709,39 @@ namespace Assets.UnitTests.AnimationControl
 
             Test.PerformAssertion();
         }
+
+        [Test]
+        public void ThursdayDay_01_indexationEvaluate()
+        {
+            CommandTest Test = new CommandTest();
+
+            // Arrange
+            string _methodSourceCode = 
+            @"create list Numbers of Number { 1, 2, 3 };
+            x = Numbers[1];
+            ";
+
+            OALProgram programInstance = new OALProgram();
+            CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
+
+            CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
+            owningClass.AddMethod(owningMethod);
+
+            // Act
+            EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);
+            owningMethod.ExecutableCode = methodScope;
+            programInstance.SuperScope = methodScope;
+
+            EXEExecutionResult _executionResult = PerformExecution(programInstance);
+
+            // Assert
+            Test.Declare(methodScope, _executionResult);
+
+            Test.Variables
+                    .ExpectVariable("x", new EXEValueInt("2"))
+                    .ExpectVariable("self", new EXEValueReference(methodScope.OwningObject));
+
+            Test.PerformAssertion();
+        }
     }
 }

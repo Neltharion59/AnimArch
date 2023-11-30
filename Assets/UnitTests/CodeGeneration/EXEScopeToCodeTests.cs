@@ -39,7 +39,7 @@ public class EXEScopeToCodeTests
         visitor.ActivateHighlighting();
         _scope.Accept(visitor);
         string _actualHighlightedAndFormattedOutput = visitor.GetCommandStringAndResetStateNow();
-    
+
         // Assert
         string _expectedUnformattedOutput             = "for each element in list\nelement.Perform()end for";
         string _expectedFormattedOutput               = "for each element in list\n\telement.Perform();\nend for;\n";
@@ -50,5 +50,49 @@ public class EXEScopeToCodeTests
         Assert.AreEqual(_expectedFormattedOutput, _actualFormattedOutput);
         Assert.AreEqual(_expectedHighlightedOutput, _actualHighlightedOutput);
         Assert.AreEqual(_expectedHighlightedAndFormattedOutput, _actualHighlightedAndFormattedOutput);
+    }
+
+    [Test]
+    public void EXEScopeEXEASTNodeIndexation_OAl_ToCodeConversionTest()
+    {
+        // Arrange
+        string _methodSourceCode = 
+        @"create list Numbers of PrettyIntegers { 1, 2, 3 };
+        x = Numbers[1];
+        ";
+        EXEScopeMethod _scope = OALParserBridge.Parse(_methodSourceCode);
+
+        VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+
+        // Act
+        _scope.Accept(visitor);
+        string _actualOutput = visitor.GetCommandStringAndResetStateNow();
+
+        // Assert
+        string _expectedOutput = "create list Numbers of PrettyIntegers { 1, 2, 3 };\nx = Numbers[1];\n";
+
+        Assert.AreEqual(_expectedOutput, _actualOutput);
+    }
+
+    [Test]
+    public void EXEScopeEXEASTNodeIndexation_Python_ToCodeConversionTest()
+    {
+        // Arrange
+        string _methodSourceCode = 
+        @"create list Numbers of PrettyIntegers { 1, 2, 3 };
+        x = Numbers[1];
+        ";
+        EXEScopeMethod _scope = OALParserBridge.Parse(_methodSourceCode);
+
+        VisitorPythonCode visitor = VisitorPythonCode.BorrowAVisitor();
+
+        // Act
+        _scope.Accept(visitor);
+        string _actualOutput = visitor.GetCommandStringAndResetStateNow();
+
+        // Assert
+        string _expectedOutput = "Numbers = [1, 2, 3]\nx = Numbers[1]\n";
+
+        Assert.AreEqual(_expectedOutput, _actualOutput);
     }
 }

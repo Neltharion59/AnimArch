@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,45 +25,47 @@ namespace OALProgramControl
 
             this.EvaluationState = EEvaluationState.IsBeingEvaluated;
 
-            EXEExecutionResult operandExecutionResult;
-            EXEExecutionResult operatorExecutionResult;
+            EXEExecutionResult executionResult;
+            EXEValueArray evaluatedList;
+            EXEValueInt evaluatedIndex;
 
-            operandExecutionResult = List.Evaluate(currentScope, currentProgramInstance);
-
-            if (!operandExecutionResult.IsSuccess)
+            executionResult = Index.Evaluate(currentScope, currentProgramInstance, valueContext);
+            if (!executionResult.IsSuccess)
             {
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
-                this.EvaluationResult = operandExecutionResult;
+                this.EvaluationResult = executionResult;
+            }
+            evaluatedIndex = executionResult.ReturnedOutput as EXEValueInt;
+            if (evaluatedIndex == null)
+            {
+                this.EvaluationState = EEvaluationState.HasBeenEvaluated;
+                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must be int!", "XEC1234");
+            }
+            if (evaluatedIndex.Value > UInt32.MaxValue)
+            {
+                this.EvaluationState = EEvaluationState.HasBeenEvaluated;
+                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must not be bigger than uint32 max!", "XEC1234");
             }
 
 
-                // Current operand evaluation finished and did not produce an error
-                if (this.EvaluationResult == null)
-                {
-                    this.EvaluationResult = EXEExecutionResult.Success();
-                    this.EvaluationResult.ReturnedOutput = operandExecutionResult.ReturnedOutput;
-                    continue;
-                }
+            executionResult = List.Evaluate(currentScope, currentProgramInstance, valueContext);
+            if (!executionResult.IsSuccess)
+            {
+                this.EvaluationState = EEvaluationState.HasBeenEvaluated;
+                this.EvaluationResult = executionResult;
+            }
+            evaluatedList = executionResult.ReturnedOutput as EXEValueArray;
+            if (evaluatedList == null)
+            {
+                this.EvaluationState = EEvaluationState.HasBeenEvaluated;
+                this.EvaluationResult = EXEExecutionResult.Error("List used for indexing to must be an array!", "XEC1234");
+            }
 
-                operatorExecutionResult = this.EvaluationResult.ReturnedOutput.ApplyOperator(this.Operation, operandExecutionResult.ReturnedOutput);
 
-                if (!operatorExecutionResult.IsSuccess)
-                {
-                    this.EvaluationResult = operatorExecutionResult;
-                    this.EvaluationState = EEvaluationState.HasBeenEvaluated;
-                }
-
-                if (!operatorExecutionResult.IsDone || !operatorExecutionResult.IsSuccess)
-                {
-                    // Either current operand evaluation did not finish or produced an error
-                    return operatorExecutionResult;
-                }
-
-                this.EvaluationResult = EXEExecutionResult.Success();
-                this.EvaluationResult.ReturnedOutput = operatorExecutionResult.ReturnedOutput;
-            
+            executionResult = evaluatedList.GetValueAt((UInt32)evaluatedIndex.Value);
 
             this.EvaluationState = EEvaluationState.HasBeenEvaluated;
+            this.EvaluationResult = executionResult;
 
             return this.EvaluationResult;
         }
