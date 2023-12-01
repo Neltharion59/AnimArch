@@ -58,6 +58,9 @@ namespace Visualization.UI
         [SerializeField] public GameObject PanelSourceCodeAnimation;
         [SerializeField] public GameObject ShowErrorBtn;
         [SerializeField] public GameObject ErrorPanel;
+        [SerializeField] private TMP_Text diagramPathLabel;
+        [SerializeField] private Button diagramRemoveBtn;
+
         // [SerializeField] public TMP_Text MaskingFileLabel;
         // [SerializeField] public Button RemoveMaskingBtn;
         public Anim createdAnim;
@@ -153,6 +156,12 @@ namespace Visualization.UI
             UpdateSpeed();
         }
 
+        public void SetDiagramPath(string diagramPath)
+        {
+            diagramPathLabel.text = diagramPath;
+            diagramRemoveBtn.interactable = true;
+        }
+        
         //Update the list of created animations
         public void UpdateAnimations()
         {

@@ -19,10 +19,10 @@ namespace Visualization.ClassDiagram
 
             DiagramPool.Instance.ClassDiagram.graph = graphGo.GetComponent<Graph>();
             DiagramPool.Instance.ClassDiagram.graph.nodePrefab = DiagramPool.Instance.networkClassPrefab;
-            GameObject.Find("EditBtn").GetComponentInChildren<Button>().interactable = true;
-            GameObject.Find("Create").GetComponentInChildren<Button>().interactable = true;
-            GameObject.Find("Open").GetComponentInChildren<Button>().interactable = true;
-            GameObject.Find("OpenMaskingFile").GetComponentInChildren<Button>().interactable = true;
+            GameObject.Find("EditBtn").GetComponentInChildren<Button>().interactable = true;            // TODO zmenit na prefabove
+            GameObject.Find("Create").GetComponentInChildren<Button>().interactable = true;             // TODO zmenit na prefabove
+            GameObject.Find("Open").GetComponentInChildren<Button>().interactable = true;               // TODO zmenit na prefabove
+            GameObject.Find("OpenMaskingFile").GetComponentInChildren<Button>().interactable = true;    // TODO zmenit na prefabove
         }
 
         public override void MakeNetworkedGraph()

@@ -100,6 +100,7 @@ public class FileLoader : MonoBehaviour
 
         if (!FileBrowser.Success) yield break;
         AnimationData.Instance.SetDiagramPath(FileBrowser.Result);
+        MenuManager.Instance.SetDiagramPath(FileBrowser.Result);
         _classDiagramBuilder.LoadDiagram();
     }
 

@@ -8,6 +8,8 @@ namespace Visualization.ClassDiagram
 {
     public class DiagramPool : Singleton<DiagramPool>
     {
+        public GameObject menuPrefab;
+
         public GameObject graphPrefab;
         public GameObject classPrefab;
         public GameObject objectPrefab;

@@ -44,7 +44,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7783454871552
-    m_Key: manageAnimationLabelKey
+    m_Key: a
     m_Metadata:
       m_Items: []
   - m_Id: 8236884299776
@@ -649,6 +649,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3927985179594752
     m_Key: animationLabelKey
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8943025125330944
+    m_Key: diagramsLabelKey
     m_Metadata:
       m_Items: []
   m_Metadata:
