@@ -55,12 +55,12 @@ namespace OALProgramControl
                 return Error(string.Format("Cannot create variable \"{0}\" as it is already name of a parameter of the current method.", variable.Name), "XEC2030");
             }
 
-            if (this.MethodDefinition.OwningClass.Attributes.Select(attribute => attribute.Name).Contains(variable.Name))
+            if (this.MethodDefinition.OwningClass.GetAttributes(true).Select(attribute => attribute.Name).Contains(variable.Name))
             {
                 return Error(string.Format("Cannot create variable \"{0}\" as it is already name of an attribute of the current class.", variable.Name), "XEC2031");
             }
 
-            if (this.MethodDefinition.OwningClass.Methods.Select(method => method.Name).Contains(variable.Name))
+            if (this.MethodDefinition.OwningClass.GetMethods(true).Select(method => method.Name).Contains(variable.Name))
             {
                 return Error(string.Format("Cannot create variable \"{0}\" as it is already name of a method of the current class.", variable.Name), "XEC2032");
             }
@@ -69,12 +69,12 @@ namespace OALProgramControl
         }
         public EXEExecutionResult AddParameterVariable(EXEVariable variable)
         {
-            if (this.MethodDefinition.OwningClass.Attributes.Select(attribute => attribute.Name).Contains(variable.Name))
+            if (this.MethodDefinition.OwningClass.GetAttributes(true).Select(attribute => attribute.Name).Contains(variable.Name))
             {
                 return Error(string.Format("Cannot create variable \"{0}\" as it is already name of an attribute of the current class.", variable.Name), "XEC2031");
             }
 
-            if (this.MethodDefinition.OwningClass.Methods.Select(method => method.Name).Contains(variable.Name))
+            if (this.MethodDefinition.OwningClass.GetMethods(true).Select(method => method.Name).Contains(variable.Name))
             {
                 return Error(string.Format("Cannot create variable \"{0}\" as it is already name of a method of the current class.", variable.Name), "XEC2032");
             }

@@ -462,11 +462,11 @@ namespace OALProgramControl
         }
         private static string AttributeNameList(CDClass owningClass)
         {
-            return string.Join(",\n", owningClass.Attributes.Select(attribute => attribute.Type + " " + attribute.Name));
+            return string.Join(",\n", owningClass.GetAttributes(true).Select(attribute => attribute.Type + " " + attribute.Name));
         }
         private static string MethodNameList(CDClass owningClass)
         {
-            return string.Join(",\n", owningClass.Methods.Select(method => method.ReturnType + " " + method.Name + "(...)"));
+            return string.Join(",\n", owningClass.GetMethods(true).Select(method => method.ReturnType + " " + method.Name + "(...)"));
         }
         private static string AttributeNameList(CDClassInstance owningClassInstance)
         {

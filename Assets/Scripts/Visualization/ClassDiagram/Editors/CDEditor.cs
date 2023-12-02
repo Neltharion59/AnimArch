@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using OALProgramControl;
 using Visualization.ClassDiagram.ClassComponents;
 using Visualization.ClassDiagram.ComponentsInDiagram;
@@ -38,9 +40,9 @@ namespace Visualization.ClassDiagram.Editors
 
         public static void UpdateAttribute(ClassInDiagram classInDiagram, string oldAttribute, Attribute newAttribute)
         {
-            var index = classInDiagram.ClassInfo.Attributes.FindIndex(x => x.Name == oldAttribute);
+            var index = classInDiagram.ClassInfo.GetAttributesReference().FindIndex(x => x.Name == oldAttribute);
             var newCdAttribute = CreateCdAttributeFromAttribute(newAttribute);
-            classInDiagram.ClassInfo.Attributes[index] = newCdAttribute;
+            classInDiagram.ClassInfo.GetAttributesReference()[index] = newCdAttribute;
         }
 
         private static CDMethod CreateCdMethodFromMethod(CDClass cdClass, Method method)
@@ -66,20 +68,23 @@ namespace Visualization.ClassDiagram.Editors
                 var tokens = argument.Split(' ');
                 var type = tokens[0];
                 var name = tokens[1];
-
+                if (cdMethod.Parameters.Where(_parameter => _parameter.Name.Equals(name)).Any()) {
+                    UnityEngine.Debug.LogError("tried to add parameter with existing name!");
+                    continue;
+                }
                 cdMethod.Parameters.Add(new CDParameter { Name = name, Type = EXETypes.ConvertEATypeName(type) });
             }
         }
 
         public static void UpdateMethod(ClassInDiagram classInDiagram, string oldMethod, Method newMethod)
         {
-            var index = classInDiagram.ClassInfo.Methods.FindIndex(x => x.Name == oldMethod);
+            var index = classInDiagram.ClassInfo.GetMethodsReference().FindIndex(x => x.Name == oldMethod);
             var newCdMethod = CreateCdMethodFromMethod(classInDiagram.ClassInfo, newMethod);
 
             if (newMethod.arguments != null)
                 AddParameters(newMethod, newCdMethod);
 
-            classInDiagram.ClassInfo.Methods[index] = newCdMethod;
+            classInDiagram.ClassInfo.GetMethodsReference()[index] = newCdMethod;
         }
 
         public static CDRelationship CreateRelation(Relation relation)
@@ -102,12 +107,12 @@ namespace Visualization.ClassDiagram.Editors
 
         public static void DeleteAttribute(ClassInDiagram classInDiagram, string attribute)
         {
-            classInDiagram.ClassInfo.Attributes.RemoveAll(x => x.Name == attribute);
+            classInDiagram.ClassInfo.GetAttributesReference().RemoveAll(x => x.Name == attribute);
         }
 
         public static void DeleteMethod(ClassInDiagram classInDiagram, string method)
         {
-            classInDiagram.ClassInfo.Methods.RemoveAll(x => x.Name == method);
+            classInDiagram.ClassInfo.GetMethodsReference().RemoveAll(x => x.Name == method);
         }
 
         public static void DeleteNode(ClassInDiagram classInDiagram)

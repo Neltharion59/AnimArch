@@ -88,7 +88,7 @@ namespace OALProgramControl
             return Result;
         }
 
-        public Boolean MethodExists(String ClassName, String MethodName)
+        public Boolean MethodExists(String ClassName, String MethodName, bool includeInherited = false)
         {
             if (!ClassExists(ClassName))
             {
@@ -111,7 +111,7 @@ namespace OALProgramControl
                 return false;
             }
 
-            return SearchedClass.MethodExists(MethodName);
+            return SearchedClass.MethodExists(MethodName, includeInherited);
         }
         public EXEExecutionResult CreateInstance(string className)
         {

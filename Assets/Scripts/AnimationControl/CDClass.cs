@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor.UI;
 
 namespace OALProgramControl
 {
     public class CDClass
     {
         public string Name { get; set; }
-        public List<CDAttribute> Attributes { get; }
-        public List<CDMethod> Methods { get; }
+        private List<CDAttribute> attributes { get; }
+        private List<CDMethod> methods { get; }
         public List<CDClassInstance> Instances { get; }
         private CDClass _SuperClass { get; set; }
         public CDClass SuperClass
@@ -32,9 +34,9 @@ namespace OALProgramControl
         {
             this.Name = Name;
 
-            this.Attributes = new List<CDAttribute>();
+            this.attributes = new List<CDAttribute>();
 
-            this.Methods = new List<CDMethod>();
+            this.methods = new List<CDMethod>();
 
             this.Instances = new List<CDClassInstance>();
 
@@ -44,12 +46,32 @@ namespace OALProgramControl
 
             this.OwningClassPool = owningClassPool;
         }
+        public List<CDMethod> GetMethods(bool includeInherited = false) {
+            List<CDMethod> allMethods = new List<CDMethod>(this.methods);
+            if (includeInherited && this.SuperClass != null) {
+                allMethods.AddRange(this.SuperClass.GetMethods(includeInherited));
+            }
+            return allMethods;
+        }
+        public List<CDMethod> GetMethodsReference() {
+            return this.methods;
+        }
+        public List<CDAttribute> GetAttributes(bool includeInherited = false) {
+            List<CDAttribute> allAttributes = new List<CDAttribute>(this.attributes);
+            if (includeInherited && this.SuperClass != null) {
+                allAttributes.AddRange(this.SuperClass.GetAttributes(includeInherited));
+            }
+            return allAttributes;
+        }
+        public List<CDAttribute> GetAttributesReference() {
+            return this.attributes;
+        }
 
         public CDClassInstance CreateClassInstance()
         {
             long NewInstanceID = EXEInstanceIDSeed.GetInstance().GenerateID();
 
-            CDClassInstance Instance = new CDClassInstance(NewInstanceID, this.Attributes, this);
+            CDClassInstance Instance = new CDClassInstance(NewInstanceID, GetAttributes(true), this);
             this.Instances.Add(Instance);
 
             return Instance;
@@ -85,7 +107,7 @@ namespace OALProgramControl
 
         public Boolean AddMethod(CDMethod newMethod)
         {
-            if (GetAttributeByName(newMethod.Name) != null)
+            if (GetAttributeByName(newMethod.Name, true) != null)
             {
                 return false;
             }
@@ -95,33 +117,33 @@ namespace OALProgramControl
                 return false;
             }
 
-            this.Methods.Add(newMethod);
+            this.methods.Add(newMethod);
 
             return true;
         }
 
         public Boolean AddAttribute(CDAttribute NewAttribute)
         {
-            if (GetAttributeByName(NewAttribute.Name) != null)
+            if (GetAttributeByName(NewAttribute.Name, true) != null)
             {
                 return false;
             }
 
-            if (MethodExists(NewAttribute.Name))
+            if (MethodExists(NewAttribute.Name, true))
             {
                 return false;
             }
 
-            this.Attributes.Add(NewAttribute);
+            this.attributes.Add(NewAttribute);
 
             return true;
         }
 
-        public Boolean MethodExists(String MethodName)
+        public Boolean MethodExists(String MethodName, bool includeInherited = false)
         {
             Boolean Result = false;
 
-            foreach (CDMethod Method in this.Methods)
+            foreach (CDMethod Method in GetMethods(includeInherited))
             {
                 if (Method.Name.Equals(MethodName))
                 {
@@ -133,11 +155,10 @@ namespace OALProgramControl
             return Result;
         }
 
-        public CDMethod GetMethodByName(String MethodName)
+        public CDMethod GetMethodByName(String MethodName, bool includeInherited = false)
         {
             CDMethod Result = null;
-
-            foreach (CDMethod Method in this.Methods)
+            foreach (CDMethod Method in GetMethods(includeInherited))
             {
                 if (Method.Name.Equals(MethodName))
                 {
@@ -215,10 +236,10 @@ namespace OALProgramControl
             return null;
         }
 
-        public CDAttribute GetAttributeByName(String Name)
+        public CDAttribute GetAttributeByName(String Name, bool includeInherited = false)
         {
             CDAttribute Result = null;
-            foreach (CDAttribute Attribute in this.Attributes)
+            foreach (CDAttribute Attribute in GetAttributes(includeInherited))
             {
                 if (String.Equals(Attribute.Name, Name))
                 {

@@ -46,16 +46,16 @@ namespace OALProgramControl
                 return false;
             }
 
-            return this.ClassInstance.OwningClass.GetAttributeByName(attributeName) != null;
+            return this.ClassInstance.OwningClass.GetAttributeByName(attributeName, true) != null;
         }
-        public override bool MethodExists(string methodName)
+        public override bool MethodExists(string methodName, bool includeInherited = false)
         {
             if (!this.WasInitialized)
             {
                 return false;
             }
 
-            return FindMethod(methodName) != null;
+            return FindMethod(methodName, includeInherited) != null;
         }
         public override EXEExecutionResult RetrieveAttributeValue(string attributeName)
         {
@@ -75,14 +75,14 @@ namespace OALProgramControl
             executionResult.ReturnedOutput = attributeValue;
             return executionResult;
         }
-        public override CDMethod FindMethod(string methodName)
+        public override CDMethod FindMethod(string methodName, bool includeInherited = false)
         {
             if (!this.WasInitialized)
             {
                 return null;
             }
 
-            return this.ClassInstance.OwningClass.GetMethodByName(methodName);
+            return this.ClassInstance.OwningClass.GetMethodByName(methodName, includeInherited);
         }
         protected override EXEExecutionResult AssignValueFromConcrete(EXEValueBase assignmentSource)
         {

@@ -43,7 +43,7 @@ namespace Assets.UnitTests.AnimationControl
             {
                 Assert.AreEqual(instancePair.Item1.OwningClass.Name, instancePair.Item2.OwningClass.Name, "Type mismatch of object instance pair.");
 
-                foreach (string attributeName in instancePair.Item1.OwningClass.Attributes.Select(attribute => attribute.Name))
+                foreach (string attributeName in instancePair.Item1.OwningClass.GetAttributes(true).Select(attribute => attribute.Name))
                 {
                     if (instancePair.Item1.State[attributeName] is not EXEValueReference)
                     {

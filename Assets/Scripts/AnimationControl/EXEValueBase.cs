@@ -16,7 +16,7 @@ namespace OALProgramControl
         {
             return false;
         }
-        public virtual bool MethodExists(string methodName)
+        public virtual bool MethodExists(string methodName, bool includeInherited = false)
         {
             return false;
         }
@@ -24,7 +24,7 @@ namespace OALProgramControl
         {
             return EXEExecutionResult.Error(string.Format("Tried to find attribute \"{0}\" on something that does not have any attribute. {1}", attributeName, this.ToString()), "XEC2004");
         }
-        public virtual CDMethod FindMethod(string methodName)
+        public virtual CDMethod FindMethod(string methodName, bool includeInherited = false)
         {
             return null;
         }

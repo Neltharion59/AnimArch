@@ -74,10 +74,10 @@ namespace OALProgramControl
                 OwningObject = valueContext.CurrentValue;
             }
 
-            if (OwningObject.MethodExists(this.MethodName))
+            if (OwningObject.MethodExists(this.MethodName, true))
             {
                 // Method exists
-                Method = OwningObject.FindMethod(this.MethodName);
+                Method = OwningObject.FindMethod(this.MethodName, true);
             }
             else
             {
