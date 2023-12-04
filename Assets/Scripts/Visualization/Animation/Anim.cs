@@ -51,10 +51,10 @@ namespace Visualisation.Animation
                     {
                         SuperClass = Relation.ToClass;
                     }
-                    Attributes = ClassItem.GetAttributes(true).Select(a => a.Name).ToList();
+                    Attributes = ClassItem.GetAttributes().Select(a => a.Name).ToList();
 
                     Methods = new List<AnimMethod>();
-                    foreach (CDMethod MethodItem in ClassItem.GetMethods(true))
+                    foreach (CDMethod MethodItem in ClassItem.GetMethods())
                     {
                         Parameters = MethodItem.Parameters.Select(p => p.Name).ToList();
                         Methods.Add(new AnimMethod(MethodItem.Name, Parameters, ""));
@@ -83,7 +83,7 @@ namespace Visualisation.Animation
                     {
                         methodItem.Code = "";
 
-                        CDMethod Method = Visualization.Animation.Animation.Instance.CurrentProgramInstance.ExecutionSpace.getClassByName(className).GetMethodByName(methodName, true);
+                        CDMethod Method = Visualization.Animation.Animation.Instance.CurrentProgramInstance.ExecutionSpace.getClassByName(className).GetMethodByName(methodName);
                         Method.ExecutableCode = null;
                     }
                     else

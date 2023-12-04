@@ -29,17 +29,6 @@ namespace OALProgramControl
                         AttributeNameList(owningClass)
                     );
         }
-        public static string MethodNotFoundOnClass(string methodName, CDClass owningClass)
-        {
-            return string
-                    .Format
-                    (
-                        "Method '{0}' not found on class '{1}'. Known methods are:\n{2}.",
-                        Stringify(methodName),
-                        Stringify(owningClass.Name),
-                        MethodNameList(owningClass)
-                    );
-        }
         public static string MethodNotFoundOnClass(string methodName, string owningClassName)
         {
             return string
@@ -463,10 +452,6 @@ namespace OALProgramControl
         private static string AttributeNameList(CDClass owningClass)
         {
             return string.Join(",\n", owningClass.GetAttributes(true).Select(attribute => attribute.Type + " " + attribute.Name));
-        }
-        private static string MethodNameList(CDClass owningClass)
-        {
-            return string.Join(",\n", owningClass.GetMethods(true).Select(method => method.ReturnType + " " + method.Name + "(...)"));
         }
         private static string AttributeNameList(CDClassInstance owningClassInstance)
         {
