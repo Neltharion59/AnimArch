@@ -23,6 +23,8 @@ namespace OALProgramControl
                 return this.EvaluationResult;
             }
 
+            
+
             this.EvaluationState = EEvaluationState.IsBeingEvaluated;
 
             EXEExecutionResult executionResult;

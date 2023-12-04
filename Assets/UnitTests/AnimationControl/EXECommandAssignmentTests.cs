@@ -717,7 +717,7 @@ namespace Assets.UnitTests.AnimationControl
 
             // Arrange
             string _methodSourceCode = 
-            @"create list Numbers of Number { 1, 2, 3 };
+            @"create list Numbers of integer { 1, 2, 3 };
             x = Numbers[1];
             ";
 
