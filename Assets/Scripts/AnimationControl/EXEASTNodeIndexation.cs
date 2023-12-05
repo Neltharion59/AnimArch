@@ -41,17 +41,17 @@ namespace OALProgramControl
             if (evaluatedIndex == null)
             {
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
-                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must be int!", "XEC1234");
+                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must be int!", "XEC3000");
             }
             if (evaluatedIndex.Value > UInt32.MaxValue)
             {
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
-                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must not be bigger than uint32 max!", "XEC1234");
+                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must not be bigger than uint32 max!", "XEC3001");
             }
             if (evaluatedIndex.Value < 0)
             {
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
-                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must be bigger than 0!", "XEC1234");
+                this.EvaluationResult = EXEExecutionResult.Error("Index used for indexing must be bigger than 0!", "XEC3002");
             }
 
 
@@ -65,7 +65,7 @@ namespace OALProgramControl
             if (evaluatedList == null)
             {
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
-                this.EvaluationResult = EXEExecutionResult.Error("List used for indexing to must be an array!", "XEC1234");
+                this.EvaluationResult = EXEExecutionResult.Error("List used for indexing to must be an array!", "XEC3003");
             }
 
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5715,10 +5715,7 @@ MonoBehaviour:
   ShowErrorBtn: {fileID: 874806523}
   ErrorPanel: {fileID: 376187649}
   createdAnim:
-    Code: 
     AnimationName: 
-    StartClass: 
-    StartMethod: 
     MethodsCodes: []
   isPlaying: 0
   playBtns:
@@ -15660,7 +15657,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: en
-          value: 1
+          value: 0
         - localeIdentifier:
             m_Code: sk
           value: 0
@@ -15672,7 +15669,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: en
-          value: 1
+          value: 0
         - localeIdentifier:
             m_Code: sk
           value: 0
@@ -15684,7 +15681,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: en
-          value: 1
+          value: 0
         - localeIdentifier:
             m_Code: sk
           value: 0
@@ -15696,7 +15693,7 @@ MonoBehaviour:
         m_VariantData:
         - localeIdentifier:
             m_Code: en
-          value: 1
+          value: 0
         - localeIdentifier:
             m_Code: sk
           value: 0
@@ -19279,10 +19276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _persistent: 1
   selectedAnim:
-    Code: 
     AnimationName: 
-    StartClass: 
-    StartMethod: 
     MethodsCodes: []
   diagramId: 0
 --- !u!1 &496680291

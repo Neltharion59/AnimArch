@@ -517,7 +517,7 @@ public class VisitorCommandToString : Visitor
                 }
                 else
                 {
-                    commandString.Append(" " + node.Operation + " ");
+                    commandString.AppendFormat(" {0} ", node.Operation);
                 }
                 operand.Accept(this);
             }

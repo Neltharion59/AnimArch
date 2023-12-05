@@ -142,7 +142,7 @@ namespace OALProgramControl
 
         public virtual EXEExecutionResult GetValueAt(UInt32 index)
         {
-            throw new System.Exception("EXEValueBase cannot return value at index!");
+            return EXEExecutionResult.Error("EXEValueBase cannot return value at index!", "XEC3007");
         }
     }
 }

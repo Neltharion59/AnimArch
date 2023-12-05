@@ -61,15 +61,15 @@ namespace OALProgramControl
             UInt32 indexValue = index;
             if (indexValue < 0)
             {
-                return EXEExecutionResult.Error("Index value cannot be lower than 0!", "XEC1234"); // TODO -> change to a better error code
+                return EXEExecutionResult.Error("Index value cannot be lower than 0!", "XEC3004");
             }
             if (Elements == null)
             {
-                return EXEExecutionResult.Error("Cannot get the value of an array that is null!", "XEC1234");
+                return EXEExecutionResult.Error("Cannot get the value of an array that is null!", "XEC3005");
             }
             if (indexValue > Elements.Count)
             {
-                return EXEExecutionResult.Error("Index " + indexValue + " is out of range (" + Elements.Count + ")!", "XEC1234");
+                return EXEExecutionResult.Error("Index " + indexValue + " is out of range (" + Elements.Count + ")!", "XEC3006");
             }
             
             EXEExecutionResult result = EXEExecutionResult.Success();
