@@ -132,11 +132,11 @@ expr
     |   ('not ' | 'NOT ') expr
     |   expr (' and ' | ' AND ') expr
     |   expr (' or ' | ' OR ') expr
-    |   expr '[' expr ']'
     ;
 
 accessChain
     :   accessChainPrefix? accessChainElement
+    |   (accessChainPrefix? accessChainElement | bracketedExpr) '[' expr ']'
     ;
 
 accessChainPrefix
