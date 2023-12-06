@@ -37,6 +37,12 @@ namespace OALProgramControl
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
                 this.EvaluationResult = executionResult;
             }
+            if (!executionResult.IsDone || !executionResult.IsSuccess)
+            {
+                // Either current operand evaluation did not finish or produced an error
+                return executionResult;
+            }
+
             evaluatedIndex = executionResult.ReturnedOutput as EXEValueInt;
             if (evaluatedIndex == null)
             {
@@ -60,6 +66,11 @@ namespace OALProgramControl
             {
                 this.EvaluationState = EEvaluationState.HasBeenEvaluated;
                 this.EvaluationResult = executionResult;
+            }
+            if (!executionResult.IsDone || !executionResult.IsSuccess)
+            {
+                // Either current operand evaluation did not finish or produced an error
+                return executionResult;
             }
             evaluatedList = executionResult.ReturnedOutput as EXEValueArray;
             if (evaluatedList == null)

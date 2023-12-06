@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using OALProgramControl;
@@ -40,9 +41,9 @@ namespace Visualization.ClassDiagram.Editors
 
         public static void UpdateAttribute(ClassInDiagram classInDiagram, string oldAttribute, Attribute newAttribute)
         {
-            var index = classInDiagram.ClassInfo.GetAttributesReference().FindIndex(x => x.Name == oldAttribute);
-            var newCdAttribute = CreateCdAttributeFromAttribute(newAttribute);
-            classInDiagram.ClassInfo.GetAttributesReference()[index] = newCdAttribute;
+            var cdAttribute = classInDiagram.ClassInfo.GetAttributeByName(oldAttribute);
+            cdAttribute.Reset();
+            cdAttribute.UpdateAttribute(newAttribute);
         }
 
         private static CDMethod CreateCdMethodFromMethod(CDClass cdClass, Method method)
@@ -78,13 +79,13 @@ namespace Visualization.ClassDiagram.Editors
 
         public static void UpdateMethod(ClassInDiagram classInDiagram, string oldMethod, Method newMethod)
         {
-            var index = classInDiagram.ClassInfo.GetMethodsReference().FindIndex(x => x.Name == oldMethod);
-            var newCdMethod = CreateCdMethodFromMethod(classInDiagram.ClassInfo, newMethod);
-
+            var cdMethod = classInDiagram.ClassInfo.GetMethodByName(oldMethod);
+            cdMethod.Reset();
+            cdMethod.UpdateMethod(classInDiagram.ClassInfo, newMethod);
             if (newMethod.arguments != null)
-                AddParameters(newMethod, newCdMethod);
-
-            classInDiagram.ClassInfo.GetMethodsReference()[index] = newCdMethod;
+            {
+                AddParameters(newMethod, cdMethod);
+            }
         }
 
         public static CDRelationship CreateRelation(Relation relation)
@@ -107,12 +108,12 @@ namespace Visualization.ClassDiagram.Editors
 
         public static void DeleteAttribute(ClassInDiagram classInDiagram, string attribute)
         {
-            classInDiagram.ClassInfo.GetAttributesReference().RemoveAll(x => x.Name == attribute);
+            classInDiagram.ClassInfo.DeleteAttributesByName(attribute);
         }
 
         public static void DeleteMethod(ClassInDiagram classInDiagram, string method)
         {
-            classInDiagram.ClassInfo.GetMethodsReference().RemoveAll(x => x.Name == method);
+            classInDiagram.ClassInfo.DeleteMethodsByName(method);
         }
 
         public static void DeleteNode(ClassInDiagram classInDiagram)

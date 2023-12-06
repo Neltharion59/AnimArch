@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Attribute = Visualization.ClassDiagram.ClassComponents.Attribute;
 
 namespace OALProgramControl
 {
@@ -22,6 +23,17 @@ namespace OALProgramControl
             this.Name = Name;
             this.Type = Type;
             this.IsMockedByCompiler = IsMockedByCompiler;
+        }
+
+        public void UpdateAttribute(Attribute attribute) {
+            this.Name = attribute.Name;
+            this.Type = EXETypes.ConvertEATypeName(attribute.Type);
+        }
+
+        public void Reset()
+        {
+            this.Name = null;
+            this.Type = null;
         }
     }
 }

@@ -53,9 +53,11 @@ namespace OALProgramControl
             }
             return allMethods;
         }
-        public List<CDMethod> GetMethodsReference() {
-            return this.methods;
+        public void DeleteMethodsByName(string name)
+        {
+            this.methods.RemoveAll(x => x.Name == name);
         }
+
         public List<CDAttribute> GetAttributes(bool includeInherited = false) {
             List<CDAttribute> allAttributes = new List<CDAttribute>(this.attributes);
             if (includeInherited && this.SuperClass != null) {
@@ -63,8 +65,10 @@ namespace OALProgramControl
             }
             return allAttributes;
         }
-        public List<CDAttribute> GetAttributesReference() {
-            return this.attributes;
+
+        public void DeleteAttributesByName(string name)
+        {
+            this.attributes.RemoveAll(x => x.Name == name);
         }
 
         public CDClassInstance CreateClassInstance()

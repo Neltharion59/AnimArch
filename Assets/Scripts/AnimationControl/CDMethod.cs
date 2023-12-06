@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Visualization.ClassDiagram.ClassComponents;
 
 namespace OALProgramControl
 {
@@ -50,6 +51,24 @@ namespace OALProgramControl
         public void IncementCallCount()
         {
             this.CallCountInOALProgram++;
+        }
+
+        public void UpdateMethod(CDClass owningClass, Method method)
+        {
+            this.OwningClass = owningClass;
+            this.Name = method.Name;
+            this.ReturnType = EXETypes.ConvertEATypeName(method.ReturnValue);
+        }
+
+        public void Reset()
+        {
+            this.OwningClass = null;
+            this.Name = null;
+            this.ReturnType = null;
+            this.CallCountInOALProgram = 0;
+            this.OALCode = "";
+            this.Parameters = new List<CDParameter>();
+            this.ExecutableCode = null;
         }
     }
 }
