@@ -14,7 +14,7 @@ namespace OALProgramControl
         {
             if (!EXETypes.IsValidArrayType(type))
             {
-                throw new Exception(string.Format("\"{0}\" is not a valid array type."));
+                throw new Exception(string.Format("\"{0}\" is not a valid array type.", type));
             }
 
             this.ElementTypeName = type.Substring(0, type.Length - 2);

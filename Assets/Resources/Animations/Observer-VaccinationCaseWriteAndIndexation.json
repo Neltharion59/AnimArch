@@ -147,7 +147,7 @@
           "Parameters": [
 
           ],
-          "Code": "i=0;\nfor each Animal in self.RegisteredAnimals\r\nx=self.RegisteredAnimals[i];\nwrite(x.Name);\ni=i+1;\nAnimal.ReceiveVaccine(self.CurrentDate);\r\nend for;\r\n"
+          "Code": "i=0;\nfor each Animal in self.RegisteredAnimals\r\nwrite(self.RegisteredAnimals[i].Name);\ni=i+1;\nAnimal.ReceiveVaccine(self.CurrentDate);\r\nend for;\r\n"
         },
         {
           "Name": "SetDate",

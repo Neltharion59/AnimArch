@@ -60,16 +60,32 @@ namespace AnimationControl.OAL
         // AccessChainElement
         public override object VisitAccessChainElement([NotNull] OALParser.AccessChainElementContext context)
         {
-            if (context.NAME() == null && context.methodCall() == null) { HandleError("MalformedAccessChainElement", context); }
-            if (context.NAME() != null && context.methodCall() != null) { HandleError("MalformedAccessChainElement", context); }
+            if (context.ChildCount == 4 && "[".Equals(context.GetChild(1).GetText()) && "]".Equals(context.GetChild(3).GetText())) {
+                //prehodit poradie v equals
+                object list = Visit(context.GetChild(0));
+                if (list is not EXEASTNodeBase || list == null) {
+                    HandleError(string.Format("Malformed expression - list of indexation is not EXEASTNodeBase, instead it is '{0}'.", list?.GetType().Name ?? "NULL"), context);
+                }
 
-            if (context.NAME() != null)
-            {
-                return VisitTerminal(context.NAME());
+                object index = Visit(context.GetChild(2));
+                if (index is not EXEASTNodeBase || index == null) {
+                    HandleError(string.Format("Malformed expression - index of indexation is not EXEASTNodeBase, instead it is '{0}'.", index?.GetType().Name ?? "NULL"), context);
+                }
+                return new EXEASTNodeIndexation(list as EXEASTNodeBase, index as EXEASTNodeBase);
             }
-            else if (context.methodCall() != null)
+            else if (context.ChildCount == 1)
             {
-                return Visit(context.methodCall());
+                if (context.NAME() == null && context.methodCall() == null) { HandleError("MalformedAccessChainElement", context); }
+                if (context.NAME() != null && context.methodCall() != null) { HandleError("MalformedAccessChainElement", context); }
+
+                if (context.NAME() != null)
+                {
+                    return VisitTerminal(context.NAME());
+                }
+                else if (context.methodCall() != null)
+                {
+                    return Visit(context.methodCall());
+                }
             }
 
             HandleError("Unknown parsing error", context);
@@ -634,20 +650,7 @@ namespace AnimationControl.OAL
 
                 result = new EXEASTNodeComposite(_operator, new EXEASTNodeBase[] { operand1 as EXEASTNodeBase, operand2 as EXEASTNodeBase });
             }
-            else if (context.ChildCount == 4 && "[".Equals(context.GetChild(1).GetText()) && "]".Equals(context.GetChild(3).GetText())) {
-                //prehodit poradie v equals
-                object list = Visit(context.GetChild(0));
-                if (list is not EXEASTNodeBase || list == null) {
-                    HandleError(string.Format("Malformed expression - list of indexation is not EXEASTNodeBase, instead it is '{0}'.", list?.GetType().Name ?? "NULL"), context);
-                }
-
-                object index = Visit(context.GetChild(2));
-                if (index is not EXEASTNodeBase || index == null) {
-                    HandleError(string.Format("Malformed expression - index of indexation is not EXEASTNodeBase, instead it is '{0}'.", index?.GetType().Name ?? "NULL"), context);
-                }
-                result = new EXEASTNodeIndexation(list as EXEASTNodeBase, index as EXEASTNodeBase);
-            }
-            else
+            else 
             {
                 HandleError("Malformed expression - generic error.", context);
                 result = null;

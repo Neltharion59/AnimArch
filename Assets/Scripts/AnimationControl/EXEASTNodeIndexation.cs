@@ -21,9 +21,7 @@ namespace OALProgramControl
             if (this.EvaluationState == EEvaluationState.HasBeenEvaluated)
             {
                 return this.EvaluationResult;
-            }
-
-            
+            }            
 
             this.EvaluationState = EEvaluationState.IsBeingEvaluated;
 

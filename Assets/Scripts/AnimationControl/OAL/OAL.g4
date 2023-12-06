@@ -136,7 +136,6 @@ expr
 
 accessChain
     :   accessChainPrefix? accessChainElement
-    |   (accessChainPrefix? accessChainElement | bracketedExpr) '[' expr ']'
     ;
 
 accessChainPrefix
@@ -146,6 +145,7 @@ accessChainPrefix
 accessChainElement
     :   methodCall
     |   NAME
+    |   (NAME | methodCall) '[' expr ']'
     ;
 
 methodCall
