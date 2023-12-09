@@ -1,7 +1,5 @@
 using TMPro;
 using UnityEngine;
-// using UnityEngine.Device;
-// using UnityEngine.Screen;
 
 public class TooltipManager : MonoBehaviour 
 {
@@ -57,10 +55,8 @@ public class TooltipManager : MonoBehaviour
     {
         if (!gameObject.activeSelf) 
         {
-            Debug.LogError("TooltipManager.HideTooltip() called when tooltip was already hidden.");
             return;
         }
-        Debug.LogError(gameObject.activeSelf);
         gameObject.SetActive(false);
         TooltipText.text = string.Empty;
     }
