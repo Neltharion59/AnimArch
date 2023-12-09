@@ -78,7 +78,7 @@ namespace Visualization.UI
             // var tableReference = LocalizationSettings.StringDatabase.GetTable("StringTable");
             // var tableEntryReference = tableReference.GetEntry("playIntro1Key");
             // InteractiveText.GetComponent<DotsAnimation>().currentText = tableEntryReference.GetLocalizedString();
-            // Debug.LogError("AAAAAAAAAAAAAA");
+            // Debug.LogError("SetLanguage()");
             // Debug.LogError(tableEntryReference.GetLocalizedString());
         }
 
@@ -304,7 +304,7 @@ namespace Visualization.UI
             EndAnimate();
         }
 
-        public void OpenAnimation() //TODO nepuziva sa?
+        public void OpenAnimation()
         {
             StartAnimate();
             createdAnim = AnimationData.Instance.selectedAnim;
@@ -328,6 +328,7 @@ namespace Visualization.UI
         {
             Debug.Assert(!AnimationData.Instance.selectedAnim.AnimationName.Equals(""));
 
+            TooltipManager.Instance.HideTooltip();  
             PanelChooseAnimationStartMethod.SetActive(true);
             PanelSourceCodeAnimation.SetActive(false);
 
