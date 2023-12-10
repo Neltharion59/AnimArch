@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -25500,6 +25500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e1b5262da637142b59d2542af57f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 669613622}
   eventHandler: {fileID: 669613626}
 --- !u!114 &669613626
 MonoBehaviour:
@@ -58685,6 +58686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e1b5262da637142b59d2542af57f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1737810752}
   eventHandler: {fileID: 1737810756}
 --- !u!114 &1737810756
 MonoBehaviour:
@@ -62993,6 +62995,11 @@ PrefabInstance:
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
       value: 3927985179594752
       objectReference: {fileID: 0}
+    - target: {fileID: 1193740111417281927, guid: e68269866e448ff449ad3e80f97e3d9d,
+        type: 3}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 1866119702}
     - target: {fileID: 1637143836219930556, guid: e68269866e448ff449ad3e80f97e3d9d,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -63641,6 +63648,18 @@ MonoBehaviour:
 --- !u!114 &1866119701 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 494047511218513988, guid: e68269866e448ff449ad3e80f97e3d9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1866119698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1866119702 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1846250835869454707, guid: e68269866e448ff449ad3e80f97e3d9d,
     type: 3}
   m_PrefabInstance: {fileID: 1866119698}
   m_PrefabAsset: {fileID: 0}
@@ -73242,6 +73261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e1b5262da637142b59d2542af57f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 2147205445}
   eventHandler: {fileID: 2147205449}
 --- !u!114 &2147205449
 MonoBehaviour:

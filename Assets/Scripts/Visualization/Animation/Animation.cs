@@ -599,14 +599,14 @@ namespace Visualization.Animation
                 {
                     if (isToBeHighlighted)
                     {
-                        if (DateTime.Now.IsJune() || true) {
+                        if (DateTime.Now.IsJune()) {
                             classTextHighligter.HighlightClassNameLine();
                         }
                         classTextHighligter.HighlightClassLine(methodName);
                     }
                     else
                     {
-                        if (DateTime.Now.IsJune() || true) {
+                        if (DateTime.Now.IsJune()) {
                             classTextHighligter.UnhighlightClassNameLine();
                         }
                         classTextHighligter.UnhighlightClassLine(methodName);
