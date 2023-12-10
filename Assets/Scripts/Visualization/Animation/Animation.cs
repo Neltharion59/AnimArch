@@ -73,13 +73,7 @@ namespace Visualization.Animation
 
             UI.MenuManager.Instance.HideErrorPanelOnStopButton();
 
-            List<Anim> animations = AnimationData.Instance.getAnimList();
             Anim selectedAnimation = AnimationData.Instance.selectedAnim;
-            if (animations != null)
-            {
-                if (animations.Count > 0 && selectedAnimation.AnimationName.Equals(""))
-                    selectedAnimation = animations[0];
-            }
 
             List<AnimClass> MethodsCodes = selectedAnimation.GetMethodsCodesList(); //Filip
 

@@ -39,10 +39,7 @@ public class FileLoader : MonoBehaviour
     
     public void SaveAnimationToPython()
     {
-        if (AnimationData.Instance.getAnimList().Count > 0)
-        {
-            StartCoroutine(SaveAnimationToPythonCoroutine());
-        }
+        StartCoroutine(SaveAnimationToPythonCoroutine());
     }
     
     IEnumerator SaveAnimationToPythonCoroutine()
@@ -87,9 +84,8 @@ public class FileLoader : MonoBehaviour
         Anim loadedAnim = new Anim(FileBrowserHelpers.GetFilename(FileBrowser.Result).Replace(".json", ""));
         loadedAnim.LoadCode(FileBrowser.Result);
         //loadedAnim.Code = GetCleanCode(loadedAnim.Code);
-        AnimationData.Instance.AddAnim(loadedAnim);
+        MenuManager.SetAnimationButtonsActive(true);
         AnimationData.Instance.selectedAnim = loadedAnim;
-        MenuManager.Instance.UpdateAnimations();
         MenuManager.Instance.SetSelectedAnimation(loadedAnim.AnimationName);
     }
 
@@ -100,6 +96,7 @@ public class FileLoader : MonoBehaviour
 
         if (!FileBrowser.Success) yield break;
         AnimationData.Instance.SetDiagramPath(FileBrowser.Result);
+        MenuManager.Instance.SetDiagramPath(FileBrowser.Result);
         _classDiagramBuilder.LoadDiagram();
     }
 
@@ -124,10 +121,9 @@ public class FileLoader : MonoBehaviour
         newAnim.SaveCode(path);
         //FileBrowserHelpers.CreateFileInDirectory(@"Assets\Resources\Animations\",fileName);
         //HandleTextFile.WriteString(path, newAnim.Code/*GetCleanCode(newAnim.Code)*/);
-        AnimationData.Instance.AddAnim(newAnim);
+        MenuManager.SetAnimationButtonsActive(true);
         AnimationData.Instance.selectedAnim = newAnim;
-        MenuManager.Instance.UpdateAnimations();
-        MenuManager.Instance.SetSelectedAnimation(newAnim.AnimationName);
+        MenuManager.Instance.SetSelectedAnimation(newAnim.AnimationName); 
     }
 
     private static IEnumerator SaveDiagramCoroutine()
@@ -149,7 +145,6 @@ public class FileLoader : MonoBehaviour
 
     public void OpenAnimation()
     {
-        MenuManager.Instance.generatePythonBtn.interactable = true;
         StartCoroutine(LoadAnimationCoroutine());
     }
 

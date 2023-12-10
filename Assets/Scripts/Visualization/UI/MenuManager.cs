@@ -14,6 +14,7 @@ using Visualization.ClassDiagram.ComponentsInDiagram;
 using UnityEngine.Localization.Settings;
 using AnimArch.Extensions;
 using UnityEditor;
+using Visualization.ClassDiagram.Editors;
 
 namespace Visualization.UI
 {
@@ -22,11 +23,13 @@ namespace Visualization.UI
         FileLoader fileLoader;
 
         //UI Panels
-        [SerializeField] private GameObject introScreen;
         [SerializeField] private GameObject animationScreen;
         [SerializeField] private GameObject mainScreen;
         [SerializeField] private Button saveBtn;
-        [SerializeField] private TMP_Dropdown animationsDropdown;
+        [SerializeField] private TMP_Text diagramPathLabel;
+        [SerializeField] private Button diagramRemoveBtn;
+        [SerializeField] private TMP_Text animationLabel;
+        [SerializeField] private Button animationRemoveBtn;
         [SerializeField] private TMP_InputField scriptCode;
         [SerializeField] private GameObject PanelColors;
         [SerializeField] private GameObject PanelInteractiveIntro;
@@ -58,6 +61,7 @@ namespace Visualization.UI
         [SerializeField] public GameObject PanelSourceCodeAnimation;
         [SerializeField] public GameObject ShowErrorBtn;
         [SerializeField] public GameObject ErrorPanel;
+
         // [SerializeField] public TMP_Text MaskingFileLabel;
         // [SerializeField] public Button RemoveMaskingBtn;
         public Anim createdAnim;
@@ -74,7 +78,7 @@ namespace Visualization.UI
             // var tableReference = LocalizationSettings.StringDatabase.GetTable("StringTable");
             // var tableEntryReference = tableReference.GetEntry("playIntro1Key");
             // InteractiveText.GetComponent<DotsAnimation>().currentText = tableEntryReference.GetLocalizedString();
-            // Debug.LogError("AAAAAAAAAAAAAA");
+            // Debug.LogError("SetLanguage()");
             // Debug.LogError(tableEntryReference.GetLocalizedString());
         }
 
@@ -153,25 +157,20 @@ namespace Visualization.UI
             UpdateSpeed();
         }
 
-        //Update the list of created animations
-        public void UpdateAnimations()
+        public void SetDiagramPath(string diagramPath)
         {
-            List<string> options = new List<string>();
-            foreach (Anim anim in AnimationData.Instance.getAnimList())
-            {
-                options.Add(anim.AnimationName);
-            }
-
-            if (animationsDropdown != null)
-            {
-                animationsDropdown.ClearOptions();
-                animationsDropdown.AddOptions(options);
-            }
+            diagramPathLabel.text = diagramPath;
+            diagramRemoveBtn.interactable = true;
         }
 
+        public void RemoveDiagram()
+        {
+            UIEditorManager.Instance.mainEditor.ClearDiagram();
+        }
         public void SetSelectedAnimation(string name)
         {
-            animationsDropdown.value = animationsDropdown.options.FindIndex(option => option.text == name);
+            animationLabel.text = name;
+            animationRemoveBtn.interactable = true;
         }
 
         public void InitializeAnim()
@@ -185,7 +184,6 @@ namespace Visualization.UI
         {
             scriptCode.text = string.Empty;
             isCreating = true;
-            introScreen.SetActive(false);
             PanelInteractiveIntro.SetActive(true);
             PanelMethod.SetActive(false);
             PanelInteractive.SetActive(true);
@@ -202,7 +200,6 @@ namespace Visualization.UI
             animationScreen.SetActive(false);
             saveBtn.interactable = false;
             mainScreen.SetActive(true);
-            introScreen.SetActive(true);
             PanelInteractiveCompleted.SetActive(false);
         }
 
@@ -307,26 +304,10 @@ namespace Visualization.UI
             EndAnimate();
         }
 
-        public void SelectAnimation()
-        {
-            String name = animationsDropdown.options[animationsDropdown.value].text;
-            foreach (Anim anim in AnimationData.Instance.getAnimList())
-            {
-                if (name.Equals(anim.AnimationName))
-                    AnimationData.Instance.selectedAnim = anim;
-            }
-        }
-
         public void OpenAnimation()
         {
-            if (AnimationData.Instance.getAnimList().Count > 0)
-            {
-                SelectAnimation();
-                StartAnimate();
-                createdAnim = AnimationData.Instance.selectedAnim;
-                AnimationData.Instance.RemoveAnim(AnimationData.Instance.selectedAnim);
-                UpdateAnimations();
-            }
+            StartAnimate();
+            createdAnim = AnimationData.Instance.selectedAnim;
         }
 
         public void ActivatePanelColors(bool show)
@@ -347,13 +328,13 @@ namespace Visualization.UI
         {
             Debug.Assert(!AnimationData.Instance.selectedAnim.AnimationName.Equals(""));
 
+            TooltipManager.Instance.HideTooltip();  
             PanelChooseAnimationStartMethod.SetActive(true);
             PanelSourceCodeAnimation.SetActive(false);
 
             isPlaying = true;
             panelAnimationPlay.SetActive(true);
             mainScreen.SetActive(false);
-            introScreen.SetActive(false);
             foreach (Button button in playBtns)
             {
                 button.gameObject.SetActive(false);
@@ -481,9 +462,10 @@ namespace Visualization.UI
 
         public static void SetAnimationButtonsActive(bool active)
         {
-            GameObject.Find("MainPanel").transform.Find("Edit").GetComponentInChildren<Button>().interactable = active;
-            GameObject.Find("MainPanel").transform.Find("Play").GetComponentInChildren<Button>().interactable = active;
-            GameObject.Find("MainPanel").transform.Find("AnimationSelect").GetComponentInChildren<TMP_Dropdown>().interactable = active;
+            GameObject.Find("AnimationSettings/Buttons/Edit").GetComponentInChildren<Button>().interactable = active; 
+            GameObject.Find("AnimationSettings/Buttons/Play").GetComponentInChildren<Button>().interactable = active;
+            GameObject.Find("GenerateToPythonButton").GetComponentInChildren<Button>().interactable = active;
+            // generatePythonBtn.interactable = true; // TODO co je lepsie? takto by sme museli zmenit funciu zo static
         }
         public void AnimateSourceCodeAtMethodStart(EXEScopeMethod currentMethodScope)
         {

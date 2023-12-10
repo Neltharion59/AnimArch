@@ -12,44 +12,13 @@ namespace Visualization.Animation
     //has global acces: AnimationData.Instance.calledMethod()
     public class AnimationData : Singleton<AnimationData>
     {
-        private List<Anim> animations;
         public Anim selectedAnim;
         string diagramPath = @"C:/AnimArch/exportedXMI.xml";
         public int diagramId = 4;
         public float AnimSpeed { get; set; }
         private void Awake()
         {
-            animations = new List<Anim>();
             selectedAnim = new Anim("");
-        }
-        public List<Anim> getAnimList()
-        {
-            return animations;
-        }
-        public void AddAnim(Anim anim)
-        {
-            animations.Add(anim);
-            MenuManager.SetAnimationButtonsActive(true);
-        }
-        public bool RemoveAnim(Anim anim)
-        {
-            if (animations.Count == 1)
-            {
-                selectedAnim = new Anim("");
-            }
-            return animations.Remove(anim);
-        }
-        public Anim FindAnimByName(string name)
-        {
-            foreach (Anim a in animations)
-            {
-                if (selectedAnim.AnimationName.Equals(name))
-                {
-                    return a;
-                }
-            }
-            Debug.Log("Anim " + name + " not found");
-            return new Anim();
         }
         public string GetDiagramPath()
         {
@@ -61,10 +30,8 @@ namespace Visualization.Animation
             this.diagramId = 0;
 
         }
-        public void ClearData()
+        public void RemoveAnimation()
         {
-            animations.Clear();
-            MenuManager.Instance.UpdateAnimations();
             selectedAnim = new Anim("");
             diagramId = 0;
             

@@ -308,9 +308,9 @@ namespace Visualization.ClassDiagram.Editors
                 DiagramPool.Instance.ClassDiagram.graph = null;
             }
 
+            DiagramPool.Instance.ClassDiagram.graph = null;
             Animation.Animation.Instance.CurrentProgramInstance.Reset();
-
-            AnimationData.Instance.ClearData();
+            AnimationData.Instance.RemoveAnimation();
         }
     }
 }

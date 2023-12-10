@@ -19,35 +19,31 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 3086442565632
-    m_Localized: "Vytvori\u0165 Diagram"
+    m_Localized: "Vytvori\u0165 diagram"
     m_Metadata:
       m_Items: []
   - m_Id: 4026562252800
-    m_Localized: "Na\u010D\xEDta\u0165 Diagram"
+    m_Localized: "Na\u010D\xEDta\u0165 diagram"
     m_Metadata:
       m_Items: []
   - m_Id: 4393018593280
-    m_Localized: "Editova\u0165 Diagram"
+    m_Localized: "Editova\u0165 diagram"
     m_Metadata:
       m_Items: []
   - m_Id: 5327710851072
-    m_Localized: "Vytvori\u0165"
+    m_Localized: "Vytvori\u0165 anim\xE1ciu"
     m_Metadata:
       m_Items: []
   - m_Id: 5743567704064
-    m_Localized: "Upravi\u0165"
+    m_Localized: "Upravi\u0165 anim\xE1ciu"
     m_Metadata:
       m_Items: []
   - m_Id: 6275166375936
-    m_Localized: "Spusti\u0165"
+    m_Localized: "Spusti\u0165 anim\xE1ciu"
     m_Metadata:
       m_Items: []
   - m_Id: 6926202048512
-    m_Localized: "Otvori\u0165"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 7783454871552
-    m_Localized: "Spravova\u0165 Anim\xE1ciu:"
+    m_Localized: "Na\u010D\xEDta\u0165 anim\xE1ciu"
     m_Metadata:
       m_Items: []
   - m_Id: 8236884299776
@@ -56,10 +52,6 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 8901480157184
     m_Localized: Maskovanie
-    m_Metadata:
-      m_Items: []
-  - m_Id: 9621885423616
-    m_Localized: "Spusti\u0165 Anim\xE1ciu:"
     m_Metadata:
       m_Items: []
   - m_Id: 2248790300954624
@@ -652,6 +644,58 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3927985179594752
     m_Localized: "Anim\xE1cia"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8943025125330944
+    m_Localized: Diagramy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12193646808928256
+    m_Localized: "Na\u010D\xEDta\u0165 maskovanie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12193829345038336
+    m_Localized: "Zru\u0161i\u0165 diagram"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12193940766724096
+    m_Localized: "Zru\u0161i\u0165 maskovanie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12194016146755584
+    m_Localized: "Zru\u0161i\u0165 anim\xE1ciu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12249321731788800
+    m_Localized: "Prelo\u017Ei\u0165 do Sloven\u010Diny"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12249531035947008
+    m_Localized: "Prelo\u017Ei\u0165 do Angli\u010Dtiny"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12249738331033600
+    m_Localized: "Zobrazi\u0165 n\xE1stroje diagramu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12250186903457792
+    m_Localized: "Zobrazi\u0165 n\xE1stroje maskovania"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12250279438192640
+    m_Localized: "Zobrazi\u0165 n\xE1stroje anim\xE1cie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12250429254537216
+    m_Localized: "Skry\u0165 n\xE1stroje maskovania"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12250372182642688
+    m_Localized: "Skry\u0165 n\xE1stroje diagramu"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12250757425270784
+    m_Localized: "Skry\u0165 n\xE1stroje anim\xE1cie"
     m_Metadata:
       m_Items: []
   references:
