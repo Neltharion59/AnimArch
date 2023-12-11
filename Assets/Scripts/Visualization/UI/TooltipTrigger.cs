@@ -5,8 +5,15 @@ using UnityEngine.UI;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
 {
-    public Button button;
-    public LocalizeStringEvent eventHandler;
+    private Button button;
+    private LocalizeStringEvent eventHandler;
+
+    public void Awake()
+    {
+        button = this.gameObject.GetComponent<Button>();
+        eventHandler = this.gameObject.GetComponent<LocalizeStringEvent>();
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         Invoke(nameof(ShowTooltip), 0.5f);

@@ -831,49 +831,6 @@ namespace Assets.UnitTests.AnimationControl
 
             Test.PerformAssertion();
         }
-
-        // [Test]
-        // public void WednesdayDay_02_indexationAsAccessChainEvaluate()
-        // {
-        //     CommandTest Test = new CommandTest();
-
-        //     // Arrange
-        //     string _methodSourceCode = 
-        //     @"
-        //     create object instance inst1 of Class1
-        //     create object instance inst2 of Class1
-        //     create object instance inst3 of Class1
-        //     create list Objects of Class1 { inst1, inst2, inst3 };
-        //     x = Objects[1];
-        //     ";
-
-        //     OALProgram programInstance = new OALProgram();
-        //     CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
-
-        //     CDClassInstance instance1 = owningClass.CreateClassInstance();
-        //     CDClassInstance instance2 = owningClass.CreateClassInstance();
-        //     CDClassInstance instance3 = owningClass.CreateClassInstance();
-
-        //     // CDAttribute attribute2 = new CDAttribute("att1", "Class1");
-        //     // owningClass.AddAttribute(attribute2);
-
-        //     CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
-        //     owningClass.AddMethod(owningMethod);
-
-        //     // Act
-        //     EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);
-        //     owningMethod.ExecutableCode = methodScope;
-        //     programInstance.SuperScope = methodScope;
-
-        //     EXEExecutionResult _executionResult = PerformExecution(programInstance);
-
-        //     // Assert
-        //     Test.Declare(methodScope, _executionResult);
-
-        //     Test.Variables
-        //             .ExpectVariable("x", new EXEValueReference(instance2));
-
-        //     Test.PerformAssertion();
-        // }
+        
     }
 }

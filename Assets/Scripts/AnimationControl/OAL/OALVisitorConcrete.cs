@@ -61,7 +61,6 @@ namespace AnimationControl.OAL
         public override object VisitAccessChainElement([NotNull] OALParser.AccessChainElementContext context)
         {
             if (context.ChildCount == 4 && "[".Equals(context.GetChild(1).GetText()) && "]".Equals(context.GetChild(3).GetText())) {
-                //prehodit poradie v equals
                 object list = Visit(context.GetChild(0));
                 if (list is not EXEASTNodeBase || list == null) {
                     HandleError(string.Format("Malformed expression - list of indexation is not EXEASTNodeBase, instead it is '{0}'.", list?.GetType().Name ?? "NULL"), context);
