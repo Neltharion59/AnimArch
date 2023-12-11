@@ -31,7 +31,7 @@ namespace OALProgramControl
         private static readonly List<String> IntNames = new List<string>(new String[] { "int", "integer", "long", "long int", "long integer" });
         private static readonly List<String> RealNames = new List<string>(new String[] { "real", "float", "double", "decimal", "floating", "floating point" });
         private static readonly List<String> BoolNames = new List<string>(new String[] { "bool", "boolean" });
-        private static readonly List<String> StringNames = new List<string>(new String[] { "string", "char[]", "char", "List<char>" });
+        private static readonly List<String> StringNames = new List<string>(new String[] { "string", "char" });
         private static readonly List<String> PrimitiveNames = new List<string>(new String[] { IntegerTypeName, RealTypeName, BooleanTypeName, StringTypeName, DateTypeName, UniqueIDTypeName });
         private static readonly Dictionary<Char, String> EscapeChars = new Dictionary<Char, String>() { { '\"', "\"" }, { '\'', "\'" }, { 't', "\t" }, { 'n', "\n" }, { '\\', "\\" } };
 

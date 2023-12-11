@@ -77,7 +77,7 @@ namespace OALProgramControl
 
             EXEExecutionResult result = base.ApplyOperator(operation, operand);
 
-            if ("or".Equals(operation))
+            if ("or".Equals(operation.ToLower()))
             {
                 if (operand is not EXEValueBool)
                 {
@@ -89,7 +89,7 @@ namespace OALProgramControl
                 result.ReturnedOutput = this;
                 return result;
             }
-            else if ("and".Equals(operation))
+            else if ("and".Equals(operation.ToLower()))
             {
                 if (operand is not EXEValueBool)
                 {

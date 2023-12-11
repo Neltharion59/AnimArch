@@ -74,7 +74,7 @@ public partial class OALLexer : Lexer {
 
 	private static readonly string[] _LiteralNames = {
 		null, "'par'", "'end par'", "';'", "'thread'", "'end thread'", "'if'", 
-		"'end if'", "'elif'", "'elseBlock'", "'('", "')'", "'while'", "'end while'", 
+		"'end if'", "'elif'", "'else'", "'('", "')'", "'while'", "'end while'", 
 		"'for each '", "' in '", "'end for'", "'continue'", "'break'", "'create object instance '", 
 		"' of '", "'create object instance of '", "'delete object instance '", 
 		"'assign '", "'='", "'.'", "'create list '", "'{'", "'}'", "'add '", "' to '", 

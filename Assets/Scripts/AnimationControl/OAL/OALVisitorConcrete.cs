@@ -10,6 +10,7 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 using System.Collections;
 using OALProgramControl;
 using UnityEngine;
+using AnimArch.Extensions;
 
 namespace AnimationControl.OAL
 {
@@ -626,7 +627,7 @@ namespace AnimationControl.OAL
             // Binary operator
             else if (context.ChildCount == 3)
             {
-                string _operator = context.GetChild(1).GetText();
+                string _operator = context.GetChild(1).GetText().ToString().ReplaceWhitespace();
 
                 if (!EXETypes.IsBinaryOperator(_operator))
                 {

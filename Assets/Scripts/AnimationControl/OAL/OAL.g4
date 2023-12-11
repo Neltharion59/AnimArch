@@ -48,7 +48,7 @@ elif
     ;
 
 elseBlock
-    :   'elseBlock' commands
+    :   'else' commands
     ;
 
 condition

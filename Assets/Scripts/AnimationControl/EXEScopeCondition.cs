@@ -65,7 +65,7 @@ namespace OALProgramControl
         {
             foreach (EXEScopeCondition scope in this.AllConditionedScopes)
             {
-                EXEExecutionResult conditionEvaluationResult = Condition.Evaluate(scope.SuperScope, OALProgram);
+                EXEExecutionResult conditionEvaluationResult = scope.Condition.Evaluate(scope.SuperScope, OALProgram);
 
                 if (!HandleRepeatableASTEvaluation(conditionEvaluationResult))
                 {
