@@ -144,21 +144,21 @@ namespace AnimArch.Visualization.Diagrams
                     AttributeName + " = " + Object.Instance.State[AttributeName].ToObjectDiagramText() + "\n";
             }
 
-            foreach (Method method in Object.Class.ParsedClass.Methods)
+            foreach (CDMethod method in Object.Class.ClassInfo.GetMethods(true))
             {
                 string arguments = "(";
-                if (method.arguments != null)
-                    for (int d = 0; d < method.arguments.Count; d++)
+                if (method.Parameters != null)
+                    for (int d = 0; d < method.Parameters.Count; d++)
                     {
-                        if (d < method.arguments.Count - 1)
-                            arguments += (method.arguments[d] + ", ");
-                        else arguments += (method.arguments[d]);
+                        if (d < method.Parameters.Count - 1)
+                            arguments += (method.Parameters[d] + ", ");
+                        else arguments += (method.Parameters[d]);
                     }
 
                 arguments += ")";
 
                 methods.GetComponent<TextMeshProUGUI>().text +=
-                    method.Name + arguments + " :" + method.ReturnValue + "\n";
+                    method.Name + arguments + " :" + method.ReturnType + "\n";
             }
 
             //Add Class to Dictionary
