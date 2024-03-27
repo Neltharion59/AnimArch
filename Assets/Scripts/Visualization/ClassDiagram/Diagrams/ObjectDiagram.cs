@@ -83,7 +83,7 @@ namespace AnimArch.Visualization.Diagrams
             ManualLayout();
             //AutoLayout();
 
-            graph.transform.position = new Vector3(0, 0, 800);
+            graph.transform.position = new Vector3(0, 0, offsetZ);
         }
 
         private Graph CreateGraph()

@@ -35,7 +35,7 @@ namespace Visualization.UI
         public void Jump()
         {
             IsJump = true;
-            InterGraphJump = 1 - InterGraphJump;
+            InterGraphJump = ++InterGraphJump % 3;
         }
 
         public void Start()

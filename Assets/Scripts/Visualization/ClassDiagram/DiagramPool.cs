@@ -11,6 +11,7 @@ namespace Visualization.ClassDiagram
         public GameObject graphPrefab;
         public GameObject classPrefab;
         public GameObject objectPrefab;
+        public GameObject activityPrefab;
         public GameObject classAttributePrefab;
         public GameObject classMethodPrefab;
         public GameObject parameterMethodPrefab;
@@ -39,6 +40,7 @@ namespace Visualization.ClassDiagram
 
         public Diagrams.ClassDiagram ClassDiagram;
         public ObjectDiagram ObjectDiagram;
+        public ActivityDiagram ActivityDiagram;
 
         public List<InterGraphRelation> RelationsClassToObject = new();
     }

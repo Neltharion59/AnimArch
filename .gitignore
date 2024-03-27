@@ -29,6 +29,9 @@
 # Vscode config directory
 .vscode/
 
+# History directory
+.history/
+
 # Gradle cache directory
 .gradle/
 

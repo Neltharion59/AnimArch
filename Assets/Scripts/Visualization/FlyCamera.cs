@@ -31,6 +31,7 @@ namespace Visualization
         public float movementToolSpeed = 2.5f;
         public float offsetX;
         public float offsetY;
+        private float offsetZ = 800;  
         public GameObject[] IgnoredInputs;
 
         private Vector3
@@ -98,7 +99,10 @@ namespace Visualization
                     transform.position = new Vector3(offsetX, offsetY, -700);
 
                 if (ToolManager.Instance.InterGraphJump == 1)
-                    transform.position = new Vector3(offsetX, offsetY, 100);
+                    transform.position = new Vector3(offsetX, offsetY, -700 + offsetZ);
+
+                if (ToolManager.Instance.InterGraphJump == 2)
+                    transform.position = new Vector3(offsetX, offsetY, -700 + 2*offsetZ);
                 ToolManager.Instance.IsJump = false;
             }
 

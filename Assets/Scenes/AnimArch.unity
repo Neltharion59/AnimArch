@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7644,6 +7644,7 @@ Transform:
   m_Children:
   - {fileID: 1164213133}
   - {fileID: 126492978}
+  - {fileID: 1930053199}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9615,6 +9616,8 @@ MonoBehaviour:
     type: 3}
   objectPrefab: {fileID: 1226358218867430, guid: 279771eab0b5f3248a5dd667c8f312e5,
     type: 3}
+  activityPrefab: {fileID: 1226358218867430, guid: 29ea50781798cac44b9a0005a201fa77,
+    type: 3}
   classAttributePrefab: {fileID: 3261782976684401946, guid: a71e905c2fd88e14fafcf1cf1c3d1655,
     type: 3}
   classMethodPrefab: {fileID: 3261782976684401946, guid: b3cccdbc4704aed4789d6dd9d1944ae7,
@@ -9663,6 +9666,7 @@ MonoBehaviour:
     type: 3}
   ClassDiagram: {fileID: 1164213134}
   ObjectDiagram: {fileID: 0}
+  ActivityDiagram: {fileID: 0}
   RelationsClassToObject: []
 --- !u!1 &250727387
 GameObject:
@@ -66291,6 +66295,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929789351}
   m_CullTransparentMesh: 0
+--- !u!1 &1930053198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930053199}
+  - component: {fileID: 1930053200}
+  m_Layer: 0
+  m_Name: ActivityDiagram
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1930053199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930053198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 400}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 189701878}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1930053200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930053198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ada00099e030da48a19e19caf07f42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graph: {fileID: 0}
 --- !u!1 &1931080332
 GameObject:
   m_ObjectHideFlags: 0
@@ -73471,22 +73520,22 @@ PrefabInstance:
     - target: {fileID: 5956890415730830927, guid: a5a0e1af83c4aaf469cd5966daf628ad,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956890415730830927, guid: a5a0e1af83c4aaf469cd5966daf628ad,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956890415730830927, guid: a5a0e1af83c4aaf469cd5966daf628ad,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956890415730830927, guid: a5a0e1af83c4aaf469cd5966daf628ad,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956890415730830927, guid: a5a0e1af83c4aaf469cd5966daf628ad,
         type: 3}
