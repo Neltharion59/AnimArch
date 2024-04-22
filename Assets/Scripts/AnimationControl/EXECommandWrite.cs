@@ -10,11 +10,16 @@ namespace OALProgramControl
     public class EXECommandWrite : EXECommand
     {
         public List<EXEASTNodeBase> Arguments { get; }
-        public string PromptText { get; private set; }
+        public string PromptText { get; set; }
+        public IStrategy Strategy =  new StrategyProduction();
         public EXECommandWrite() : this(new List<EXEASTNodeBase>()) {}
         public EXECommandWrite(List<EXEASTNodeBase> Arguments)
         {
             this.Arguments = Arguments;
+        }
+
+        public void SetStrategy(IStrategy Strategy){
+            this.Strategy = Strategy;
         }
 
         protected override EXEExecutionResult Execute(OALProgram OALProgram)
@@ -36,7 +41,9 @@ namespace OALProgramControl
                         return visitor.GetCommandStringAndResetStateNow();
             }));
 
-            this.PromptText = result;
+            // this.PromptText = result;
+            
+            this.Strategy.Write(this, result);
 
             return Success();
         }
