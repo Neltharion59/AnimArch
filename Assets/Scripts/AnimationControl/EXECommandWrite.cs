@@ -11,7 +11,7 @@ namespace OALProgramControl
     {
         public List<EXEASTNodeBase> Arguments { get; }
         public string PromptText { get; set; }
-        public IStrategy Strategy =  new StrategyProduction();
+        public IStrategy Strategy = StrategyProduction.Instance;
         public EXECommandWrite() : this(new List<EXEASTNodeBase>()) {}
         public EXECommandWrite(List<EXEASTNodeBase> Arguments)
         {

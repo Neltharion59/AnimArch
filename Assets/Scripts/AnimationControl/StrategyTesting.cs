@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 namespace OALProgramControl
 {
-    public class StrategyTesting : IStrategy
+    public class StrategyTesting : Singleton<StrategyTesting>, IStrategy
     {
         public List<string> Commands { get; }
 
-        public EXEExecutionResult Read(OALProgram OALProgram)
+        public int Read(EXECommandRead EXECommandRead)
         {    
+            Debug.LogError("testing read");
             return null;
         }     
 

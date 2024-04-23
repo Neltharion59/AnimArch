@@ -8,7 +8,7 @@ namespace OALProgramControl
     {
         public List<string> Commands { get; }
 
-        EXEExecutionResult Read(OALProgram OALProgram);      
+        int Read(EXECommandRead EXECommandRead);      
         void Write(EXECommandWrite EXECommandWrite, string result); 
     }
 }
