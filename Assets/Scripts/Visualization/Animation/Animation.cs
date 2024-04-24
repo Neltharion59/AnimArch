@@ -182,28 +182,16 @@ namespace Visualization.Animation
             else
             {
                 highlightScheduler.Enqueue(request);
-            
-            yield return new WaitUntil(() => request.IsDone());
+                yield return new WaitUntil(() => request.IsDone());
             }
 
             yield return new WaitUntil(() => !isPaused);
         }
 
-        private void ResolveAssignment(EXECommand currentCommand)
-        {
-        }
-        private void ResolveAssignment(CDClassInstance classInstance)
-        {
-            
-        }
         public ObjectInDiagram AddObjectToDiagram(CDClassInstance newObject, string name = null, bool showNewObject = true)
         {
             ObjectInDiagram objectInDiagram = objectDiagram.AddObjectInDiagram(name, newObject, showNewObject);
             return objectInDiagram;
-        }
-        private IEnumerator ResolveCreateObject(EXECommand currentCommand, int threadId, bool Animate = true, bool AnimateNewObjects = true)
-        {
-            return null;
         }
 
         private IEnumerator AnimateFillInterGraph(InterGraphRelation relation)
@@ -609,30 +597,6 @@ namespace Visualization.Animation
             {
                 relation.HighlightSubject.InvocationInfo = Call;
             }
-        }
-
-        // Couroutine used to Resolve one OALCall consisting of Caller class, caller method, edge, called class, called method
-        // Same coroutine is called for play or step mode
-        public IEnumerator ResolveCallFunct(MethodInvocationInfo Call, int threadId)
-        {
-            //Debug.Log(Call.ToString());
-
-            //AnimationCallFunctionRequest r = new AnimationCallFunctionRequest(Call, threadId);
-            //highlightScheduler.Enqueue(r);
-
-            //yield return new WaitUntil(() => r.IsDone());
-
-            //IncrementBarrier();
-            return null;
-        }
-
-        public IEnumerator ResolveReturn(MethodInvocationInfo callInfo, int threadId)
-        {
-            //AnimationReturnRequest r = new AnimationReturnRequest(callInfo, threadId);
-            //highlightScheduler.Enqueue(r);
-
-            //yield return new WaitUntil(() => r.IsDone());
-            return null;
         }
 
         private int UnhighlightAllStepAnimation(MethodInvocationInfo Call, int step)

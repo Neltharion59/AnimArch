@@ -27,14 +27,11 @@ namespace Visualization.Animation
 
                         animation.objectDiagram.AddRelation(methodCallInfo.CallerObject, methodCallInfo.CalledObject, "ASSOCIATION");
 
-                        //animation.StartCoroutine(ResolveCallFunct(methodCallInfo, AnimationThread.ID));
-
                         animation.StartCoroutine(animation.BarrierFillCheck());
                     }
                 }
 
-                
-
+            // UI.MenuManager.Instance.RefreshSourceCodePanel(((EXECommandCall)command).InvokedMethod);
         }
 
         public override IEnumerator PerformRequest()
@@ -57,9 +54,8 @@ namespace Visualization.Animation
             calledMethod.HighlightSubject.IncrementHighlightLevel();
             yield return new WaitForSeconds(AnimationData.Instance.AnimSpeed * ANIM_SPEED_QUANTIFIER);
 
-            UI.MenuManager.Instance.RefreshSourceCodePanel(((EXECommandCall)command).InvokedMethod);
             Done = true;
-            
+
             animation.IncrementBarrier();
         }
     }
