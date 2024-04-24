@@ -7,12 +7,35 @@ using Visualization.UI;
 
 namespace Visualization.Animation
 {
-    public class HighlightingCallFunctionRequest : HighlightingRequest
+    public class AnimationCallFunctionRequest : AnimationRequest
     {
         private const float ANIM_SPEED_QUANTIFIER = 1.25f;
 
-        public HighlightingCallFunctionRequest(MethodInvocationInfo call, int threadId) : base(call, threadId)
-        {}
+        public AnimationCallFunctionRequest(EXECommand command, AnimationThread thread, bool animate, bool animateNewObjects) : base(command, thread, animate, animateNewObjects)
+        {
+            EXECommandCall exeCommandCall = (EXECommandCall)command;
+
+                if (animate)
+                {
+                    MethodInvocationInfo methodCallInfo = exeCommandCall.CallInfo;
+                    callInfo = methodCallInfo;
+
+                    if (methodCallInfo != null)
+                    {
+                        animation.BarrierSize = 1;
+                        animation.CurrentBarrierFill = 0;
+
+                        animation.objectDiagram.AddRelation(methodCallInfo.CallerObject, methodCallInfo.CalledObject, "ASSOCIATION");
+
+                        //animation.StartCoroutine(ResolveCallFunct(methodCallInfo, AnimationThread.ID));
+
+                        animation.StartCoroutine(animation.BarrierFillCheck());
+                    }
+                }
+
+                
+
+        }
 
         public override IEnumerator PerformRequest()
         {
@@ -34,7 +57,10 @@ namespace Visualization.Animation
             calledMethod.HighlightSubject.IncrementHighlightLevel();
             yield return new WaitForSeconds(AnimationData.Instance.AnimSpeed * ANIM_SPEED_QUANTIFIER);
 
+            UI.MenuManager.Instance.RefreshSourceCodePanel(((EXECommandCall)command).InvokedMethod);
             Done = true;
+            
+            animation.IncrementBarrier();
         }
     }
 }
