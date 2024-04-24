@@ -9,8 +9,8 @@ namespace Visualization.UI
     {
         public GameObject MethodPrefabButton;
         public Transform ButtonParent;
-        private List<GameObject> Buttons = new List<GameObject>();
-        private List<string> Items = new List<string>();
+        private readonly List<GameObject> Buttons = new();
+        private List<string> Items = new();
         public ScrollableListState CurrentState { get; set; }
         private void Start()
         {   
@@ -66,6 +66,9 @@ namespace Visualization.UI
             }
         }
     }
+    //TODO sprav z toho singletony
+    //template method selectmethod a selectplaymethod presunut sem
+    //spravit ine volanie pre kazdy state
 
     public abstract class ScrollableListState
     {
