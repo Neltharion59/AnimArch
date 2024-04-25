@@ -56,38 +56,61 @@ namespace Visualization.UI
                 button.GetComponentInChildren<TextMeshProUGUI>().text = item;
                 
                 CurrentState.HandleButtonClick(item, button.GetComponent<Button>());
-                /*if(EditMode){
-                    button.GetComponent<Button>().onClick.AddListener(() => MenuManager.Instance.SelectMethod(item));
-                }else{
-                    button.GetComponent<Button>().onClick.AddListener(() => MenuManager.Instance.SelectPlayMethod(item));
-                }*/
+  
                 button.SetActive(true);
                 Buttons.Add(button);
             }
         }
     }
-    //TODO sprav z toho singletony
-    //template method selectmethod a selectplaymethod presunut sem
-    //spravit ine volanie pre kazdy state
 
     public abstract class ScrollableListState
     {
-        public abstract void HandleButtonClick(string item, Button button);
+        public void HandleButtonClick(string item, Button button){
+            button.onClick.AddListener(() => HandleButtonClickAction(item));
+        }
+
+        protected abstract void HandleButtonClickAction(string item);
     }
 
     public class EditModeState : ScrollableListState
     {
-        public override void HandleButtonClick(string item, Button button)
+        private static EditModeState instance;
+        public static EditModeState Instance
         {
-            button.onClick.AddListener(() => MenuManager.Instance.SelectMethod(item));
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new EditModeState();
+                }
+                return instance;
+            }
+        }
+
+        protected override void HandleButtonClickAction(string item)
+        {
+            MenuManager.Instance.SelectMethod(item);
         }
     }
 
     public class PlayModeState : ScrollableListState
     {
-        public override void HandleButtonClick(string item, Button button)
+        private static PlayModeState instance;
+        public static PlayModeState Instance
         {
-            button.onClick.AddListener(() => MenuManager.Instance.SelectPlayMethod(item));
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new PlayModeState();
+                }
+                return instance;
+            }
+        }
+
+        protected override void HandleButtonClickAction(string item)
+        {
+            MenuManager.Instance.SelectPlayMethod(item);
         }
     }
 }
