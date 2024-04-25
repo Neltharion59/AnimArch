@@ -39,7 +39,7 @@ namespace Visualization.Animation
             {
                 return new AnimationWaitRequest(command, thread, animate, animateNewObjects);
             }
-            return null;
+            return new AnimationNullRequest(command, thread, animate, animateNewObjects);
         }
     }
 }

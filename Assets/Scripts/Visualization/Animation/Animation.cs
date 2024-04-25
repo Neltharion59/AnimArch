@@ -47,7 +47,7 @@ namespace Visualization.Animation
         public string startMethodName;
         public Dictionary<string, List<EXEVariable>> startMethodParameters = new Dictionary<string, List<EXEVariable>>();
 
-        private const float AnimationSpeedCoefficient = 0.2f;
+        public const float AnimationSpeedCoefficient = 0.2f;
 
         [HideInInspector] private OALProgram currentProgramInstance = new OALProgram();
         [HideInInspector] public OALProgram CurrentProgramInstance { get { return currentProgramInstance; } }
@@ -171,18 +171,8 @@ namespace Visualization.Animation
         public IEnumerator AnimateCommand(EXECommand CurrentCommand, AnimationThread AnimationThread, bool Animate = true, bool AnimateNewObjects = true)
         {
             AnimationRequest request = AnimationRequestFactory.Create(CurrentCommand, AnimationThread, Animate, AnimateNewObjects);
-            if (request == null) {
-                if (Animate)
-                {
-                    float speedPerAnim = AnimationData.Instance.AnimSpeed;
-                    yield return new WaitForSeconds(AnimationSpeedCoefficient * speedPerAnim);
-                }
-            }
-            else
-            {
-                highlightScheduler.Enqueue(request);
-                yield return new WaitUntil(() => request.IsDone());
-            }
+            highlightScheduler.Enqueue(request);
+            yield return new WaitUntil(() => request.IsDone());
 
             yield return new WaitUntil(() => !isPaused);
         }
