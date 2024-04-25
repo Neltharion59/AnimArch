@@ -7,10 +7,21 @@ namespace OALProgramControl
 {
     public class EXEScopeNull : EXEScopeBase
     {
+        protected static EXEScopeNull instance = null;
+        
         public EXEScopeNull() : base()
         {
         }
-        
+
+        public static EXEScopeNull GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new EXEScopeNull();
+            }
+            return instance;
+        }
+
         public override IEnumerable<EXEScopeBase> ScopesToTop()
         {
             yield break;
@@ -52,7 +63,7 @@ namespace OALProgramControl
         
         public override EXECommand CreateClone()
         {
-            return new EXEScopeNull();
+            return GetInstance();
         }
 
         public override void ToggleActiveRecursiveBottomUp(bool active)

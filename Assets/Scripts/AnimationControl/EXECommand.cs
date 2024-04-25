@@ -8,7 +8,7 @@ namespace OALProgramControl
     public abstract class EXECommand
     {
         public bool IsActive { get; set; } = false;
-        public static EXEScopeNull NullScope = new EXEScopeNull();
+        public static EXEScopeNull NullScope = EXEScopeNull.GetInstance();
         public EXEScopeBase SuperScope { get; set; } = NullScope; 
         public EXEExecutionStack CommandStack { get; set; } = null;
         
