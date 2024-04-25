@@ -12,19 +12,13 @@ namespace Visualization.Animation
     {
         public AnimationCreateObjectRequest(EXECommand command, AnimationThread thread, bool animate, bool animateNewObjects) : base(command, thread, animate, animateNewObjects)
         {
-
             animation.BarrierSize = 1;
             animation.CurrentBarrierFill = 0;
 
             if (animate)
             {
-                //StartCoroutine(ResolveCreateObject(CurrentCommand, AnimationThread.ID, true, AnimateNewObjects));
                 animation.StartCoroutine(animation.BarrierFillCheck());
             }
-            //else
-            //{
-                //yield return ResolveCreateObject(CurrentCommand, AnimationThread.ID, false, AnimateNewObjects);
-            //}
         }
 
         public override IEnumerator PerformRequest()
@@ -57,49 +51,49 @@ namespace Visualization.Animation
                 {
                     #region Object creation animation
 
-            int step = 0;
-            float speedPerAnim = AnimationData.Instance.AnimSpeed;
-            float timeModifier = 1f;
-            IEnumerable<RelationInDiagram> relationsOfClass = animation.classDiagram.FindRelationsByClass(createdObject.OwningClass.Name);
+                    int step = 0;
+                    float speedPerAnim = AnimationData.Instance.AnimSpeed;
+                    float timeModifier = 1f;
+                    IEnumerable<RelationInDiagram> relationsOfClass = animation.classDiagram.FindRelationsByClass(createdObject.OwningClass.Name);
 
-            foreach (RelationInDiagram rel in relationsOfClass)
-            {
-                yield return new WaitUntil(() => rel.HighlightSubject.finishedFlag.IsDrawingFinished());
-            }
-            Class highlightedClass = animation.classDiagram.FindClassByName(createdObject.OwningClass.Name).ParsedClass;
-            highlightedClass.HighlightSubject.ClassName = highlightedClass.Name;
-            while (step < 7)
-            {
-                switch (step)
-                {
-                    case 0:
-                        highlightedClass.HighlightSubject.IncrementHighlightLevel();
-                        break;
-                    case 1:
-                        // yield return StartCoroutine(AnimateFillInterGraph(relation));
-                        timeModifier = 0f;
-                        break;
-                    case 3:
-                        // relation.Show(); // TODO
-                        // relation.Highlight();
-                        timeModifier = 1f;
-                        break;
-                    case 2:
-                        animation.objectDiagram.ShowObject(objectInDiagram);
-                        timeModifier = 0.5f;
-                        break;
-                    case 6:
-                        highlightedClass.HighlightSubject.DecrementHighlightLevel();
-                        // relation.UnHighlight();
-                        timeModifier = 1f;
-                        break;
-                }
+                    foreach (RelationInDiagram rel in relationsOfClass)
+                    {
+                        yield return new WaitUntil(() => rel.HighlightSubject.finishedFlag.IsDrawingFinished());
+                    }
+                    Class highlightedClass = animation.classDiagram.FindClassByName(createdObject.OwningClass.Name).ParsedClass;
+                    highlightedClass.HighlightSubject.ClassName = highlightedClass.Name;
+                    while (step < 7)
+                    {
+                        switch (step)
+                        {
+                            case 0:
+                                highlightedClass.HighlightSubject.IncrementHighlightLevel();
+                                break;
+                            case 1:
+                                // yield return StartCoroutine(AnimateFillInterGraph(relation));
+                                timeModifier = 0f;
+                                break;
+                            case 3:
+                                // relation.Show(); // TODO
+                                // relation.Highlight();
+                                timeModifier = 1f;
+                                break;
+                            case 2:
+                                animation.objectDiagram.ShowObject(objectInDiagram);
+                                timeModifier = 0.5f;
+                                break;
+                            case 6:
+                                highlightedClass.HighlightSubject.DecrementHighlightLevel();
+                                // relation.UnHighlight();
+                                timeModifier = 1f;
+                                break;
+                        }
 
-                step++;
-                yield return new WaitForSeconds(AnimationData.Instance.AnimSpeed * timeModifier);
-            }
+                        step++;
+                        yield return new WaitForSeconds(AnimationData.Instance.AnimSpeed * timeModifier);
+                    }
 
-            animation.objectDiagram.AddRelation(callerObject, createdObject, "ASSOCIATION");
+                    animation.objectDiagram.AddRelation(callerObject, createdObject, "ASSOCIATION");
 
                     step = 0;
                     while (step < 7)
@@ -126,8 +120,6 @@ namespace Visualization.Animation
                         }
                     }
 
-                    //yield return new WaitUntil(() => r.IsDone());
-
                     #endregion
                 }
             }
@@ -135,9 +127,8 @@ namespace Visualization.Animation
             {
                 animation.AddObjectToDiagram(createdObject, targetVariableName, false);
             }
-                
-            animation.IncrementBarrier();
 
+            animation.IncrementBarrier();
             Done = true;
         }
     }

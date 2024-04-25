@@ -13,34 +13,33 @@ namespace Visualization.Animation
 
         public AnimationWaitRequest(EXECommand command, AnimationThread thread, bool animate, bool animateNewObjects) : base(command, thread, animate, animateNewObjects)
         {
-
         }
 
         public override IEnumerator PerformRequest()
         {
            
             if (animate)
+            {
+                EXECommandWait waitCommand = command as EXECommandWait;
+
+                float secondsToWait;
+                if (waitCommand.WaitTime.EvaluationResult.ReturnedOutput is EXEValueReal)
                 {
-                    EXECommandWait waitCommand = command as EXECommandWait;
-
-                    float secondsToWait;
-                    if (waitCommand.WaitTime.EvaluationResult.ReturnedOutput is EXEValueReal)
-                    {
-                        EXEValueReal secondsToWaitValue = waitCommand.WaitTime.EvaluationResult.ReturnedOutput as EXEValueReal;
-                        secondsToWait = (float)secondsToWaitValue.Value;
-                    }
-                    else if (waitCommand.WaitTime.EvaluationResult.ReturnedOutput is EXEValueInt)
-                    {
-                        EXEValueInt secondsToWaitValue = waitCommand.WaitTime.EvaluationResult.ReturnedOutput as EXEValueInt;
-                        secondsToWait = (float)secondsToWaitValue.Value;
-                    }
-                    else
-                    {
-                        throw new Exception(string.Format("Tried to wait for some seconds. The value type is {0}", waitCommand.WaitTime.EvaluationResult.ReturnedOutput.TypeName));
-                    }
-
-                    yield return new WaitForSeconds(secondsToWait);
+                    EXEValueReal secondsToWaitValue = waitCommand.WaitTime.EvaluationResult.ReturnedOutput as EXEValueReal;
+                    secondsToWait = (float)secondsToWaitValue.Value;
                 }
+                else if (waitCommand.WaitTime.EvaluationResult.ReturnedOutput is EXEValueInt)
+                {
+                    EXEValueInt secondsToWaitValue = waitCommand.WaitTime.EvaluationResult.ReturnedOutput as EXEValueInt;
+                    secondsToWait = (float)secondsToWaitValue.Value;
+                }
+                else
+                {
+                    throw new Exception(string.Format("Tried to wait for some seconds. The value type is {0}", waitCommand.WaitTime.EvaluationResult.ReturnedOutput.TypeName));
+                }
+
+                yield return new WaitForSeconds(secondsToWait);
+            }
 
             Done = true;
             yield return new WaitForFixedUpdate();

@@ -15,23 +15,21 @@ namespace Visualization.Animation
         {
             EXECommandCall exeCommandCall = (EXECommandCall)command;
 
-                if (animate)
+            if (animate)
+            {
+                MethodInvocationInfo methodCallInfo = exeCommandCall.CallInfo;
+                callInfo = methodCallInfo;
+
+                if (methodCallInfo != null)
                 {
-                    MethodInvocationInfo methodCallInfo = exeCommandCall.CallInfo;
-                    callInfo = methodCallInfo;
+                    animation.BarrierSize = 1;
+                    animation.CurrentBarrierFill = 0;
 
-                    if (methodCallInfo != null)
-                    {
-                        animation.BarrierSize = 1;
-                        animation.CurrentBarrierFill = 0;
+                    animation.objectDiagram.AddRelation(methodCallInfo.CallerObject, methodCallInfo.CalledObject, "ASSOCIATION");
 
-                        animation.objectDiagram.AddRelation(methodCallInfo.CallerObject, methodCallInfo.CalledObject, "ASSOCIATION");
-
-                        animation.StartCoroutine(animation.BarrierFillCheck());
-                    }
+                    animation.StartCoroutine(animation.BarrierFillCheck());
                 }
-
-            // UI.MenuManager.Instance.RefreshSourceCodePanel(((EXECommandCall)command).InvokedMethod);
+            }
         }
 
         public override IEnumerator PerformRequest()

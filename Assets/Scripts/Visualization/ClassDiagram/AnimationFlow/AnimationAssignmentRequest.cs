@@ -12,12 +12,10 @@ namespace Visualization.Animation
 
         public AnimationAssignmentRequest(EXECommand command, AnimationThread thread, bool animate, bool animateNewObjects) : base(command, thread, animate, animateNewObjects)
         {
-
         }
 
         public override IEnumerator PerformRequest()
         {
-           
             EXECommandAssignment assignment = (EXECommandAssignment)command;
             CDClassInstance classInstance = assignment.GetAssignmentTargetOwner();
             if (classInstance != null)

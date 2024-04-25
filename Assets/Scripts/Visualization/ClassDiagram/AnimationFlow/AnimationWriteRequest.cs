@@ -12,12 +12,10 @@ namespace Visualization.Animation
 
         public AnimationWriteRequest(EXECommand command, AnimationThread thread, bool animate, bool animateNewObjects) : base(command, thread, animate, animateNewObjects)
         {
-
         }
 
         public override IEnumerator PerformRequest()
         {
-           
             EXECommandWrite readCommand = command as EXECommandWrite;
 
             ConsoleRequestWrite consoleRequest = new ConsoleRequestWrite(readCommand.PromptText);
@@ -26,7 +24,6 @@ namespace Visualization.Animation
 
             Done = true;
             yield return new WaitForFixedUpdate();
-    
         }
     }
 }

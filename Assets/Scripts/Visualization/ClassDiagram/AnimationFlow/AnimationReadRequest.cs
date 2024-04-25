@@ -12,7 +12,6 @@ namespace Visualization.Animation
 
         public AnimationReadRequest(EXECommand command, AnimationThread thread, bool animate, bool animateNewObjects) : base(command, thread, animate, animateNewObjects)
         {
-
         }
 
         public override IEnumerator PerformRequest()
@@ -20,12 +19,12 @@ namespace Visualization.Animation
            
              EXECommandRead readCommand = command as EXECommandRead;
 
-                ConsoleRequestRead consoleRequest = new ConsoleRequestRead(readCommand.PromptText);
-                animation.consoleScheduler.Enqueue(consoleRequest);
-                yield return new WaitUntil(() => consoleRequest.Done);
+            ConsoleRequestRead consoleRequest = new ConsoleRequestRead(readCommand.PromptText);
+            animation.consoleScheduler.Enqueue(consoleRequest);
+            yield return new WaitUntil(() => consoleRequest.Done);
 
-                thread.ExecutionSuccess
-                    = ((EXECommandRead)command).AssignReadValue(consoleRequest.ReadValue, animation.CurrentProgramInstance);
+            thread.ExecutionSuccess
+                = ((EXECommandRead)command).AssignReadValue(consoleRequest.ReadValue, animation.CurrentProgramInstance);
 
             Done = true;
             yield return new WaitForFixedUpdate();

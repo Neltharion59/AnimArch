@@ -13,45 +13,43 @@ namespace Visualization.Animation
         {
              EXECommandReturn exeCommandReturn = (EXECommandReturn)command;
 
-                if (animate)
+            if (animate)
+            {
+                EXEScopeMethod exeScopeMethod = exeCommandReturn.GetCurrentMethodScope();
+
+                if (exeScopeMethod != null)
                 {
-                    EXEScopeMethod exeScopeMethod = exeCommandReturn.GetCurrentMethodScope();
+                    CDMethod calledMethod = exeScopeMethod.MethodDefinition;
+                    EXEScopeMethod exeScopeCaller = thread.CurrentMethod;
+                    CDMethod callerMethod = exeScopeCaller?.MethodDefinition;
 
-                    if (exeScopeMethod != null)
+                    if
+                    (
+                        exeScopeCaller != null && callerMethod !=  null &&
+                        exeScopeCaller.OwningObject != null && exeScopeCaller.OwningObject is EXEValueReference &&
+                        exeScopeMethod.OwningObject != null && exeScopeMethod.OwningObject is EXEValueReference
+                    )
                     {
-                        CDMethod calledMethod = exeScopeMethod.MethodDefinition;
-                        EXEScopeMethod exeScopeCaller = thread.CurrentMethod;
-                        CDMethod callerMethod = exeScopeCaller?.MethodDefinition;
+                        CDClass caller = callerMethod.OwningClass;
+                        CDClass called = calledMethod.OwningClass;
+                        CDRelationship relation = animation.CurrentProgramInstance.RelationshipSpace.GetRelationshipByClasses(caller.Name, called.Name);
 
-                        if
-                        (
-                            exeScopeCaller != null && callerMethod !=  null &&
-                            exeScopeCaller.OwningObject != null && exeScopeCaller.OwningObject is EXEValueReference &&
-                            exeScopeMethod.OwningObject != null && exeScopeMethod.OwningObject is EXEValueReference
-                        )
-                        {
-                            CDClass caller = callerMethod.OwningClass;
-                            CDClass called = calledMethod.OwningClass;
-                            CDRelationship relation = animation.CurrentProgramInstance.RelationshipSpace.GetRelationshipByClasses(caller.Name, called.Name);
+                        CDClassInstance callerInstance = (exeScopeCaller.OwningObject as EXEValueReference).ClassInstance;
+                        CDClassInstance calledInstance = (exeScopeMethod.OwningObject as EXEValueReference).ClassInstance;
 
-                            CDClassInstance callerInstance = (exeScopeCaller.OwningObject as EXEValueReference).ClassInstance;
-                            CDClassInstance calledInstance = (exeScopeMethod.OwningObject as EXEValueReference).ClassInstance;
-
-                            callInfo = new MethodInvocationInfo(callerMethod, calledMethod, relation, callerInstance, calledInstance);
-                            //StartCoroutine(ResolveReturn(new MethodInvocationInfo(callerMethod, calledMethod, relation, callerInstance, calledInstance), AnimationThread.ID));
-                        }
-                        else if
-                        (
-                            exeScopeCaller == null &&
-                            exeScopeMethod.OwningObject != null && exeScopeMethod.OwningObject is EXEValueReference
-                        )
-                        {
-                            CDClassInstance calledInstance = (exeScopeMethod.OwningObject as EXEValueReference).ClassInstance;
-                            callInfo = MethodInvocationInfo.CreateCalledOnlyInstance(calledMethod, calledInstance);
-                            //StartCoroutine(ResolveReturn(MethodInvocationInfo.CreateCalledOnlyInstance(calledMethod, calledInstance), AnimationThread.ID));
-                        }
+                        callInfo = new MethodInvocationInfo(callerMethod, calledMethod, relation, callerInstance, calledInstance);
+                    }
+                    else if
+                    (
+                        exeScopeCaller == null &&
+                        exeScopeMethod.OwningObject != null && exeScopeMethod.OwningObject is EXEValueReference
+                    )
+                    {
+                        CDClassInstance calledInstance = (exeScopeMethod.OwningObject as EXEValueReference).ClassInstance;
+                        callInfo = MethodInvocationInfo.CreateCalledOnlyInstance(calledMethod, calledInstance);
                     }
                 }
+            }
         }
 
         public override IEnumerator PerformRequest()
