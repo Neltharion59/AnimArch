@@ -60,7 +60,7 @@ namespace Assets.UnitTests.AnimationControl
             CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
 
             CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
-            owningClass.AddMethod(owningMethod);
+            owningClass.AddMethod(owningMethod); // TODO tu si zadefinujeme potom este to dalsie pote mockovacich vtupov co sa ptm budu citat
 
             // Act
             EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);
@@ -80,7 +80,7 @@ namespace Assets.UnitTests.AnimationControl
             Test.Variables
                 .ExpectVariable("x", array)
                 .ExpectVariable("self", methodScope.OwningObject);
-
+            // test console history
             Test.PerformAssertion();
         }
 

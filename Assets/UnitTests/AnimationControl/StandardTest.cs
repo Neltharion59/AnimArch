@@ -11,6 +11,7 @@ namespace Assets.UnitTests.AnimationControl
 
         protected EXEExecutionResult PerformExecution(OALProgram programInstance)
         {
+            //TODO tu sa nastavi ten atribut globalnej strategie na testovaciu strategiu
             EXEScopeMethod executedMethod = programInstance.SuperScope as EXEScopeMethod;
 
             // Object owning the executed method

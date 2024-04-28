@@ -29,7 +29,9 @@ namespace Assets.UnitTests.AnimationControl
             Assert.IsTrue(this.ActualExecutionResult.IsSuccess, "There was an execution error.\n" + this.ActualExecutionResult.ToString());
             Assert.IsTrue(this.ActualExecutionResult.IsDone, "The execution did not finish.");
 
-            this.Variables.PerformAssertion();
+            this.Variables.PerformAssertion(); //TODO tu bude aj console history perform assertion
+            // test console history bude vsade v testoch nech sa kontroluje ci sa nahodou nenapisalo nieco do konzoly ked nema
+
             this.ObjectInstances.PerformAssertion();
         }
     }

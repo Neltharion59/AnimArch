@@ -281,7 +281,7 @@ namespace Visualization.Animation
                 yield return new WaitUntil(() => consoleRequest.Done);
 
                 AnimationThread.ExecutionSuccess
-                    = ((EXECommandRead)CurrentCommand).AssignReadValue(consoleRequest.ReadValue, CurrentProgramInstance);
+                    = ((EXECommandRead)CurrentCommand).AssignReadValue(consoleRequest.ReadValue, CurrentProgramInstance); //TODO toto bude v test strategy
             }
             else if (CurrentCommand.GetType().Equals(typeof(EXECommandWrite)))
             {

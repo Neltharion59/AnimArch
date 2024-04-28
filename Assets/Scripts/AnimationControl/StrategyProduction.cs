@@ -10,27 +10,26 @@ namespace OALProgramControl
         public List<string> Commands { get; }
 
 
-        public int Read(EXECommandRead EXECommandRead)
+        public void Read(EXECommandRead EXECommandRead, EXEExecutionResult promptEvaluationResult, EXEScope SuperScope, OALProgram OALProgram)
         {
             Debug.LogError("production read");
+            // EXEExecutionResult promptEvaluationResult = null;
+            // if (EXECommandRead.Prompt != null)
+            // {
+            //     promptEvaluationResult  = EXECommandRead.Prompt.Evaluate(SuperScope, OALProgram);
 
-            EXEExecutionResult promptEvaluationResult = null;
-            if (EXECommandRead.Prompt != null)
-            {
-                promptEvaluationResult  = EXECommandRead.Prompt.Evaluate(EXECommandRead.SuperScope, OALProgram);
+            //     if (!HandleRepeatableASTEvaluation(promptEvaluationResult))
+            //     {
+            //         // return 0;
+            //         return promptEvaluationResult;
+            //     }
+            // }
 
-                if (!HandleRepeatableASTEvaluation(promptEvaluationResult))
-                {
-                    return 0;
-                    //return promptEvaluationResult;
-                }
-            }
-
-            if (promptEvaluationResult.ReturnedOutput is not EXEValueString)
-            {
-                return 1;
-                //return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
-            }
+            // if (promptEvaluationResult.ReturnedOutput is not EXEValueString)
+            // {
+            //     // return 1;
+            //     return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
+            // }
 
             string prompt = string.Empty;
             EXEValueString retOutput = promptEvaluationResult.ReturnedOutput as EXEValueString;
@@ -42,13 +41,13 @@ namespace OALProgramControl
 
             EXECommandRead.PromptText = prompt;
 
-            return 2;
-            //return EXECommandRead.Success();
+            // return 2;
+            // return EXECommandRead.Success();
         }      
-        public void Write(EXECommandWrite EXECommandWrite, string result)
+        public void Write(EXECommandWrite EXECommandWrite)
         {
             Debug.LogError("production write");
-            EXECommandWrite.PromptText = result;  
+            // EXECommandWrite.PromptText = result;  
         }
 
        

@@ -11,7 +11,7 @@ namespace OALProgramControl
     {
         public List<EXEASTNodeBase> Arguments { get; }
         public string PromptText { get; set; }
-        public IStrategy Strategy = StrategyProduction.Instance;
+        public IStrategy Strategy = StrategyProduction.Instance; // TODO toto bude default pre celu app, ako abstraktny atribut v IStrategy
         public EXECommandWrite() : this(new List<EXEASTNodeBase>()) {}
         public EXECommandWrite(List<EXEASTNodeBase> Arguments)
         {
@@ -41,9 +41,9 @@ namespace OALProgramControl
                         return visitor.GetCommandStringAndResetStateNow();
             }));
 
-            // this.PromptText = result;
+            this.PromptText = result;
             
-            this.Strategy.Write(this, result);
+            this.Strategy.Write(this);
 
             return Success();
         }

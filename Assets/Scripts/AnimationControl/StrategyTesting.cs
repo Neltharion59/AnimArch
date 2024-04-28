@@ -8,16 +8,15 @@ namespace OALProgramControl
     {
         public List<string> Commands { get; }
 
-        public int Read(EXECommandRead EXECommandRead)
+        public void Read(EXECommandRead EXECommandRead, EXEExecutionResult promptEvaluationResult, EXEScope SuperScope, OALProgram OALProgram)
         {    
             Debug.LogError("testing read");
-            return null;
         }     
 
-        public void Write(EXECommandWrite EXECommandWrite, string result)
+        public void Write(EXECommandWrite EXECommandWrite)
         {
             Debug.LogError("testing write");
-            Commands.Add(result);
+            Commands.Add(EXECommandWrite.PromptText);
         }
     }
 }

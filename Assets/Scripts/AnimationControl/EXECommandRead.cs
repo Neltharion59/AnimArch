@@ -12,7 +12,7 @@ namespace OALProgramControl
         public String AssignmentType { get; }
         public EXEASTNodeAccessChain AssignmentTarget { get; }
         public EXEASTNodeBase Prompt { get; }  // Must be String type
-        public string PromptText { get; private set; }
+        public string PromptText { get; set; }
 
         public IStrategy Strategy = StrategyProduction.Instance;
 
@@ -41,21 +41,39 @@ namespace OALProgramControl
                 return assignmentTargetEvaluationResult;
             }
 
-            //this.Strategy.Read(this);
+            EXEExecutionResult promptEvaluationResult = null;
+            if (this.Prompt != null)
+            {
+                promptEvaluationResult = this.Prompt.Evaluate(this.SuperScope, OALProgram);
 
-            switch(this.Strategy.Read(this)){
-                case 0:
+                if (!HandleRepeatableASTEvaluation(promptEvaluationResult))
+                {
                     return promptEvaluationResult;
-                case 1:
-                    return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
-                case 2:
-                    return Success();
-                default:
-                    Debug.LogError("Something wrong happened in Strategy Read.");
-                    return null;
+                }
             }
 
-            
+            if (promptEvaluationResult.ReturnedOutput is not EXEValueString)
+            {
+                return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
+            }
+
+            this.Strategy.Read(this, promptEvaluationResult, this.SuperScope, OALProgram);
+
+            return Success();
+
+            // switch(this.Strategy.Read(this)){
+            //     case 0:
+            //         return promptEvaluationResult;
+            //     case 1:
+            //         return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
+            //     case 2:
+            //         return Success();
+            //     default:
+            //         Debug.LogError("Something wrong happened in Strategy Read.");
+            //         return null;
+            // }
+
+
         }
 
         public EXEExecutionResult AssignReadValue(String Value, OALProgram OALProgram)
