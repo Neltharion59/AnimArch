@@ -7,8 +7,9 @@ namespace OALProgramControl
     public interface IStrategy
     {
         public List<string> Commands { get; }
+        public abstract IStrategy Strategy {get; set;}
 
-        void Read(EXECommandRead EXECommandRead, EXEExecutionResult promptEvaluationResult, EXEScope SuperScope, OALProgram OALProgram);      
+        void Read();      
         void Write(EXECommandWrite EXECommandWrite); 
     }
 }

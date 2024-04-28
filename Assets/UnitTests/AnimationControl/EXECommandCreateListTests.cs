@@ -60,7 +60,7 @@ namespace Assets.UnitTests.AnimationControl
             CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
 
             CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
-            owningClass.AddMethod(owningMethod); // TODO tu si zadefinujeme potom este to dalsie pote mockovacich vtupov co sa ptm budu citat
+            owningClass.AddMethod(owningMethod); // TODOs tu si zadefinujeme potom este to dalsie pole mockovacich vstupov co sa ptm budu citat
 
             // Act
             EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);

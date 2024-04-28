@@ -14,17 +14,11 @@ namespace OALProgramControl
         public EXEASTNodeBase Prompt { get; }  // Must be String type
         public string PromptText { get; set; }
 
-        public IStrategy Strategy = StrategyProduction.Instance;
-
         public EXECommandRead(String assignmentType, EXEASTNodeAccessChain assignmentTarget, EXEASTNodeBase prompt)
         {
             this.AssignmentType = assignmentType ?? EXETypes.StringTypeName;
             this.AssignmentTarget = assignmentTarget;
             this.Prompt = prompt;
-        }
-
-          public void SetStrategy(IStrategy Strategy){
-            this.Strategy = Strategy;
         }
 
         protected override EXEExecutionResult Execute(OALProgram OALProgram)
@@ -57,23 +51,19 @@ namespace OALProgramControl
                 return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
             }
 
-            this.Strategy.Read(this, promptEvaluationResult, this.SuperScope, OALProgram);
+            string prompt = string.Empty;
+            EXEValueString retOutput = promptEvaluationResult.ReturnedOutput as EXEValueString;
+            if (retOutput != null)
+            {
+                VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                retOutput.Accept(visitor);
+                prompt = visitor.GetCommandStringAndResetStateNow();
+            }
+
+            this.PromptText = prompt;
+            Strategy.Read();
 
             return Success();
-
-            // switch(this.Strategy.Read(this)){
-            //     case 0:
-            //         return promptEvaluationResult;
-            //     case 1:
-            //         return Error("XEC2025", string.Format("Tried to read from console with prompt that is not string. Instead, it is \"{0}\".", promptEvaluationResult.ReturnedOutput.TypeName));
-            //     case 2:
-            //         return Success();
-            //     default:
-            //         Debug.LogError("Something wrong happened in Strategy Read.");
-            //         return null;
-            // }
-
-
         }
 
         public EXEExecutionResult AssignReadValue(String Value, OALProgram OALProgram)

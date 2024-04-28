@@ -10,7 +10,7 @@ namespace Assets.UnitTests.AnimationControl
     public class EXECommandWriteTests : StandardTest
     {    
         [Test]
-        public void HappyDay_01_Write_01()
+        public void HappyDay_01_Write_01() //TODOs
         {
             // Arrange
             EXEASTNodeAccessChain _assignmentTarget = new EXEASTNodeAccessChain();
@@ -22,7 +22,7 @@ namespace Assets.UnitTests.AnimationControl
             OALProgram _OALProgram = new OALProgram();
            
             // Act
-            _command.SetStrategy(new StrategyTesting()); 
+            _command.Strategy = new StrategyTesting(); 
 
             // Assert
             string _expectedOutput = "\"Zaciatok\"";

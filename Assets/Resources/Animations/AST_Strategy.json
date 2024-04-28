@@ -17,7 +17,7 @@
                         "operationEvaluator",
                         "scope"
                     ],
-                    "Code": "y=\"ahoj\";\nwrite(y);\np=\"\";\nx=AST(read(p));"
+                    "Code": "y=\"ahoj\";\nwrite(y);\nplacehoder=\"Zadaj text...\";\nx=string(read(placehoder));"
                 },
                 {
                     "Name": "printPretty",
