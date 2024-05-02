@@ -8,16 +8,23 @@ namespace OALProgramControl
     public class StrategyTesting : IStrategy
     {
         public List<string> ConsoleHistory { get; }
-        public String MockedInput { get; set; }
+        public List<String> MockedInputs { get; set; }
         public StrategyTesting()
-        {
+        {   
             this.ConsoleHistory = new List<string>();
-            this.MockedInput = "";
+            this.MockedInputs = new List<String>();
         }
 
         public void Read(EXECommandRead CurrentCommand, OALProgram CurrentProgramInstance)
         {
+            if(MockedInputs.Count <= 0)
+            {
+                throw new Exception("No more inputs to read.");
+            }
+            String MockedInput = MockedInputs[0];
+            MockedInputs.RemoveAt(0);
             CurrentCommand.AssignReadValue(MockedInput, CurrentProgramInstance);
+            ConsoleHistory.Add(CurrentCommand.PromptText);
             ConsoleHistory.Add(MockedInput);
         }   
 

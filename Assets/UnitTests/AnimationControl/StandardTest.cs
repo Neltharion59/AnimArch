@@ -1,4 +1,5 @@
-﻿using OALProgramControl;
+﻿using NUnit.Framework;
+using OALProgramControl;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -10,10 +11,14 @@ namespace Assets.UnitTests.AnimationControl
     {
         private const int LIMIT = 200;
 
-        protected EXEExecutionResult PerformExecution(OALProgram programInstance, String mockedInput = "")
+        [SetUp]
+        public void Setup()
         {
-            MenuManager.Instance.Strategy = new StrategyTesting(); 
-            MenuManager.Instance.Strategy.MockedInput = mockedInput;
+            MenuManager.Instance.Strategy = new StrategyTesting();
+        }
+
+        protected EXEExecutionResult PerformExecution(OALProgram programInstance)
+        {
             EXEScopeMethod executedMethod = programInstance.SuperScope as EXEScopeMethod;
 
             // Object owning the executed method
@@ -58,5 +63,6 @@ namespace Assets.UnitTests.AnimationControl
             command.Accept(visitor);
             return visitor.GetCommandStringAndResetStateNow();
         }
+
     }
 }

@@ -8,7 +8,7 @@ namespace OALProgramControl
     public interface IStrategy
     {
         public List<string> ConsoleHistory { get; }
-        public String MockedInput { get; set; }
+        public List<String> MockedInputs { get; set; }
 
         void Read(EXECommandRead CurrentCommand, OALProgram CurrentProgramInstance);      
         void Write(string text); 
