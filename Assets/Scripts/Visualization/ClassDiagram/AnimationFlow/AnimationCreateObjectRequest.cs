@@ -25,9 +25,9 @@ namespace Visualization.Animation
             string targetVariableName = null;
             if (createCommand.AssignmentTarget != null)
             {
-                VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                VisitorCommandToString visitor = new VisitorCommandToString();
                 createCommand.AssignmentTarget.Accept(visitor);
-                targetVariableName = visitor.GetCommandStringAndResetStateNow();
+                targetVariableName = visitor.GetCommandString();
             }
 
             if (animateNewObjects)
@@ -37,13 +37,11 @@ namespace Visualization.Animation
 
                 if (!animate)
                 {
-                    Debug.LogError("not animate");
                     animation.objectDiagram.ShowObject(objectInDiagram);
                     animation.objectDiagram.AddRelation(callerObject, createdObject, "ASSOCIATION");
                 }
                 else
                 {
-                    Debug.LogError("animate");
                     float speedPerAnim = AnimationData.Instance.AnimSpeed;
                     float timeModifier = 1.25f;
                     IEnumerable<RelationInDiagram> relationsOfClass = animation.classDiagram.FindRelationsByClass(createdObject.OwningClass.Name);
@@ -59,11 +57,8 @@ namespace Visualization.Animation
                     animation.objectDiagram.ShowObject(objectInDiagram);
                     yield return new WaitForSeconds(AnimationData.Instance.AnimSpeed * timeModifier);
                     highlightedClass.HighlightSubject.DecrementHighlightLevel();
-                    
-                    
 
                     animation.objectDiagram.AddRelation(callerObject, createdObject, "ASSOCIATION");
-
                 }
             }
             else

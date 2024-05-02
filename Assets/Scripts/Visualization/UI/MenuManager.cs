@@ -618,7 +618,7 @@ namespace Visualization.UI
                 }
                 else
                 {
-                    VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                    VisitorCommandToString visitor = new VisitorCommandToString();
 
                     if (a.startMethodParameters.ContainsKey(startMethodName))
                     {
@@ -629,7 +629,7 @@ namespace Visualization.UI
                         EXETypes.DefaultValue(parameter.Type, a.CurrentProgramInstance.ExecutionSpace).Accept(visitor);
                     }
                     
-                    parameterValue = visitor.GetCommandStringAndResetStateNow();
+                    parameterValue = visitor.GetCommandString();
                 }
 
                 parameterGo.GetComponent<MethodParameterManager>().SetPlaceholderText(parameterValue);
@@ -699,10 +699,10 @@ namespace Visualization.UI
                 .GetComponent<PanelSourceCodeAnimation>()
                 .SetMethodLabelText(currentMethodScope.MethodDefinition.OwningClass.Name, currentMethodScope.MethodDefinition.Name);
 
-            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            VisitorCommandToString visitor = new VisitorCommandToString();
             visitor.ActivateHighlighting();
             currentMethodScope.Accept(visitor);
-            string sourceCode = visitor.GetCommandStringAndResetStateNow();
+            string sourceCode = visitor.GetCommandString();
             PanelSourceCodeAnimation.GetComponent<PanelSourceCodeAnimation>().SetSourceCodeText(sourceCode);
         }
     }

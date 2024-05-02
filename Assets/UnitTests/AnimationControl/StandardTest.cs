@@ -25,9 +25,9 @@ namespace Assets.UnitTests.AnimationControl
             {
                 EXECommand currentCommand = programInstance.CommandStack.Next();
               
-                VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                VisitorCommandToString visitor = new VisitorCommandToString();
                 currentCommand.Accept(visitor);
-                Debug.Log(i.ToString() + visitor.GetCommandStringAndResetStateNow());
+                Debug.Log(i.ToString() + visitor.GetCommandString());
               
                 _executionResult = currentCommand.PerformExecution(programInstance);
 
@@ -51,9 +51,9 @@ namespace Assets.UnitTests.AnimationControl
 
         protected string ToCode(EXECommand command)
         {
-            VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+            VisitorCommandToString visitor = new VisitorCommandToString();
             command.Accept(visitor);
-            return visitor.GetCommandStringAndResetStateNow();
+            return visitor.GetCommandString();
         }
     }
 }

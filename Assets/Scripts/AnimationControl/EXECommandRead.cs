@@ -49,9 +49,9 @@ namespace OALProgramControl
             string prompt = string.Empty;
             EXEValueString retOutput = promptEvaluationResult.ReturnedOutput as EXEValueString;
             if (retOutput != null) {
-                VisitorCommandToString visitor = VisitorCommandToString.BorrowAVisitor();
+                VisitorCommandToString visitor = new VisitorCommandToString();
                 retOutput.Accept(visitor);
-                prompt = visitor.GetCommandStringAndResetStateNow();
+                prompt = visitor.GetCommandString();
             }
 
             this.PromptText = prompt;
