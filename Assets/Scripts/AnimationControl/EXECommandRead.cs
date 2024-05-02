@@ -23,15 +23,11 @@ namespace OALProgramControl
 
         protected override EXEExecutionResult Execute(OALProgram OALProgram)
         {
-            Debug.LogError("commandRead najprv");
-
             EXEExecutionResult assignmentTargetEvaluationResult
                 = this.AssignmentTarget.Evaluate(this.SuperScope, OALProgram, new EXEASTNodeAccessChainContext() { CreateVariableIfItDoesNotExist = true, VariableCreationType = this.AssignmentType });
 
             if (!HandleRepeatableASTEvaluation(assignmentTargetEvaluationResult))
             {
-                Debug.LogError("commandRead HandleRepeatableASTEvaluation return");
-
                 return assignmentTargetEvaluationResult;
             }
 
@@ -61,7 +57,7 @@ namespace OALProgramControl
             }
 
             this.PromptText = prompt;
-            Strategy.Read();
+            MenuManager.Instance.Strategy.Read(this, OALProgram);
 
             return Success();
         }

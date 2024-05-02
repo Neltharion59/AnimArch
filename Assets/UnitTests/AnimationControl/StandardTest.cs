@@ -2,6 +2,7 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using Visualization.UI;
 
 namespace Assets.UnitTests.AnimationControl
 {
@@ -9,9 +10,10 @@ namespace Assets.UnitTests.AnimationControl
     {
         private const int LIMIT = 200;
 
-        protected EXEExecutionResult PerformExecution(OALProgram programInstance)
+        protected EXEExecutionResult PerformExecution(OALProgram programInstance, String mockedInput = "")
         {
-            programInstance.SuperScope.Strategy = new StrategyTesting();  //TODOs tu sa nastavi ten atribut globalnej strategie na testovaciu strategiu
+            MenuManager.Instance.Strategy = new StrategyTesting(); 
+            MenuManager.Instance.Strategy.MockedInput = mockedInput;
             EXEScopeMethod executedMethod = programInstance.SuperScope as EXEScopeMethod;
 
             // Object owning the executed method

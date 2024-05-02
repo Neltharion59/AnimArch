@@ -17,7 +17,7 @@
                         "operationEvaluator",
                         "scope"
                     ],
-                    "Code": "y=\"ahoj\";\nwrite(y);\nplacehoder=\"Zadaj text...\";\nx=string(read(placehoder));"
+                    "Code": "y=\"ahoj\";\nwrite(y);\nwrite(123);\nwrite(0,123);\nplaceholder=\"Zadaj text...\";\nx=string(read(placeholder));\nx=string(read(\"\"));"
                 },
                 {
                     "Name": "printPretty",

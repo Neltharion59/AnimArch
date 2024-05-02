@@ -38,7 +38,7 @@ namespace OALProgramControl
 
             this.PromptText = result;
             
-            Strategy.Write(this);
+            MenuManager.Instance.Strategy.Write(result);
 
             return Success();
         }

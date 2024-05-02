@@ -1,15 +1,16 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace OALProgramControl
 {
     public interface IStrategy
     {
-        public List<string> Commands { get; }
-        public abstract IStrategy Strategy {get; set;}
+        public List<string> ConsoleHistory { get; }
+        public String MockedInput { get; set; }
 
-        void Read();      
-        void Write(EXECommandWrite EXECommandWrite); 
+        void Read(EXECommandRead CurrentCommand, OALProgram CurrentProgramInstance);      
+        void Write(string text); 
     }
 }

@@ -1,25 +1,26 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace OALProgramControl
 {
     public class StrategyProduction : IStrategy
     {
-        public List<string> Commands { get; }
-        public IStrategy Strategy { get; set; }
+        public List<string> ConsoleHistory { get; }
+        public String MockedInput { get; set; }
         public StrategyProduction()
         {
-            Strategy = this;
+            this.ConsoleHistory = new List<string>();
+            this.MockedInput = "";
         }
 
-        public void Read()
+        public void Read(EXECommandRead CurrentCommand, OALProgram CurrentProgramInstance)
         {
-            Debug.LogError("production read");
         }      
-        public void Write(EXECommandWrite EXECommandWrite)
+        
+        public void Write(string text)
         {
-            Debug.LogError("production write");
         }
 
     }

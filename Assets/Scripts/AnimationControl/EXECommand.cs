@@ -9,7 +9,6 @@ namespace OALProgramControl
         public bool IsActive { get; set; } = false;
         protected EXEScope SuperScope { get; private set; } = null;
         public EXEExecutionStack CommandStack { get; set; } = null;
-        public IStrategy Strategy = new StrategyProduction();
         public virtual IEnumerable<EXEScope> ScopesToTop()
         {
             EXEScope currentScope = this.SuperScope;

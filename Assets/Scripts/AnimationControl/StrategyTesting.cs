@@ -1,26 +1,29 @@
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace OALProgramControl
 {
     public class StrategyTesting : IStrategy
     {
-        public List<string> Commands { get; }
-        public IStrategy Strategy { get; set; }
+        public List<string> ConsoleHistory { get; }
+        public String MockedInput { get; set; }
         public StrategyTesting()
         {
-            Strategy = this;
+            this.ConsoleHistory = new List<string>();
+            this.MockedInput = "";
         }
 
-        public void Read()
-        {    
-            Debug.LogError("testing read");
-        }     
-        public void Write(EXECommandWrite EXECommandWrite)
+        public void Read(EXECommandRead CurrentCommand, OALProgram CurrentProgramInstance)
         {
-            Debug.LogError("testing write");
-            Commands.Add(EXECommandWrite.PromptText);
+            CurrentCommand.AssignReadValue(MockedInput, CurrentProgramInstance);
+            ConsoleHistory.Add(MockedInput);
+        }   
+
+        public void Write(string text)
+        {
+            ConsoleHistory.Add(text);
         }
 
     }

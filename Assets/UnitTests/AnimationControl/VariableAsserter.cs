@@ -7,7 +7,7 @@ using OALProgramControl;
 
 namespace Assets.UnitTests.AnimationControl
 {
-    public class VariableAsserter // TODOs takto aj console history
+    public class VariableAsserter 
     {
         private List<EXEVariable> ExpectedVariables;
         private EXEScope ActualScope;
@@ -69,7 +69,7 @@ namespace Assets.UnitTests.AnimationControl
                 throw new ArgumentNullException("actualScope");
             }
 
-            this.ActualScope = actualScope; // TODOs tu si ziskame pole na write z console 
+            this.ActualScope = actualScope;
         }
 
         public void PerformAssertion()
