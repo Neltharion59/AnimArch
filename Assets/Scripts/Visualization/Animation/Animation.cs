@@ -31,8 +31,6 @@ namespace Visualization.Animation
         public Color methodColor;
         public Color relationColor;
         public GameObject LineFill;
-        public int BarrierSize;
-        public int CurrentBarrierFill;
         public HighlightEdgeState edgeHighlighter;
         [HideInInspector] public bool AnimationIsRunning = false;
         [HideInInspector] public bool isPaused = false;
@@ -219,16 +217,6 @@ namespace Visualization.Animation
             }
 
             return step;
-        }
-
-        public void IncrementBarrier()
-        {
-            this.CurrentBarrierFill++;
-        }
-
-        public IEnumerator BarrierFillCheck()
-        {
-            yield return new WaitUntil(() => CurrentBarrierFill >= BarrierSize);
         }
 
         public void StartAnimation()
