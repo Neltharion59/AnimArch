@@ -724,5 +724,15 @@ namespace Visualization.Animation
             nextStep = true;
             prevStep = true;
         }
+
+        public void SetEdgeHighlighter(HighlightEdgeState newState)
+        {
+            edgeHighlighter = newState; 
+        }
+
+        public HighlightEdgeState GetEdgeHighlighter()
+        {
+            return edgeHighlighter;
+        }
     }
 }

@@ -675,11 +675,11 @@ namespace Visualization.UI
             Animation.Animation a = Animation.Animation.Instance;
             if (fillEdgeToggle.isOn)
             {
-               a.edgeHighlighter = HighlightFill.GetInstance(); 
+               a.SetEdgeHighlighter(HighlightFill.GetInstance()); 
             }
             else
             {
-                a.edgeHighlighter = HighlightImmediate.GetInstance(); 
+                a.SetEdgeHighlighter(HighlightImmediate.GetInstance()); 
             }
         }
 
