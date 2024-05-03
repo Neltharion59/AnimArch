@@ -11,7 +11,7 @@ namespace Assets.UnitTests.AnimationControl
     public class EXECommandReadWriteTests : StandardTest
     {
         [Test]
-        public void HappyDay_01_Read_01()
+        public void HappyDay_01_Read_01_String()
         {
             CommandTest Test = new CommandTest();
 
@@ -47,7 +47,7 @@ namespace Assets.UnitTests.AnimationControl
         }
         
         [Test]
-        public void HappyDay_01_Read_02()
+        public void HappyDay_01_Read_02_Int()
         {
             CommandTest Test = new CommandTest();
 
@@ -83,7 +83,7 @@ namespace Assets.UnitTests.AnimationControl
         }
 
         [Test]
-        public void HappyDay_01_Read_03()
+        public void HappyDay_01_Read_03_Bool()
         {
             CommandTest Test = new CommandTest();
 
@@ -119,7 +119,7 @@ namespace Assets.UnitTests.AnimationControl
         }
 
         [Test]
-        public void HappyDay_01_Read_04()
+        public void HappyDay_01_Read_04_Real()
         {
             CommandTest Test = new CommandTest();
 
@@ -155,7 +155,7 @@ namespace Assets.UnitTests.AnimationControl
         }
 
         [Test]
-        public void HappyDay_01_Read_05()
+        public void HappyDay_01_Read_05_Multi()
         {
             CommandTest Test = new CommandTest();
 
@@ -203,7 +203,7 @@ namespace Assets.UnitTests.AnimationControl
         }
 
         [Test]
-        public void HappyDay_01_Write_01() 
+        public void HappyDay_02_Write_01_String() 
         {
             CommandTest Test = new CommandTest();
 
@@ -234,7 +234,7 @@ namespace Assets.UnitTests.AnimationControl
         }
 
         [Test]
-        public void HappyDay_01_Write_02() 
+        public void HappyDay_02_Write_02_Int() 
         {
             CommandTest Test = new CommandTest();
 
@@ -265,7 +265,69 @@ namespace Assets.UnitTests.AnimationControl
         }
 
         [Test]
-        public void HappyDay_01_Write_03() 
+        public void HappyDay_02_Write_03_Bool() 
+        {
+            CommandTest Test = new CommandTest();
+
+            // Arrange
+            string _methodSourceCode = "write(true);";
+
+            OALProgram programInstance = new OALProgram();
+            CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
+
+            CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
+            owningClass.AddMethod(owningMethod);
+           
+            // Act
+            EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);
+            owningMethod.ExecutableCode = methodScope;
+            programInstance.SuperScope = methodScope;
+
+            EXEExecutionResult _executionResult = PerformExecution(programInstance);
+
+            // Assert
+            Test.Declare(methodScope, _executionResult);
+            Test.Variables
+                .ExpectVariable("self", methodScope.OwningObject);
+            Test.ConsoleHistory
+                .ExpectText("TRUE");
+                
+            Test.PerformAssertion();
+        }
+
+        [Test]
+        public void HappyDay_02_Write_04_Real() 
+        {
+            CommandTest Test = new CommandTest();
+
+            // Arrange
+            string _methodSourceCode = "write(0.123);";
+
+            OALProgram programInstance = new OALProgram();
+            CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
+
+            CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
+            owningClass.AddMethod(owningMethod);
+           
+            // Act
+            EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);
+            owningMethod.ExecutableCode = methodScope;
+            programInstance.SuperScope = methodScope;
+
+            EXEExecutionResult _executionResult = PerformExecution(programInstance);
+
+            // Assert
+            Test.Declare(methodScope, _executionResult);
+            Test.Variables
+                .ExpectVariable("self", methodScope.OwningObject);
+            Test.ConsoleHistory
+                .ExpectText("0.123");
+                
+            Test.PerformAssertion();
+        }
+
+        [Test]
+        public void HappyDay_02_Write_05_Multi() 
         {
             CommandTest Test = new CommandTest();
 
@@ -294,13 +356,13 @@ namespace Assets.UnitTests.AnimationControl
                 .ExpectText("\"Zápästie,\nnie fist - päsť.\"")
                 .ExpectText("-123")
                 .ExpectText("0.987")
-                .ExpectText("False");          
+                .ExpectText("FALSE");          
 
             Test.PerformAssertion();
         }
 
         [Test]
-        public void HappyDay_01_ReadWrite_01()
+        public void HappyDay_03_ReadWrite_01()
         {
             CommandTest Test = new CommandTest();
 
