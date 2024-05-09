@@ -185,6 +185,13 @@ namespace Visualization.Animation
             InitializeSchedulers();
         }
 
+        private IEnumerator TeardownAnimation()
+        {
+            TerminateSchedulers();
+            yield return new WaitUntil(() => highlightScheduler.IsOver());
+            Debug.Log("Over");
+        }
+
         // Main Couroutine for compiling the OAL of Animation script and then starting the visualisation of Animation
         public IEnumerator Animate()
         {
@@ -214,9 +221,7 @@ namespace Visualization.Animation
             AnimationThread SuperThread = new AnimationThread(currentProgramInstance.CommandStack, currentProgramInstance, this);
             yield return StartCoroutine(SuperThread.Start());
 
-            TerminateSchedulers();
-            yield return new WaitUntil(() => highlightScheduler.IsOver());
-            Debug.Log("Over");
+            yield return TeardownAnimation();
             AnimationIsRunning = false;
         }
 
