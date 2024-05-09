@@ -672,15 +672,13 @@ namespace Visualization.UI
         }
         public void ChangeEdgeHighlighting()
         {
-            Animation.Animation a = Animation.Animation.Instance;
+            HighlightEdgeState state = HighlightImmediateState.GetInstance(); 
             if (fillEdgeToggle.isOn)
             {
-               a.SetEdgeHighlighter(HighlightFill.GetInstance()); 
+               state = HighlightFillState.GetInstance(); 
             }
-            else
-            {
-                a.SetEdgeHighlighter(HighlightImmediate.GetInstance()); 
-            }
+
+            Animation.Animation.Instance.SetEdgeHighlighter(state);
         }
 
         public static void SetAnimationButtonsActive(bool active)

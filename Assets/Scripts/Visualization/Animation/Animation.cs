@@ -57,7 +57,7 @@ namespace Visualization.Animation
             classDiagram = GameObject.Find("ClassDiagram").GetComponent<ClassDiagram.Diagrams.ClassDiagram>();
             objectDiagram = GameObject.Find("ObjectDiagram").GetComponent<ObjectDiagram>();
             standardPlayMode = true;
-            edgeHighlighter = HighlightImmediate.GetInstance();
+            edgeHighlighter = HighlightImmediateState.GetInstance();
         }
 
         private void ParseAnimationMethods()
