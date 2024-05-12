@@ -326,7 +326,7 @@ namespace Assets.UnitTests.AnimationControl
             Test.Variables
                     .ExpectVariable("self", methodScope.OwningObject);
             Test.ConsoleHistory
-                    .ExpectText("0.123");
+                    .ExpectText("0,123");
                 
             Test.PerformAssertion();
         }
@@ -360,7 +360,7 @@ namespace Assets.UnitTests.AnimationControl
                     .ExpectText("\"Čo je wrist?\"")
                     .ExpectText("\"Zápästie,\nnie fist - päsť.\"")
                     .ExpectText("-123")
-                    .ExpectText("0.987")
+                    .ExpectText("0,987")
                     .ExpectText("FALSE");          
 
             Test.PerformAssertion();
