@@ -133,6 +133,14 @@ public class VisitorCommandToString : Visitor
         });
     }
 
+    public override void VisitExeCommandListOperation(EXECommandListOperation command)
+    {
+        HandleBasicEXECommand(command, (visitor) => {
+            visitor.commandString.Append("<EXECommandListOperation>");
+            return false;
+        });
+    }
+
     public override void VisitExeCommandAddingToList(EXECommandAddingToList command)
     {
         HandleBasicEXECommand(command, (visitor) => {
@@ -219,6 +227,14 @@ public class VisitorCommandToString : Visitor
             command.StringToWrite.Accept(visitor);
             visitor.commandString.Append(" to file ");
             command.FileToWriteTo.Accept(visitor);
+            return false;
+        });
+    }
+
+    public override void VisitExeCommandFileModify(EXECommandFileModify command)
+    {
+        HandleBasicEXECommand(command, (visitor) => {
+            visitor.commandString.Append("<EXECommandFileModify>");
             return false;
         });
     }
@@ -329,6 +345,15 @@ public class VisitorCommandToString : Visitor
                 arg.Accept(this);
             }
             visitor.commandString.Append(")");
+            return false;
+        });
+    }
+
+    public override void VisitExeScopeNull(EXEScopeNull scope)
+    {
+        HandleBasicEXECommand(scope, (visitor) => {
+            visitor.commandString.Append("<EXEScopeNull>");
+
             return false;
         });
     }

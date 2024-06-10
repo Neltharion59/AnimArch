@@ -115,6 +115,15 @@ public class VisitorPythonCode : Visitor
         
     }
 
+    public override void VisitExeCommandListOperation(EXECommandListOperation command)
+    {
+        HandleBasicEXECommand(command, (visitor) => {
+            visitor.commandString.Append("<EXECommandListOperation>");
+            
+            return false;
+        });
+    }
+
     public override void VisitExeCommandAssignment(EXECommandAssignment command)
     {
         
@@ -195,6 +204,15 @@ public class VisitorPythonCode : Visitor
             visitor.commandString.Append(", \"w\") as file_to_write_to:\n\tfile_to_write_to.write(");
             command.StringToWrite.Accept(visitor);
             visitor.commandString.Append(")");
+            return false;
+        });
+    }
+
+    public override void VisitExeCommandFileModify(EXECommandFileModify command)
+    {
+        HandleBasicEXECommand(command, (visitor) => {
+            visitor.commandString.Append("<EXECommandFileModify>");
+            
             return false;
         });
     }
@@ -326,6 +344,15 @@ public class VisitorPythonCode : Visitor
             return false;
         });
         
+    }
+
+    public override void VisitExeScopeNull(EXEScopeNull scope)
+    {
+        HandleBasicEXECommand(scope, (visitor) => {
+            visitor.commandString.Append("<EXEScopeNull>");
+
+            return false;
+        });
     }
 
     public override void VisitExeScope(EXEScope scope)

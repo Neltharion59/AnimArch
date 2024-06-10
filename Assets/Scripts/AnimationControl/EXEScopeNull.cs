@@ -69,5 +69,10 @@ namespace OALProgramControl
         public override void ToggleActiveRecursiveBottomUp(bool active)
         {
         }
+
+        public override void Accept(Visitor v)
+        {
+            v.VisitExeScopeNull(this);
+        }
     }
 }
