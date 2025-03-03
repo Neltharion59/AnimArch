@@ -101,26 +101,40 @@ namespace OALProgramControl
         public void LayoutMessagesWithActivationBlocks()
         {
             foreach (MessageInDiagram messageInDiagram in Messages) {
-                
-                float X1 = messageInDiagram.SourceEntity.LifeLine.transform.position.x;
-                float Y = messageInDiagram.SourceEntity.VisualObjectHeader.transform.position.y;
-                messageInDiagram.ActivationBlockSource.transform.SetPositionAndRotation(
-                    new Vector3(X1,Y-150, 0), 
-                    Quaternion.identity
-                );
+                Transform SEObj = messageInDiagram.SourceEntity.LifeLine.transform;
+                Transform SEVOH = messageInDiagram.SourceEntity.VisualObjectHeader.transform;
 
-                float X2 = messageInDiagram.DestinationEntity.LifeLine.transform.position.x;
-                Y = messageInDiagram.DestinationEntity.VisualObjectHeader.transform.position.y;
-                messageInDiagram.ActivationBlockDestination.transform.SetPositionAndRotation(
-                    new Vector3(X2, Y-150, 0), 
-                    Quaternion.identity
-                );
+                Vector3 SourcePosition = new Vector3(SEObj.position.x, SEVOH.position.y-150, 0);
+                messageInDiagram.ActivationBlockSource.transform.position = SourcePosition;
 
-                messageInDiagram.Arrow.transform.SetPositionAndRotation(
-                    new Vector3((X1+X2)/2, Y-150, 0), 
-                    Quaternion.identity
-                );
+                // Napr
+                ScaleAndRepositionOfBlock(messageInDiagram.ActivationBlockSource.transform, new Vector3(1, 100, 1));
+                ScaleAndRepositionOfBlock(messageInDiagram.ActivationBlockSource.transform, new Vector3(1, 10, 1));
+
+                Transform DEObj = messageInDiagram.DestinationEntity.LifeLine.transform;
+                Transform DEVOH = messageInDiagram.DestinationEntity.VisualObjectHeader.transform;
+
+                Vector3 DestPosition = new Vector3(DEObj.position.x, DEVOH.position.y-150, 0);
+                messageInDiagram.ActivationBlockDestination.transform.position = DestPosition;
+            
+                // Napr
+                ScaleAndRepositionOfBlock(messageInDiagram.ActivationBlockDestination.transform, new Vector3(1, 333, 1));
+
+                messageInDiagram.Arrow.transform.position = 
+                new Vector3((SourcePosition.x + DestPosition.x)/2, DEVOH.position.y-150, 0);
             }
+        }
+
+        public void ScaleAndRepositionOfBlock(Transform obj, Vector3 newScale)
+        {
+            float oldHeight = obj.localScale.y;
+
+            float offset = oldHeight / 4f;
+            obj.position += new Vector3(0, offset, 0);
+
+            obj.localScale = newScale;
+            offset = newScale.y / 4f;
+            obj.position -= new Vector3(0, offset, 0);
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -33916,7 +33916,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
-  graph: {fileID: 0}
 --- !u!1 &847760169
 GameObject:
   m_ObjectHideFlags: 0
@@ -40462,7 +40461,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 85fc0f85531d0a44aadd68207e1876e0, type: 3}
+  m_Texture: {fileID: 2800000, guid: 1f38687a4d9c61f4f975d810431fffb9, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
