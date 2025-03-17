@@ -208,6 +208,7 @@ namespace Visualization.Animation
 
             AnimationIsRunning = true;
 
+            EXEScopeMethod.CommandIDSeed = 1;
             ParseAnimationMethods();
 
             CDMethod startMethod = FindInitialMethod();

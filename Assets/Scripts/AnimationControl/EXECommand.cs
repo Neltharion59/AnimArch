@@ -7,6 +7,8 @@ namespace OALProgramControl
 {
     public abstract class EXECommand
     {
+        public long CommandID { get; private set; }
+
         public bool IsActive { get; set; } = false;
         public bool IsDirectlyInCode { get; set; } = false;
         public static EXEScopeNull NullScope = EXEScopeNull.GetInstance();
@@ -94,6 +96,7 @@ namespace OALProgramControl
 
             // Shared behaviour of cloning goes here
             copy.IsDirectlyInCode = IsDirectlyInCode;
+            copy.CommandID = CommandID;
 
             return copy;
         }
@@ -142,6 +145,30 @@ namespace OALProgramControl
             }
 
             return executionResult.IsSuccess;
+        }
+        public override bool Equals(object obj)
+        {
+            // Debug.Log("[Karin] EXECommand.Equals");
+            if (obj == null || this.GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            EXECommand other = (EXECommand)obj;
+            return IsActive == other.IsActive &&
+                   IsDirectlyInCode == other.IsDirectlyInCode &&
+                   EqualityComparer<EXEScopeBase>.Default.Equals(SuperScope, other.SuperScope) &&
+                   EqualityComparer<EXEExecutionStack>.Default.Equals(CommandStack, other.CommandStack);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(IsActive, IsDirectlyInCode, SuperScope, CommandStack);
+        }
+
+        public virtual void SetCommandID()
+        {
+            CommandID = EXEScopeMethod.CommandIDSeed++;
         }
     }
 }
