@@ -103,6 +103,7 @@ namespace Visualization.Animation
                 }
 
                 yield return Animation.AnimateCommand(CurrentCommand, this, Animate, AnimateNewObjects);
+                Animation.ToPlantUMLCommand(CurrentCommand);
 
                 if (!ExecutionSuccess.IsSuccess)
                 {

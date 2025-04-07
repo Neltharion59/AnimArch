@@ -10152,6 +10152,7 @@ MonoBehaviour:
   sequenceArrowSD: {fileID: 1523548488617654, guid: 3dbd934c74a95a741a4fa0f9d894e458,
     type: 3}
   sequenceMessage: {fileID: 100000, guid: ddc15c0da3841364b90e38453e021c3b, type: 3}
+  SVG: {fileID: 1029083211520646884, guid: 620e9df974524954d89ce3c4881f5538, type: 3}
   activityInitialPrefab: {fileID: 1226358218867430, guid: 204995dbba78b89409f029217f15cb08,
     type: 3}
   activityFinalPrefab: {fileID: 1226358218867430, guid: 1be686612295d7949a1be32ca1e1dbb3,
@@ -33881,6 +33882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838906256}
   - component: {fileID: 838906257}
+  - component: {fileID: 838906258}
   m_Layer: 0
   m_Name: SequenceDiagram
   m_TagString: Untagged
@@ -33916,6 +33918,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graph: {fileID: 0}
+--- !u!114 &838906258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838906255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 996c8baf00084d847b1665080150aa53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  svgImage: {fileID: 0}
 --- !u!1 &847760169
 GameObject:
   m_ObjectHideFlags: 0
