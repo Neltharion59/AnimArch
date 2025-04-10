@@ -1,0 +1,83 @@
+@startuml
+
+
+
+
+
+Client -> Vet : Register(, )
+activate Vet
+
+Vet -> Obs : SetVaccinationDate()
+activate Obs
+
+
+return done
+
+return done
+
+
+
+
+Client -> Vet : Register(, )
+activate Vet
+
+Vet -> Obs : SetVaccinationDate()
+activate Obs
+
+
+return done
+
+return done
+Client -> Vet : SetDate()
+activate Vet
+
+Vet -> Vet : VaccinateAnimals()
+activate Vet
+
+Vet -> Animal : ReceiveVaccine()
+activate Animal
+	
+
+
+
+return done
+
+Vet -> Animal : ReceiveVaccine()
+activate Animal
+	
+
+
+return done
+
+
+return done
+
+return done
+Client -> Vet : SetDate()
+activate Vet
+
+Vet -> Vet : VaccinateAnimals()
+activate Vet
+
+Vet -> Animal : ReceiveVaccine()
+activate Animal
+	
+
+
+return done
+
+Vet -> Animal : ReceiveVaccine()
+activate Animal
+	
+
+
+
+return done
+
+
+return done
+
+return done
+
+return done
+@enduml

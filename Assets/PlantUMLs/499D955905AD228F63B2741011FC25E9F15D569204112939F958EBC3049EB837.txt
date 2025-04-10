@@ -1,0 +1,176 @@
+@startuml
+Client -> game_1 : CreateLevel()
+activate game_1
+game_1 -> game_1 : CreateHumanArmy()
+activate game_1
+
+game_1 -> humanfactory_1 : CreateWarrior()
+activate humanfactory_1
+
+humanfactory_1 -> humanwarrior_1 : HumanWarrior()
+activate humanwarrior_1
+
+return done
+
+return done
+game_1 -> humanfactory_1 : CreateWarrior()
+activate humanfactory_1
+
+humanfactory_1 -> humanwarrior_1 : HumanWarrior()
+activate humanwarrior_1
+
+return done
+
+return done
+game_1 -> humanfactory_1 : CreateWarrior()
+activate humanfactory_1
+
+humanfactory_1 -> humanwarrior_1 : HumanWarrior()
+activate humanwarrior_1
+
+return done
+
+return done
+game_1 -> humanfactory_1 : CreateRanger()
+activate humanfactory_1
+
+humanfactory_1 -> humanranger_1 : HumanRanger()
+activate humanranger_1
+
+return done
+
+return done
+game_1 -> humanfactory_1 : CreateRanger()
+activate humanfactory_1
+
+humanfactory_1 -> humanranger_1 : HumanRanger()
+activate humanranger_1
+
+return done
+
+return done
+game_1 -> humanfactory_1 : CreateMage()
+activate humanfactory_1
+
+humanfactory_1 -> humanmage_1 : HumanMage()
+activate humanmage_1
+
+return done
+
+return done
+
+return done
+game_1 -> game_1 : CreateElvenArmy()
+activate game_1
+
+game_1 -> elvenfactory_1 : CreateWarrior()
+activate elvenfactory_1
+
+elvenfactory_1 -> elvenwarrior_1 : ElvenWarrior()
+activate elvenwarrior_1
+
+return done
+
+return done
+game_1 -> elvenfactory_1 : CreateRanger()
+activate elvenfactory_1
+
+elvenfactory_1 -> elvenranger_1 : ElvenRanger()
+activate elvenranger_1
+
+return done
+
+return done
+game_1 -> elvenfactory_1 : CreateRanger()
+activate elvenfactory_1
+
+elvenfactory_1 -> elvenranger_1 : ElvenRanger()
+activate elvenranger_1
+
+return done
+
+return done
+game_1 -> elvenfactory_1 : CreateRanger()
+activate elvenfactory_1
+
+elvenfactory_1 -> elvenranger_1 : ElvenRanger()
+activate elvenranger_1
+
+return done
+
+return done
+game_1 -> elvenfactory_1 : CreateRanger()
+activate elvenfactory_1
+
+elvenfactory_1 -> elvenranger_1 : ElvenRanger()
+activate elvenranger_1
+
+return done
+
+return done
+game_1 -> elvenfactory_1 : CreateMage()
+activate elvenfactory_1
+
+elvenfactory_1 -> elvenmage_1 : ElvenMage()
+activate elvenmage_1
+
+return done
+
+return done
+
+return done
+game_1 -> game_1 : CreateTrollArmy()
+activate game_1
+
+game_1 -> trollfactory_1 : CreateWarrior()
+activate trollfactory_1
+
+trollfactory_1 -> trollwarrior_1 : TrollWarrior()
+activate trollwarrior_1
+
+return done
+
+return done
+game_1 -> trollfactory_1 : CreateWarrior()
+activate trollfactory_1
+
+trollfactory_1 -> trollwarrior_1 : TrollWarrior()
+activate trollwarrior_1
+
+return done
+
+return done
+game_1 -> trollfactory_1 : CreateWarrior()
+activate trollfactory_1
+
+trollfactory_1 -> trollwarrior_1 : TrollWarrior()
+activate trollwarrior_1
+
+return done
+
+return done
+game_1 -> trollfactory_1 : CreateWarrior()
+activate trollfactory_1
+
+trollfactory_1 -> trollwarrior_1 : TrollWarrior()
+activate trollwarrior_1
+
+return done
+
+return done
+game_1 -> trollfactory_1 : CreateMage()
+activate trollfactory_1
+
+trollfactory_1 -> trollmage_1 : TrollMage()
+activate trollmage_1
+
+return done
+
+return done
+
+return done
+
+return done
+
+return done
+@enduml

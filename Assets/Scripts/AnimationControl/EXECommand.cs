@@ -11,6 +11,7 @@ namespace OALProgramControl
         public static EXEScopeNull NullScope = EXEScopeNull.GetInstance();
         public EXEScopeBase SuperScope { get; set; } = NullScope; 
         public EXEExecutionStack CommandStack { get; set; } = null;
+        public bool IsDone { get; set; } = false;
         
         public virtual IEnumerable<EXEScopeBase> ScopesToTop()
         {
@@ -37,7 +38,7 @@ namespace OALProgramControl
         public EXEExecutionResult PerformExecution(OALProgram OALProgram)
         {
             EXEExecutionResult Result = Execute(OALProgram);
-
+            IsDone = Result.IsDone;
             return Result;
         }
         protected abstract EXEExecutionResult Execute(OALProgram OALProgram);

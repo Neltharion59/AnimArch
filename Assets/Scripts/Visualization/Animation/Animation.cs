@@ -54,9 +54,6 @@ namespace Visualization.Animation
         [HideInInspector] private OALProgram currentProgramInstance = new OALProgram();
         [HideInInspector] public OALProgram CurrentProgramInstance { get { return currentProgramInstance; } }
 
-        public StringBuilder commandString;
-
-        VisitorCommandToPlantUML visitor;
         public bool SuperSpeed = false;
 
         private void Awake()
@@ -65,8 +62,6 @@ namespace Visualization.Animation
             DiagramManager.sequenceDiagram = GameObject.Find("SequenceDiagram").GetComponent<SequenceDiagram>();
             standardPlayMode = true;
             edgeHighlighter = HighlightImmediateState.GetInstance();
-            commandString = new StringBuilder();
-            visitor = new VisitorCommandToPlantUML();
         }
 
         private void ParseAnimationMethods()
@@ -198,16 +193,10 @@ namespace Visualization.Animation
         {
             TerminateSchedulers();
             yield return new WaitUntil(() => highlightScheduler.IsOver());
-            visitor.AppendToCommandString("@enduml");
-
-            string path = Application.dataPath + "/myTextFile.txt";
-            string content = visitor.GetCommandString().ToString();
-
-            File.WriteAllText(path, content);
+            DiagramManager.sequenceDiagram.CreatePlantUMLFile();
 
             Debug.Log("Over");
         }
-        // "@startuml;\nClient -> game_1 : ;\n;\ngame_1 -> game_1 : ;\n;\ngame_1 -> game_1 : ;\ngame_1 -> self : ;\nself -> self : ;\nself -> self : ;\nself -> self : ;\nself -> self : ;\nself -> self : ;\n;\nself -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanwarrior_1 : ;\n;\nhumanwarrior_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanranger_1 : ;\n;\nhumanranger_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\n;\nhumanfactory_1 -> humanmage_1 : ;\n;\nhumanmage_1 -> humanmage_1 : ;\n;\nhumanmage_1 -> humanmage_1 : ;\n;\nhumanmage_1 -> humanmage_1 : ;\n;\nhumanmage_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> humanfactory_1 : ;\nhumanfactory_1 -> self : ;\nself -> self : ;\nself -> self : ;\n;\nself -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenwarrior_1 : ;\n;\nelvenwarrior_1 -> elvenwarrior_1 : ;\n;\nelvenwarrior_1 -> elvenwarrior_1 : ;\n;\nelvenwarrior_1 -> elvenwarrior_1 : ;\n;\nelvenwarrior_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenranger_1 : ;\n;\nelvenranger_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\n;\nelvenfactory_1 -> elvenmage_1 : ;\n;\nelvenmage_1 -> elvenmage_1 : ;\n;\nelvenmage_1 -> elvenmage_1 : ;\n;\nelvenmage_1 -> elvenmage_1 : ;\n;\nelvenmage_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> elvenfactory_1 : ;\nelvenfactory_1 -> self : ;\nself -> self : ;\nself -> self : ;\n;\nself -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollwarrior_1 : ;\n;\ntrollwarrior_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\n;\ntrollfactory_1 -> trollmage_1 : ;\n;\ntrollmage_1 -> trollmage_1 : ;\n;\ntrollmage_1 -> trollmage_1 : ;\n;\ntrollmage_1 -> trollmage_1 : ;\n;\ntrollmage_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> trollfactory_1 : ;\ntrollfactory_1 -> self : ;\nself -> self : ;\nself -> self : ;\n;\nself -> game_1 : ;\n"
 
         // Main Couroutine for compiling the OAL of Animation script and then starting the visualisation of Animation
         public IEnumerator Animate()
@@ -232,12 +221,14 @@ namespace Visualization.Animation
             {
                 yield break;
             }
-            visitor.classNames.Push(startClassName);    
-            visitor.AppendToCommandString("@startuml");  
-
-            DiagramManager.sequenceDiagram.AddEntities(currentProgramInstance.ExecutionSpace.Classes);
+            
             DiagramManager.sequenceDiagram.ResetDiagram();
             DiagramManager.sequenceDiagram.LoadDiagram();
+
+            DiagramManager.sequenceDiagram.StartPlantUMLCreation(startClassName); 
+            DiagramManager.sequenceDiagram.CreateHash(GenerateJoinedFileNameForSeqD());
+            // hash file name, check if there exists png, if not start plantUml creation
+            // if started creation, accept currentCommand in AnimateCommand(), and end creation in TeardownAnimation() 
 
             SetupAnimation(startMethod, MethodExecutableCode);
 
@@ -250,11 +241,12 @@ namespace Visualization.Animation
             AnimationIsRunning = false;
         }
 
-        public void ToPlantUMLCommand(EXECommand CurrentCommand){
-            var scope = CurrentCommand.GetCurrentMethodScope();
+        private string GenerateJoinedFileNameForSeqD()
+        {
+            string AnimationName = AnimationData.Instance.selectedAnim.AnimationName;
+            string DiagramName = AnimationData.Instance.diagramPath;
             
-            scope.Accept(visitor);
-            commandString.Append(visitor.GetCommandString());
+            return DiagramName + AnimationName + startClassName + startMethodName;
         }
 
         public IEnumerator AnimateCommand(EXECommand CurrentCommand, AnimationThread AnimationThread, bool Animate = true, bool AnimateNewObjects = true)
@@ -279,6 +271,10 @@ namespace Visualization.Animation
                 AddActivityToDiagram(CurrentCommand, commandCode);
             }
             // <= Karin - Activity Diagram
+            if (CurrentCommand.IsDone){
+                DiagramManager.sequenceDiagram.ToPlantUMLCommand(CurrentCommand);
+            }
+            
 
             AnimationRequest request = AnimationRequestFactory.Create(CurrentCommand, AnimationThread, Animate, AnimateNewObjects);
             highlightScheduler.Enqueue(request);

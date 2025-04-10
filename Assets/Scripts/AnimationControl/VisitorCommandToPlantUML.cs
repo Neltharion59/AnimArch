@@ -235,7 +235,7 @@ public class VisitorCommandToPlantUML : Visitor
                 command.Expression.Accept(visitor);
             }
             visitor.commandString.Append("\nreturn done");
-            visitor.commandString.Append("\ndeactivate " + classNames.Pop());
+            classNames.Pop();
             
             return false;
         });
@@ -288,10 +288,6 @@ public class VisitorCommandToPlantUML : Visitor
 
     public override void VisitExeScopeMethod(EXEScopeMethod scope)
     {
-        foreach (EXECommand Command in scope.Commands)
-        {
-            Command.Accept(this);
-        }
     }
 
     public override void VisitExeScopeForEach(EXEScopeForEach scope)
@@ -300,10 +296,7 @@ public class VisitorCommandToPlantUML : Visitor
         scope.Iterable.Accept(this);
 
         IncreaseIndentation();
-        foreach (EXECommand Command in scope.Commands)
-        {
-            Command.Accept(this);
-        }
+
         DecreaseIndentation();
 
         WriteIndentation();
