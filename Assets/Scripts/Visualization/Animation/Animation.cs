@@ -290,7 +290,6 @@ namespace Visualization.Animation
 
             yield return new WaitUntil(() => !isPaused);
         }
-
         public ObjectInDiagram AddObjectToDiagram(CDClassInstance newObject, string name = null, bool showNewObject = true)
         {
             ObjectInDiagram objectInDiagram = DiagramManager.objectDiagram.AddObjectInDiagram(name, newObject, showNewObject);
