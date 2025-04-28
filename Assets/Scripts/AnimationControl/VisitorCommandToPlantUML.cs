@@ -15,12 +15,17 @@ public class VisitorCommandToPlantUML : Visitor
     private int indentationLevel;
 
     public Stack<string> classNames;
+    public HashSet<long> CommandCallsInLoop = new HashSet<long>();
+
+    private bool addingParameters = false;
+    public Stack<long> loopIDs;
 
 
     public VisitorCommandToPlantUML()
     {
         commandString = new StringBuilder();
         classNames = new Stack<string>();
+        loopIDs = new Stack<long>();
         ResetState();
     }
 
@@ -91,6 +96,21 @@ public class VisitorCommandToPlantUML : Visitor
     public override void VisitExeCommandCall(EXECommandCall command)
     {
         HandleBasicEXECommand(command, (visitor) => {
+            if (command.UniqueID == 0) {
+                command.UniqueID = EXEInstanceIDSeed.GetInstance().GenerateID();
+            }
+            if (loopIDs.Count() != 0) {
+                CommandCallsInLoop.Add(command.UniqueID);
+            }
+            else {
+                // If outside a loop and command was already seen, skip it
+                if (CommandCallsInLoop.Contains(command.UniqueID))
+                    return false;
+
+                // Reset tracking for non-loop execution
+                CommandCallsInLoop = new HashSet<long>();
+            }
+
             string callerClass = classNames.Peek();
             string nextClass = command.MethodAccessChainS;
             if (nextClass == "self"){
@@ -100,7 +120,9 @@ public class VisitorCommandToPlantUML : Visitor
             classNames.Push(nextClass);
 
             command.MethodCall.Accept(visitor);
-            visitor.commandString.Append("\nactivate " + nextClass);
+            AddEOL();
+            WriteIndentation();
+            visitor.commandString.Append("activate " + nextClass);
 
             return false;
         });
@@ -234,7 +256,11 @@ public class VisitorCommandToPlantUML : Visitor
             {
                 command.Expression.Accept(visitor);
             }
-            visitor.commandString.Append("\nreturn done");
+            if (classNames.Count != 1){
+                AddEOL();
+                WriteIndentation();
+                visitor.commandString.Append("return done");
+            }
             classNames.Pop();
             
             return false;
@@ -271,19 +297,10 @@ public class VisitorCommandToPlantUML : Visitor
 
     public override void VisitExeScope(EXEScope scope)
     {
-        foreach (EXECommand Command in scope.Commands)
-        {
-            Command.Accept(this);
-        }
     }
 
     public override void VisitExeScopeLoop(EXEScopeLoop scope)
     {
-        
-        foreach (EXECommand Command in scope.Commands)
-        {
-            Command.Accept(this);
-        }
     }
 
     public override void VisitExeScopeMethod(EXEScopeMethod scope)
@@ -292,14 +309,20 @@ public class VisitorCommandToPlantUML : Visitor
 
     public override void VisitExeScopeForEach(EXEScopeForEach scope)
     { 
-        WriteIndentation();
-        scope.Iterable.Accept(this);
+        if (loopIDs.Count() != 0 && scope.UniqueID == loopIDs.Peek()){
+            // end for us
+            DecreaseIndentation();
+            commandString.Append("end\n");
+            return;
+        }
+
+        // first time going through loop
+        scope.UniqueID = EXEInstanceIDSeed.GetInstance().GenerateID();
+        loopIDs.Push(scope.UniqueID);
+        commandString.Append("loop " + scope.IteratorName);
 
         IncreaseIndentation();
 
-        DecreaseIndentation();
-
-        WriteIndentation();
         AddEOL();
     }
 
@@ -415,12 +438,16 @@ public class VisitorCommandToPlantUML : Visitor
 
     public override void VisitExeASTNodeLeaf(EXEASTNodeLeaf node)
     {
+        if (addingParameters){
+            commandString.Append(node.Value);
+        }
     }
 
     public override void VisitExeASTNodeMethodCall(EXEASTNodeMethodCall node)
     {
         commandString.Append(node.MethodName + "(");
         bool first = true;
+        addingParameters = true;
         foreach (var arg in node.Arguments) {
             if (first)
             {
@@ -430,8 +457,10 @@ public class VisitorCommandToPlantUML : Visitor
             {
                 commandString.Append(", ");
             }
+            
             arg.Accept(this);
         }
+        addingParameters = false;
         commandString.Append(")");
     }
 

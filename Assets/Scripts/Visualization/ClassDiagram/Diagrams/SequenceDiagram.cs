@@ -21,7 +21,9 @@ namespace AnimArch.Visualization.Diagrams
     public class SequenceDiagram : Diagram
     {
         private VisitorCommandToPlantUML visitor;
-        public string FileNameOfPlantUMLText;
+        private string FileNameOfPlantUMLText;
+
+        private bool fileExists = false;
 
         private void Awake()
         {
@@ -55,19 +57,37 @@ namespace AnimArch.Visualization.Diagrams
             return graph;
         }
 
+        private void SetFileExists()
+        {
+            string path = Application.dataPath + "/PlantUMLs/" + FileNameOfPlantUMLText + ".svg";
+            if (File.Exists(path)) {
+              fileExists = true;  
+            }
+        }
+
         public void StartPlantUMLCreation(string initialClassName)
         {
+            SetFileExists();
+            if (fileExists) {
+                return;
+            }
             visitor.classNames.Push(initialClassName);    
             visitor.AppendToCommandString("@startuml"); 
         }
 
         public void ToPlantUMLCommand(EXECommand CurrentCommand)
         {
+            if (fileExists) {
+                return;
+            }
             CurrentCommand.Accept(visitor);
         }
 
         public void CreatePlantUMLFile()
         {
+            if (fileExists) {
+                return;
+            }
             visitor.AppendToCommandString("@enduml");
 
             string path = Application.dataPath + "/PlantUMLs/" + FileNameOfPlantUMLText + ".txt";

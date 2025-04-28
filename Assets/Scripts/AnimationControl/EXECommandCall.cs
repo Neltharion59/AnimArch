@@ -4,6 +4,7 @@ namespace OALProgramControl
 {
     public class EXECommandCall : EXECommand
     {
+        public long UniqueID = 0;
         public readonly EXEASTNodeAccessChain MethodAccessChain;
         public readonly EXEASTNodeMethodCall MethodCall;
         public EXEValueBase ReturnedValue;

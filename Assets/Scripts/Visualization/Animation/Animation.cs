@@ -225,8 +225,8 @@ namespace Visualization.Animation
             DiagramManager.sequenceDiagram.ResetDiagram();
             DiagramManager.sequenceDiagram.LoadDiagram();
 
-            DiagramManager.sequenceDiagram.StartPlantUMLCreation(startClassName); 
             DiagramManager.sequenceDiagram.CreateHash(GenerateJoinedFileNameForSeqD());
+            DiagramManager.sequenceDiagram.StartPlantUMLCreation(startClassName); 
             // hash file name, check if there exists png, if not start plantUml creation
             // if started creation, accept currentCommand in AnimateCommand(), and end creation in TeardownAnimation() 
 
@@ -245,8 +245,15 @@ namespace Visualization.Animation
         {
             string AnimationName = AnimationData.Instance.selectedAnim.AnimationName;
             string DiagramName = AnimationData.Instance.diagramPath;
+
+            string parameters = "";
+            if (startMethodParameters.ContainsKey(startMethodName)){
+                foreach (EXEVariable variable in startMethodParameters[startMethodName]){
+                    parameters += variable.Name;
+                }
+            }
             
-            return DiagramName + AnimationName + startClassName + startMethodName;
+            return DiagramName + AnimationName + startClassName + startMethodName + parameters;
         }
 
         public IEnumerator AnimateCommand(EXECommand CurrentCommand, AnimationThread AnimationThread, bool Animate = true, bool AnimateNewObjects = true)
