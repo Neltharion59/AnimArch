@@ -1,0 +1,82 @@
+@startuml
+
+
+
+
+
+Client -> Vet : Register(Husky, "1.4.2022")
+activate Vet
+
+Vet -> Obs : SetVaccinationDate(Date)
+activate Obs
+
+
+return done
+
+return done
+
+
+
+
+Client -> Vet : Register(PersianCat, "2.4.2022")
+activate Vet
+
+Vet -> Obs : SetVaccinationDate(Date)
+activate Obs
+
+
+return done
+
+return done
+Client -> Vet : SetDate("1.4.2022")
+activate Vet
+
+Vet -> Vet : VaccinateAnimals()
+activate Vet
+
+Vet -> Animal : ReceiveVaccine(selfCurrentDate)
+activate Animal
+	
+
+
+
+return done
+
+Vet -> Animal : ReceiveVaccine(selfCurrentDate)
+activate Animal
+	
+
+
+return done
+
+
+return done
+
+return done
+Client -> Vet : SetDate("2.4.2022")
+activate Vet
+
+Vet -> Vet : VaccinateAnimals()
+activate Vet
+
+Vet -> Animal : ReceiveVaccine(selfCurrentDate)
+activate Animal
+	
+
+
+return done
+
+Vet -> Animal : ReceiveVaccine(selfCurrentDate)
+activate Animal
+	
+
+
+
+return done
+
+
+return done
+
+return done
+
+@enduml
