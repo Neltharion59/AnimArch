@@ -54,7 +54,6 @@ namespace Visualization.Animation
         public override IEnumerator PerformRequest()
         {
             yield return UnhighlightClassAndObject();
-            AnimateActivityDiagram();
 
             Done = true;
         }
@@ -83,11 +82,6 @@ namespace Visualization.Animation
             {
                 yield return new WaitForSeconds(AnimationData.Instance.AnimSpeed * timeModifier);
             }
-        }
-        private void AnimateActivityDiagram()
-        {
-            animation.AddFinalActivityToDiagram();
-            animation.isEXECommandReturn = true;
         }
     }
 }

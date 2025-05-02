@@ -1,3 +1,4 @@
+using AnimArch.Visualization.Diagrams;
 using OALProgramControl;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,9 +14,6 @@ namespace Visualization.Animation
 
         public override IEnumerator PerformRequest()
         {
-            Debug.LogError("EXEScopeMethod activityDiagram.ClearDiagram()");
-            animation.activityDiagram.ClearDiagram();
-
             Done = true;
             yield return null;
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Linq;
 using Microsoft.Msagl.Core.Layout;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions;
@@ -13,6 +14,7 @@ namespace UMSAGL.Scripts
         public GameObject startCap;
         public GameObject endCap;
         public GameObject deleteButton;
+        public GameObject label;
         public bool dashed;
         public float segmentLength = 10f;
 
@@ -93,6 +95,7 @@ namespace UMSAGL.Scripts
             SegmentLength = segmentLength;
             UpdateCaps();
             SetupDeleteButton();
+            SetupLabel();
         }
 
         private static float CapAngle(Vector2 p1, Vector2 p2)
@@ -156,6 +159,44 @@ namespace UMSAGL.Scripts
 
         private void UpdateDeleteButtonPosition()
         {
+            var(first, second) = GetMaxDistancePoints();
+            if (first == Vector2.zero && second == Vector2.zero)
+            {
+                return;
+            }
+
+            var buttonTransform = transform.Find("DeleteButton");
+            buttonTransform.localPosition = Vector2.Lerp(first, second, 0.5f);
+        }
+
+        private void UpdateLabelPosition()
+        {
+            var (first, second) = GetMaxDistancePoints();
+            if (first == Vector2.zero && second == Vector2.zero)
+            {
+                return;
+            }
+            
+            var labelTransform = transform.Find("Label");
+            if (Mathf.Abs(second.x - first.x) > Mathf.Abs(second.y - first.y))
+            {
+                var labelPosition = Vector2.Lerp(first, second, 0.5f); // horizontal vector, set label position more to the right
+                labelTransform.localPosition = new Vector3(labelPosition.x + 35, labelPosition.y + 25, labelTransform.localPosition.z);
+            }
+            else
+            {
+                var labelPosition = Vector2.Lerp(first, second, 0.1f); // vertical vector, set label position more to the top
+                labelTransform.localPosition = new Vector3(labelPosition.x + 30, labelPosition.y, labelTransform.localPosition.z);
+            }
+        }
+
+        private (Vector2 first, Vector2 second) GetMaxDistancePoints()
+        {
+            if (!Points.Any())
+            {
+                return (Vector2.zero, Vector2.zero);
+            }
+
             var prev = Points.First();
             var maxDistance = float.MinValue;
             Vector2 first = default;
@@ -172,8 +213,8 @@ namespace UMSAGL.Scripts
 
                 prev = next;
             }
-            var buttonTransform = transform.Find("DeleteButton");
-            buttonTransform.localPosition = Vector2.Lerp(first, second, 0.5f);
+
+            return (first, second);
         }
 
         private void Update()
@@ -188,6 +229,7 @@ namespace UMSAGL.Scripts
             }
 
             UpdateDeleteButtonPosition();
+            UpdateLabelPosition();
         }
 
         public void ChangeColor(Color c)
@@ -218,6 +260,12 @@ namespace UMSAGL.Scripts
             var button = deleteButtonGo.transform.Find("DeleteButton").GetComponent<Button>();
             button.onClick.AddListener(DeleteEdge);
             button.gameObject.SetActive(UIEditorManager.Instance.active);
+        }
+
+        public void SetupLabel()
+        {
+            var labelGo = Instantiate(label, transform);
+            labelGo.name = "Label";
         }
 
         private void DeleteEdge()

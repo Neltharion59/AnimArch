@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UMSAGL.Scripts;
 using UnityEngine;
 using Visualization.ClassDiagram.ComponentsInDiagram;
@@ -7,37 +8,37 @@ namespace Visualization.ClassDiagram.Relations
 {
     public class ActivityRelation
     {
-        private readonly Graph _graph;        
-        private readonly String _type;
-        private readonly ActivityInDiagram _start;
-        private readonly ActivityInDiagram _end;
-        public GameObject GameObject;
-        public ActivityRelation(Graph graph, ActivityInDiagram start, ActivityInDiagram end)
+        public readonly ActivityInDiagram From;
+        public readonly ActivityInDiagram To;
+        public string Label;
+        public bool IsHighlighted = false;
+
+        public GameObject VisualObject;
+        public ActivityRelation(ActivityInDiagram start, ActivityInDiagram end, string label = "")
         {
-            _graph = graph;
-            _type = "ASSOCIATION";
-            _start = start;
-            _end = end;
+            From = start;
+            To = end;
+            Label = label;
         }
 
-        public void Generate()
+        public void GenerateVisualObject(Graph graph)
         {
-            Debug.LogError("ActivityRelation::Generate()");
-            GameObject = InitEdge();
-            var uEdge = GameObject.GetComponent<UEdge>();
-            uEdge.Points = new Vector2[]
+            if (From.VisualObject == null || To.VisualObject == null)
             {
-                _start.VisualObject.transform.position,
-                _end.VisualObject.transform.position
-            };
-        }
+                return;
+            }
 
-        private GameObject InitEdge()
-        {
-            Debug.LogError("ActivityRelation::InitEdge()");
-            return _graph.AddEdge(_start.VisualObject, _end.VisualObject,
-                DiagramPool.Instance.associationNonePrefab);
+            VisualObject = graph.AddEdge(From.VisualObject, To.VisualObject, DiagramPool.Instance.activityFlowPrefab);
+            if (VisualObject == null)
+            {
+                return;
+            } 
+            var label = VisualObject.transform.Find("Label/Text");
+            if (Label != "")
+            {
+                label.GetComponent<TextMeshProUGUI>().text = Label;
+            }
+            
         }
-
     }
 }
