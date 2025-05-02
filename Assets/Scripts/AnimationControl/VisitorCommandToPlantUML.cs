@@ -96,20 +96,20 @@ public class VisitorCommandToPlantUML : Visitor
     public override void VisitExeCommandCall(EXECommandCall command)
     {
         HandleBasicEXECommand(command, (visitor) => {
-            if (command.UniqueID == 0) {
-                command.UniqueID = EXEInstanceIDSeed.GetInstance().GenerateID();
-            }
-            if (loopIDs.Count() != 0) {
-                CommandCallsInLoop.Add(command.UniqueID);
-            }
-            else {
-                // If outside a loop and command was already seen, skip it
-                if (CommandCallsInLoop.Contains(command.UniqueID))
-                    return false;
+            // if (command.UniqueID == 0) {
+            //     command.UniqueID = EXEInstanceIDSeed.GetInstance().GenerateID();
+            // }
+            // if (loopIDs.Count() != 0) {
+            //     CommandCallsInLoop.Add(command.UniqueID);
+            // }
+            // else {
+            //     // If outside a loop and command was already seen, skip it
+            //     if (CommandCallsInLoop.Contains(command.UniqueID))
+            //         return false;
 
-                // Reset tracking for non-loop execution
-                CommandCallsInLoop = new HashSet<long>();
-            }
+            //     // Reset tracking for non-loop execution
+            //     CommandCallsInLoop = new HashSet<long>();
+            // }
 
             string callerClass = classNames.Peek();
             string nextClass = command.MethodAccessChainS;
@@ -309,19 +309,19 @@ public class VisitorCommandToPlantUML : Visitor
 
     public override void VisitExeScopeForEach(EXEScopeForEach scope)
     { 
-        if (loopIDs.Count() != 0 && scope.UniqueID == loopIDs.Peek()){
-            // end for us
-            DecreaseIndentation();
-            commandString.Append("end\n");
-            return;
-        }
+        // if (loopIDs.Count() != 0 && scope.UniqueID == loopIDs.Peek()){
+        //     // end for us
+        //     //DecreaseIndentation();
+        //     commandString.Append("end\n");
+        //     return;
+        // }
 
-        // first time going through loop
-        scope.UniqueID = EXEInstanceIDSeed.GetInstance().GenerateID();
-        loopIDs.Push(scope.UniqueID);
-        commandString.Append("loop " + scope.IteratorName);
+        // // first time going through loop
+        // scope.UniqueID = EXEInstanceIDSeed.GetInstance().GenerateID();
+        // loopIDs.Push(scope.UniqueID);
+        // commandString.Append("loop " + scope.IteratorName);
 
-        IncreaseIndentation();
+        // IncreaseIndentation();
 
         AddEOL();
     }
@@ -408,7 +408,7 @@ public class VisitorCommandToPlantUML : Visitor
         {
             Command.Accept(this);
         }
-        DecreaseIndentation();
+        //DecreaseIndentation();
 
         WriteIndentation();
         AddEOL();

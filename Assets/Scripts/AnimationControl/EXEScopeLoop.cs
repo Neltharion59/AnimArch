@@ -4,7 +4,6 @@ namespace OALProgramControl
 {
     public abstract class EXEScopeLoop : EXEScope
     {
-        public long UniqueID = 0;
         protected abstract EXEExecutionResult HandleIterationStart(OALProgram OALProgram, out bool startNewIteration);
         protected override EXEExecutionResult Execute(OALProgram OALProgram)
         {
