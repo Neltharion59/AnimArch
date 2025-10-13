@@ -185,6 +185,7 @@ namespace OALProgramControl
             InitializeSubstringMethod();
             InitializeContainsMethod();
             InitializeReplaceMethod();
+            InitializeParseIntMethod();
         }
 
         private void InitializeJoinMethod()
@@ -320,6 +321,12 @@ namespace OALProgramControl
             );
             MethodReplace.ExecutableCode = new EXEScopeBuiltInMethod(MethodReplace, new BuiltInMethodStringReplace());
             DefiningClass.AddMethod(MethodReplace);
+        }
+        private void InitializeParseIntMethod()
+        {
+            CDMethod MethodParseInt = new CDMethod(DefiningClass, "ParseInt", EXETypes.IntegerTypeName);
+            MethodParseInt.ExecutableCode = new EXEScopeBuiltInMethod(MethodParseInt, new BuiltInMethodStringParseInt());
+            DefiningClass.AddMethod(MethodParseInt);
         }
         #endregion
 

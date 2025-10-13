@@ -1780,5 +1780,56 @@ namespace Assets.UnitTests.AnimationControl
                 Test.PerformAssertion();
             }
         }
+
+        [TestFixture]
+        public class ParseInt : StandardTest
+        {
+            [Test]
+            // Valid Int
+            [TestCase("-974111", -974111)]
+            [TestCase("-7", -7)]
+            [TestCase("0", 0)]
+            [TestCase("7", 7)]
+            [TestCase("974111", 974111)]
+            // Invalid Int
+            [TestCase("abcd", 0)]
+            [TestCase("./.*", 0)]
+            [TestCase("-.-.-.-.", 0)]
+            [TestCase("", 0)]
+            [TestCase("\n", 0)]
+            [TestCase("78.0", 0)]
+            [TestCase("true", 0)]
+            [TestCase("[]", 0)]
+            public void HappyDay(string x, int y)
+            {
+                CommandTest Test = new CommandTest();
+
+                // Arrange
+                string _methodSourceCode = $"x = \"{x}\";\ny = x.ParseInt();";
+
+                OALProgram programInstance = new OALProgram();
+                CDClass owningClass = programInstance.ExecutionSpace.SpawnClass("Class1");
+
+                CDMethod owningMethod = new CDMethod(owningClass, "Method1", "");
+                owningClass.AddMethod(owningMethod);
+
+                // Act
+                EXEScopeMethod methodScope = OALParserBridge.Parse(_methodSourceCode);
+                owningMethod.ExecutableCode = methodScope;
+                programInstance.SuperScope = methodScope;
+
+                EXEExecutionResult _executionResult = PerformExecution(programInstance);
+
+                // Assert
+                Test.Declare(methodScope, _executionResult);
+
+                Test.Variables
+                        .ExpectVariable("x", new EXEValueString($"\"{x}\""))
+                        .ExpectVariable("y", new EXEValueInt(y))
+                        .ExpectVariable("self", methodScope.OwningObject);
+
+                Test.PerformAssertion();
+            }
+        }
     }
 }
