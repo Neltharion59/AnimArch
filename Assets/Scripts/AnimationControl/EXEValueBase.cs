@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.AnimationControl.BuiltIn;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,15 +17,86 @@ namespace OALProgramControl
         {
             return false;
         }
-        public virtual bool MethodExists(string methodName, bool includeInherited = false)
+        public bool MethodExists(string methodName, bool includeInherited = false)
+        {
+            if (MethodExistsCustom(methodName, includeInherited)) { return true; }
+
+            if (DefiningClass == null)
+            {
+                InitializeMethods();
+            }
+
+            return DefiningClass.MethodExists(methodName, includeInherited);
+        }
+
+        protected virtual bool MethodExistsCustom(string methodName, bool includeInherited = false)
         {
             return false;
         }
+        #region Methods
+        private static CDClass DefiningClass = null;
+        private void InitializeMethods()
+        {
+            DefiningClass = new CDClass("Object", null);
+
+            InitializeReadFileMethod();
+            InitializeWriteToFileMethod();
+        }
+        private void InitializeReadFileMethod()
+        {
+            CDMethod MethodContains = new CDMethod(DefiningClass, "ReadFile", EXETypes.StringTypeName);
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "filePath",
+                    Type = EXETypes.StringTypeName
+                }
+            );
+            MethodContains.ExecutableCode = new EXEScopeBuiltInMethod(MethodContains, new BuiltInMethodAllReadFile());
+            DefiningClass.AddMethod(MethodContains);
+        }
+        private void InitializeWriteToFileMethod()
+        {
+            CDMethod MethodContains = new CDMethod(DefiningClass, "WriteToFile", EXETypes.WildCardTypeName);
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "filePath",
+                    Type = EXETypes.StringTypeName
+                }
+            );
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "writtenText",
+                    Type = EXETypes.StringTypeName
+                }
+            );
+            MethodContains.ExecutableCode = new EXEScopeBuiltInMethod(MethodContains, new BuiltInMethodAllWriteToFile());
+            DefiningClass.AddMethod(MethodContains);
+        }
+        #endregion
         public virtual EXEExecutionResult RetrieveAttributeValue(string attributeName)
         {
             return EXEExecutionResult.Error("XEC2004", string.Format("Tried to find attribute \"{0}\" on something that does not have any attribute. {1}", attributeName, this.ToString()));
         }
-        public virtual CDMethod FindMethod(string methodName, bool includeInherited = false)
+        public CDMethod FindMethod(string methodName, bool includeInherited = false)
+        {
+
+            CDMethod method = FindMethodCustom(methodName, includeInherited);
+            if (method != null) { return method; }
+
+            if (DefiningClass == null)
+            {
+                InitializeMethods();
+            }
+
+            return DefiningClass.GetMethodByName(methodName, includeInherited);
+        }
+        protected virtual CDMethod FindMethodCustom(string methodName, bool includeInherited = false)
         {
             return null;
         }

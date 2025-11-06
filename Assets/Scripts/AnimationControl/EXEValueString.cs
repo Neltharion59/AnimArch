@@ -152,7 +152,7 @@ namespace OALProgramControl
         #region Methods
         private static CDClass DefiningClass = null;
         
-        public override bool MethodExists(string methodName, bool includeInherited = false)
+        protected override bool MethodExistsCustom(string methodName, bool includeInherited = false)
         {
             if (DefiningClass == null)
             {
@@ -162,7 +162,7 @@ namespace OALProgramControl
             return DefiningClass.MethodExists(methodName, includeInherited);
         }
 
-        public override CDMethod FindMethod(string methodName, bool includeInherited = false)
+        protected override CDMethod FindMethodCustom(string methodName, bool includeInherited = false)
         {
             if (DefiningClass == null)
             {

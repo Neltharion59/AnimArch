@@ -48,14 +48,14 @@ namespace OALProgramControl
 
             return this.ClassInstance.OwningClass.GetAttributeByName(attributeName, true) != null;
         }
-        public override bool MethodExists(string methodName, bool includeInherited = false)
+        protected override bool MethodExistsCustom(string methodName, bool includeInherited = false)
         {
             if (!this.WasInitialized)
             {
                 return false;
             }
 
-            return FindMethod(methodName, includeInherited) != null;
+            return FindMethodCustom(methodName, includeInherited) != null;
         }
         public override EXEExecutionResult RetrieveAttributeValue(string attributeName)
         {
@@ -75,7 +75,7 @@ namespace OALProgramControl
             executionResult.ReturnedOutput = attributeValue;
             return executionResult;
         }
-        public override CDMethod FindMethod(string methodName, bool includeInherited = false)
+        protected override CDMethod FindMethodCustom(string methodName, bool includeInherited = false)
         {
             if (!this.WasInitialized)
             {

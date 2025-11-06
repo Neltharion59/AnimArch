@@ -29,7 +29,7 @@ namespace Visualization.Animation
 
         public override IEnumerator PerformRequest()
         {
-            if (callInfo != null)
+            if (callInfo != null && !"Object".Equals(callInfo.CalledMethod.OwningClass.Name))
             {
                 ClassDiagram.Diagrams.ClassDiagram classDiagram = Animation.Instance.classDiagram;
                 Class called = classDiagram.FindClassByName(callInfo.CalledMethod.OwningClass.Name).ParsedClass;
