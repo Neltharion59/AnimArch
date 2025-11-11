@@ -14,8 +14,10 @@ namespace Assets.Scripts.AnimationControl.BuiltIn
             string delimiter = delimiterValue.Value;
             string stringToSplit = owningObject.Value;
 
-            string[] splitTokens = stringToSplit.Split(new[] { delimiter }, StringSplitOptions.None);
+            delimiter = delimiter.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\t", "\t");
 
+            string[] splitTokens = stringToSplit.Split(new[] { delimiter }, StringSplitOptions.None);
+            
             EXEExecutionResult result = EXEExecutionResult.Success();
             result.ReturnedOutput
                 = new EXEValueArray(EXETypes.StringTypeName + "[]")
