@@ -18,6 +18,8 @@ namespace Assets.Scripts.AnimationControl.BuiltIn
             }
 
             string delimiter = owningObject.Value;
+            delimiter = delimiter.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\t", "\t");
+
             IEnumerable<string> items = list.Elements.Select(element => (element as EXEValueString).Value);
 
             string valueResult = string.Format("\"{0}\"", string.Join(delimiter, items));
