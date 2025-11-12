@@ -54,7 +54,8 @@ namespace Visualization.UI
             {
                 GameObject button = Instantiate(MethodPrefabButton, ButtonParent);
                 button.GetComponentInChildren<TextMeshProUGUI>().text = item;
-                
+                button.transform.SetParent(gameObject.transform, false);
+
                 CurrentState.HandleButtonClick(item, button.GetComponent<Button>());
   
                 button.SetActive(true);
