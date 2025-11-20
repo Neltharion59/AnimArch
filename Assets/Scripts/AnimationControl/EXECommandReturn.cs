@@ -40,7 +40,7 @@ namespace OALProgramControl
 
         public override EXECommand CreateClone()
         {
-            return new EXECommandReturn(Expression.Clone());
+            return new EXECommandReturn(Expression?.Clone());
         }
     }
 }
