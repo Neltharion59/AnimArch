@@ -3,7 +3,7 @@
     public class EXEVariable
     {
         public readonly string Name;
-        public readonly EXEValueBase Value;
+        public EXEValueBase Value;
 
         public EXEVariable(string name, EXEValueBase value)
         {

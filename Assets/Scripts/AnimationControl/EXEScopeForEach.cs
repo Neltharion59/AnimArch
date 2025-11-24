@@ -110,8 +110,12 @@ namespace OALProgramControl
 
             if (this.CurrentIterableIndex < iterableValue.Elements.Count)
             {
+                // Need new EXEValue instance - or else assigning to this will rewrite all other references (e.g. if iterator value was added to an array)
+                iteratorVariable.Value = EXETypes.DefaultValue(iterableValue.ElementTypeName, OALProgram.ExecutionSpace);
+
+                EXEValueBase assignedValue = iterableValue.GetElementAt(this.CurrentIterableIndex);
                 EXEExecutionResult iteratorAssignmentResult
-                    = iteratorVariable.Value.AssignValueFrom(iterableValue.GetElementAt(this.CurrentIterableIndex));
+                    = iteratorVariable.Value.AssignValueFrom(assignedValue);
 
                 if (!HandleSingleShotASTEvaluation(iteratorAssignmentResult))
                 {
