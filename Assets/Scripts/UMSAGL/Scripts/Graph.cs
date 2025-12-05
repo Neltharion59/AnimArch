@@ -123,7 +123,12 @@ namespace UMSAGL.Scripts
             uEdge.GraphEdge = edge;
             _graph.Edges.Add(edge);
             // We cannot wait (i.e. use UpdateGraph()), or the edge will be drawn too late
-            LayoutHelpers.RouteAndLabelEdges(_graph, _settings, _graph.Edges);
+            // TODO - try-catch saved us on Sasa's diagnostic system.
+            try
+            {
+                LayoutHelpers.RouteAndLabelEdges(_graph, _settings, _graph.Edges);
+            }
+            catch (Exception e) { Debug.LogError($"[UMSAGL] {e.Message}. {e.StackTrace}"); }
             RedrawEdges();
             return go;
         }
