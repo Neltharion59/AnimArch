@@ -41,6 +41,9 @@ namespace OALProgramControl
 
             InitializeReadFileMethod();
             InitializeWriteToFileMethod();
+            InitializeRandomReal();
+            InitializeRandomInt();
+            InitializeRandomBool();
         }
         private void InitializeReadFileMethod()
         {
@@ -76,6 +79,56 @@ namespace OALProgramControl
                 }
             );
             MethodContains.ExecutableCode = new EXEScopeBuiltInMethod(MethodContains, new BuiltInMethodAllWriteToFile());
+            DefiningClass.AddMethod(MethodContains);
+        }
+        private void InitializeRandomReal()
+        {
+            CDMethod MethodContains = new CDMethod(DefiningClass, "RandomReal", EXETypes.RealTypeName);
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "min",
+                    Type = EXETypes.RealTypeName
+                }
+            );
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "max",
+                    Type = EXETypes.RealTypeName
+                }
+            );
+            MethodContains.ExecutableCode = new EXEScopeBuiltInMethod(MethodContains, new BuiltInMethodAllRandomReal());
+            DefiningClass.AddMethod(MethodContains);
+        }
+        private void InitializeRandomInt()
+        {
+            CDMethod MethodContains = new CDMethod(DefiningClass, "RandomInt", EXETypes.IntegerTypeName);
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "min",
+                    Type = EXETypes.IntegerTypeName
+                }
+            );
+            MethodContains.Parameters.Add
+            (
+                new CDParameter()
+                {
+                    Name = "max",
+                    Type = EXETypes.IntegerTypeName
+                }
+            );
+            MethodContains.ExecutableCode = new EXEScopeBuiltInMethod(MethodContains, new BuiltInMethodAllRandomInt());
+            DefiningClass.AddMethod(MethodContains);
+        }
+        private void InitializeRandomBool()
+        {
+            CDMethod MethodContains = new CDMethod(DefiningClass, "RandomBool", EXETypes.BooleanTypeName);
+            MethodContains.ExecutableCode = new EXEScopeBuiltInMethod(MethodContains, new BuiltInMethodAllRandomBool());
             DefiningClass.AddMethod(MethodContains);
         }
         #endregion
