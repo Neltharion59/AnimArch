@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using Visualization.UI;
 using UnityEngine;
+using System.Linq;
 
 namespace OALProgramControl
 {
@@ -64,19 +65,21 @@ namespace OALProgramControl
 
         public EXEExecutionResult AssignReadValue(String Value, OALProgram OALProgram)
         {
-            EPrimitiveType readValueType = EXETypes.DeterminePrimitiveType(Value);
+            bool isString = AssignmentType.ToLower().Equals(EXETypes.StringTypeName.ToLower());
+            EPrimitiveType readValueType = isString ? EPrimitiveType.String : EXETypes.DeterminePrimitiveType(Value);
 
             if (readValueType == EPrimitiveType.NotPrimitive)
             {
-                Value = $"\"{Value}\"";
-                readValueType = EXETypes.DeterminePrimitiveType(Value);
-                if (readValueType == EPrimitiveType.NotPrimitive)
-                {
-                    return Error("XEC2026", ErrorMessage.InvalidValueForType(Value, this.AssignmentType));
-                }
+                return Error("XEC2026", ErrorMessage.InvalidValueForType(Value, this.AssignmentType));
             }
 
-            EXEValuePrimitive readValue = EXETypes.DeterminePrimitiveValue(Value);
+            if (isString && !EXETypes.IsValidStringValue(Value))
+            {
+                if (Value.First() != '"') { Value = $"\"{Value}"; }
+                if (Value.Last() != '"') { Value = $"{Value}\""; }
+            }
+
+            EXEValuePrimitive readValue = isString ? new EXEValueString(Value) : EXETypes.DeterminePrimitiveValue(Value);
 
             AssignmentTarget.EvaluationResult.ReturnedOutput.AssignValueFrom(readValue);
 
