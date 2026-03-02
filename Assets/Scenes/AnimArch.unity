@@ -10165,6 +10165,8 @@ MonoBehaviour:
     type: 3}
   realisationPrefab: {fileID: 1250365410247918905, guid: b038e1a8b67b5294ebca95aaa358c047,
     type: 3}
+  aggregationPrefab: {fileID: 1523548488617654, guid: f4be19ddef056804dad6579279c3554e,
+    type: 3}
   interGraphLinePrefab: {fileID: 2910138570680623619, guid: 1d27ae98b0c21b54e9cc37aa284dcaba,
     type: 3}
   interGraphArrowPrefab: {fileID: 2511745522907912916, guid: acc81195bd5b641c3b95dc9f282ab13a,
@@ -10188,6 +10190,8 @@ MonoBehaviour:
   networkDependsPrefab: {fileID: 1333350112338376, guid: 46fd3b2addee83147a6cdeebb1e800ac,
     type: 3}
   networkRealisationPrefab: {fileID: 1250365410247918905, guid: 30cd4580fef21734d83ecd870d192fca,
+    type: 3}
+  networkAggregationPrefab: {fileID: 1523548488617654, guid: 3c03773fbca0b394fa2084a1c6de0bc3,
     type: 3}
   ClassDiagram: {fileID: 1164213134}
   ObjectDiagram: {fileID: 0}
@@ -43417,6 +43421,10 @@ MonoBehaviour:
     - m_Text: Dependency
       m_Image: {fileID: 0}
     - m_Text: Realisation
+      m_Image: {fileID: 0}
+    - m_Text: Aggregation
+      m_Image: {fileID: 0}
+    - m_Text: Composition
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

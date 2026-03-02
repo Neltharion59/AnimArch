@@ -134,6 +134,8 @@ namespace Visualization.ClassDiagram.Editors
                 "Generalization" => DiagramPool.Instance.generalizationPrefab,
                 "Dependency" => DiagramPool.Instance.dependsPrefab,
                 "Realisation" => DiagramPool.Instance.realisationPrefab,
+                "Aggregation" => DiagramPool.Instance.aggregationPrefab,
+                "Composition" => DiagramPool.Instance.aggregationPrefab,
                 _ => DiagramPool.Instance.associationNonePrefab
             };
 

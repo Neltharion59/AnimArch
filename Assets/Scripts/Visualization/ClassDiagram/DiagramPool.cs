@@ -25,6 +25,7 @@ namespace Visualization.ClassDiagram
         public GameObject generalizationPrefab;
         public GameObject implementsPrefab;
         public GameObject realisationPrefab;
+        public GameObject aggregationPrefab;
         public GameObject interGraphLinePrefab;
         public GameObject interGraphArrowPrefab;
 
@@ -39,6 +40,7 @@ namespace Visualization.ClassDiagram
         public GameObject networkGeneralizationPrefab;
         public GameObject networkDependsPrefab;
         public GameObject networkRealisationPrefab;
+        public GameObject networkAggregationPrefab;
 
         public Diagrams.ClassDiagram ClassDiagram;
         public ObjectDiagram ObjectDiagram;
